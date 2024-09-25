@@ -7,7 +7,6 @@ import 'store_app.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
-  // ToDo remove this in the future to check that
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
