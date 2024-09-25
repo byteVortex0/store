@@ -6,6 +6,7 @@ class StoreApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
@@ -13,6 +14,12 @@ class StoreApp extends StatelessWidget {
       ),
       home: Scaffold(
         appBar: AppBar(),
+        body: const Center(
+          child: Text(
+            'Flutter',
+            style: TextStyle(fontSize: 25),
+          ),
+        ),
       ),
     );
   }
