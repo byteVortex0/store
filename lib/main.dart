@@ -9,7 +9,7 @@ import 'store_app.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
-  await EnvVariables.instance.init(envTypeEnum: EnvTypeEnum.dev);
+  await EnvVariables.instance.init(envType: EnvTypeEnum.dev);
 
   // ToDo remove this in the future to check that
   await Firebase.initializeApp(
