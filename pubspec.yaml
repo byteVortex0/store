@@ -19,6 +19,7 @@ dependencies:
   flutter_screenutil: ^5.9.3
   connectivity_plus: ^6.0.5
   flutter_dotenv: ^5.1.0
+  flutter_native_splash: ^2.4.2
 
 dev_dependencies:
   flutter_test:
