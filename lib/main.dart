@@ -11,7 +11,7 @@ void main() async {
 
   await EnvVariables.instance.init(envType: EnvTypeEnum.dev);
 
-  // ToDo remove this in the future to check that
+  //TODO: remove this in the future to check that
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
