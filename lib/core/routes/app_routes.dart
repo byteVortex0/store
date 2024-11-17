@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:store/core/common/screens/under_build_screen.dart';
 import 'package:store/core/routes/base_routes.dart';
+import 'package:store/login_screen.dart';
 
 class AppRoutes {
-  //TODO: add screens 
-  static const String testOne = '';
-  static const String testTwo = '';
+  
+  static const String loginScreen = '/LoginScreen';
 
   Route onGenerateRoutes(RouteSettings settings) {
-    final arg = settings.arguments;
+    //final arg = settings.arguments;
     switch (settings.name) {
-      case testOne:
-        return BaseRoute(page: const PageUnderBuildScreen());
+      case loginScreen:
+        return BaseRoute(page: const LoginScreen());
 
       default:
         return BaseRoute(page: const PageUnderBuildScreen());

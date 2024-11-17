@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:store/core/app/connectivity_controller.dart';
 import 'package:store/core/common/screens/no_network_screen.dart';
+import 'package:store/core/routes/app_routes.dart';
+import 'package:store/core/theme/app_theme.dart';
+import 'package:store/login_screen.dart';
 
 class StoreApp extends StatelessWidget {
   const StoreApp({super.key});
@@ -19,11 +22,10 @@ class StoreApp extends StatelessWidget {
                 return MaterialApp(
                   debugShowCheckedModeBanner: false,
                   title: 'Store App',
-                  theme: ThemeData(
-                    colorScheme:
-                        ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-                    useMaterial3: true,
-                  ),
+                  theme: AppTheme().lightTheme(),
+                  darkTheme: AppTheme().darkTheme(),
+                  themeMode: ThemeMode.dark,
+                  onGenerateRoute: (settings) => AppRoutes().onGenerateRoutes(settings),
                   builder: (context, child) => Scaffold(
                     body: Builder(
                       builder: (context) {
@@ -35,15 +37,7 @@ class StoreApp extends StatelessWidget {
                   home: child,
                 );
               },
-              child: Scaffold(
-                appBar: AppBar(),
-                body: const Center(
-                  child: Text(
-                    'Flutter',
-                    style: TextStyle(fontSize: 25),
-                  ),
-                ),
-              ),
+              child: const LoginScreen(),
             )
           : ScreenUtilInit(
               designSize: const Size(360, 690),
@@ -53,11 +47,9 @@ class StoreApp extends StatelessWidget {
                 return MaterialApp(
                   debugShowCheckedModeBanner: false,
                   title: 'Store App',
-                  theme: ThemeData(
-                    colorScheme:
-                        ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-                    useMaterial3: true,
-                  ),
+                  theme: AppTheme().lightTheme(),
+                  darkTheme: AppTheme().darkTheme(),
+                  themeMode: ThemeMode.dark,
                   home: child,
                 );
               },

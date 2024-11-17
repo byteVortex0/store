@@ -9,7 +9,7 @@ extension ConextExtension on BuildContext {
   MyColors get color => Theme.of(this).extension<MyColors>()!;
 
   //Images
-  MyImages get image => Theme.of(this).extension<MyImages>()!;
+  MyImages get asset => Theme.of(this).extension<MyImages>()!;
 
   //pages
   Future<dynamic> pushName(String routeName, {Object? arg}) =>
