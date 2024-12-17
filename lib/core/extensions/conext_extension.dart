@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:store/core/language/app_localizations.dart';
 import 'package:store/core/theme/colors_extension.dart';
 
 import '../theme/images_extension.dart';
@@ -10,6 +11,11 @@ extension ConextExtension on BuildContext {
 
   //Images
   MyImages get asset => Theme.of(this).extension<MyImages>()!;
+
+  //language
+  String trenslate(String langKey){
+    return AppLocalizations.of(this)!.translate(langKey).toString();
+  }
 
   //pages
   Future<dynamic> pushName(String routeName, {Object? arg}) =>
