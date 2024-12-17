@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:store/core/app/connectivity_controller.dart';
 import 'package:store/core/common/screens/no_network_screen.dart';
+import 'package:store/core/language/app_localizations_setup.dart';
 import 'package:store/core/routes/app_routes.dart';
 import 'package:store/core/theme/app_theme.dart';
 import 'package:store/login_screen.dart';
@@ -25,13 +26,25 @@ class StoreApp extends StatelessWidget {
                   theme: AppTheme().lightTheme(),
                   darkTheme: AppTheme().darkTheme(),
                   themeMode: ThemeMode.dark,
-                  onGenerateRoute: (settings) => AppRoutes().onGenerateRoutes(settings),
-                  builder: (context, child) => Scaffold(
-                    body: Builder(
-                      builder: (context) {
-                        ConnectivityController.instance.init();
-                        return child!;
-                      },
+                  locale: const Locale('en'),
+                  localizationsDelegates:
+                      AppLocalizationsSetup.localizationsDelegates,
+                  supportedLocales: AppLocalizationsSetup.supportedLocales,
+                  localeResolutionCallback:
+                      AppLocalizationsSetup.localeResolutionCallback,
+                  onGenerateRoute: (settings) =>
+                      AppRoutes().onGenerateRoutes(settings),
+                  builder: (context, child) => GestureDetector(
+                    onTap: () {
+                      FocusManager.instance.primaryFocus?.unfocus();
+                    },
+                    child: Scaffold(
+                      body: Builder(
+                        builder: (context) {
+                          ConnectivityController.instance.init();
+                          return child!;
+                        },
+                      ),
                     ),
                   ),
                   home: child,
