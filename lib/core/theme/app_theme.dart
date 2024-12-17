@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:store/core/colors/colors_dark.dart';
 import 'package:store/core/colors/colors_light.dart';
 import 'package:store/core/theme/colors_extension.dart';
-import 'images_extension.dart';
+import 'assets_extension.dart';
 
 class AppTheme {
 
@@ -11,7 +11,7 @@ class AppTheme {
       scaffoldBackgroundColor: ColorsLight.mainColor,
       extensions: const <ThemeExtension<dynamic>>[
         MyColors.light,
-        MyImages.light,
+        MyAssets.light,
       ],
       //useMaterial3: true,
     );
@@ -22,7 +22,7 @@ class AppTheme {
       scaffoldBackgroundColor: ColorsDark.mainColor,
       extensions: <ThemeExtension<dynamic>>[
         MyColors.dark,
-        MyImages.dark,
+        MyAssets.dark,
       ],
       //useMaterial3: true
     );
