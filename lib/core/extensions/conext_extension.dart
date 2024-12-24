@@ -12,6 +12,9 @@ extension ConextExtension on BuildContext {
   //Images
   MyAssets get asset => Theme.of(this).extension<MyAssets>()!;
 
+  //style
+  TextStyle get textStyle => Theme.of(this).textTheme.displaySmall!;
+
   //language
   String trenslate(String langKey){
     return AppLocalizations.of(this)!.translate(langKey).toString();
