@@ -7,7 +7,7 @@ import 'package:store/core/common/screens/no_network_screen.dart';
 import 'package:store/core/di/injection_container.dart';
 import 'package:store/core/language/app_localizations_setup.dart';
 import 'package:store/core/routes/app_routes.dart';
-import 'package:store/core/services/shared_pref/pref_key.dart';
+import 'package:store/core/services/shared_pref/pref_keys.dart';
 import 'package:store/core/services/shared_pref/shared_pref.dart';
 import 'package:store/core/theme/app_theme.dart';
 
@@ -22,7 +22,9 @@ class StoreApp extends StatelessWidget {
           ? BlocProvider(
               create: (context) => sl<AppCubit>()
                 ..changeAppThemeMode(
-                    sharedMode: SharedPref().getBoolean(PrefKey.themeMode)),
+                    sharedMode: SharedPref().getBoolean(PrefKeys.themeMode))
+                    ..savedLanguage(),
+                    
               child: ScreenUtilInit(
                 designSize: const Size(375, 812),
                 minTextAdapt: true,
@@ -42,7 +44,7 @@ class StoreApp extends StatelessWidget {
                           cubit.isDark ? ThemeMode.light : ThemeMode.dark,
 
                       //**Language */
-                      locale: const Locale('en'),
+                      locale: Locale(cubit.currentLang),
                       localizationsDelegates:
                           AppLocalizationsSetup.localizationsDelegates,
                       supportedLocales: AppLocalizationsSetup.supportedLocales,
