@@ -4,7 +4,9 @@ import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:store/core/app/bloc_observer.dart';
 import 'package:store/core/app/env_variables.dart';
+import 'package:store/core/services/shared_pref/shared_pref.dart';
 
+import 'core/di/injection_container.dart';
 import 'firebase_options.dart';
 import 'store_app.dart';
 
@@ -16,6 +18,10 @@ void main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
+
+  await SharedPref().instantiatePreferences();
+
+  await setupInjector();
 
   Bloc.observer = AppBlocObserver();
 
