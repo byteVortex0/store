@@ -6,6 +6,7 @@ import 'package:store/core/common/animations/animate_do.dart';
 import 'package:store/core/common/widgets/custom_linear_button.dart';
 import 'package:store/core/common/widgets/text_app.dart';
 import 'package:store/core/extensions/context_extension.dart';
+import 'package:store/core/language/app_localizations.dart';
 import 'package:store/core/language/lang_keys.dart';
 import 'package:store/core/style/fonts/font_weight_helper.dart';
 
@@ -35,12 +36,19 @@ class DarkAndLangButton extends StatelessWidget {
           },
         ),
         //* Language
+
         CustomFadeInLeft(
           duration: 400,
           child: CustomLinearButton(
             height: 44.h,
             width: 100.w,
-            onPressed: () {},
+            onPressed: () {
+              if (AppLocalizations.of(context)!.isEnLocale) {
+                cubit.toArabic();
+              }else{
+                cubit.toEnglish();
+              }
+            },
             child: TextApp(
               text: context.trenslate(LangKeys.language),
               theme: context.textStyle.copyWith(
