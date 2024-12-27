@@ -1,9 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:store/core/app/app_cubit/app_cubit.dart';
 import 'package:store/core/app/connectivity_controller.dart';
 import 'package:store/core/common/screens/no_network_screen.dart';
+import 'package:store/core/di/injection_container.dart';
 import 'package:store/core/language/app_localizations_setup.dart';
 import 'package:store/core/routes/app_routes.dart';
+import 'package:store/core/services/shared_pref/pref_key.dart';
+import 'package:store/core/services/shared_pref/shared_pref.dart';
 import 'package:store/core/theme/app_theme.dart';
 
 class StoreApp extends StatelessWidget {
@@ -14,41 +19,53 @@ class StoreApp extends StatelessWidget {
     return ValueListenableBuilder(
       valueListenable: ConnectivityController.instance.isConnected,
       builder: (_, value, __) => value
-          ? ScreenUtilInit(
-              designSize: const Size(375, 812),
-              minTextAdapt: true,
-              splitScreenMode: true,
-              child: MaterialApp(
-                debugShowCheckedModeBanner: false,
-                title: 'Store App',
+          ? BlocProvider(
+              create: (context) => sl<AppCubit>()
+                ..changeAppThemeMode(
+                    sharedMode: SharedPref().getBoolean(PrefKey.themeMode)),
+              child: ScreenUtilInit(
+                designSize: const Size(375, 812),
+                minTextAdapt: true,
+                splitScreenMode: true,
+                child: BlocBuilder<AppCubit, AppState>(
+                  buildWhen: (previous, current) => previous != current,
+                  builder: (context, state) {
+                    final cubit = context.read<AppCubit>();
+                    return MaterialApp(
+                      debugShowCheckedModeBanner: false,
+                      title: 'Store App',
 
-                //**Theme */
-                theme: AppTheme().lightTheme(),
-                darkTheme: AppTheme().darkTheme(),
-                themeMode: ThemeMode.dark,
+                      //**Theme */
+                      theme: AppTheme().lightTheme(),
+                      darkTheme: AppTheme().darkTheme(),
+                      themeMode:
+                          cubit.isDark ? ThemeMode.light : ThemeMode.dark,
 
-                //**Language */
-                locale: const Locale('en'),
-                localizationsDelegates:
-                    AppLocalizationsSetup.localizationsDelegates,
-                supportedLocales: AppLocalizationsSetup.supportedLocales,
-                localeResolutionCallback:
-                    AppLocalizationsSetup.localeResolutionCallback,
+                      //**Language */
+                      locale: const Locale('en'),
+                      localizationsDelegates:
+                          AppLocalizationsSetup.localizationsDelegates,
+                      supportedLocales: AppLocalizationsSetup.supportedLocales,
+                      localeResolutionCallback:
+                          AppLocalizationsSetup.localeResolutionCallback,
 
-                //**Check NetWorks */
-                builder: (context, child) => Scaffold(
-                  body: Builder(
-                    builder: (context) {
-                      ConnectivityController.instance.init();
-                      return child!;
-                    },
-                  ),
+                      //**Check NetWorks */
+                      builder: (context, child) => Scaffold(
+                        body: Builder(
+                          builder: (context) {
+                            ConnectivityController.instance.init();
+                            return child!;
+                          },
+                        ),
+                      ),
+
+                      //**Routes */
+                      onGenerateRoute: (settings) =>
+                          AppRoutes().onGenerateRoutes(settings),
+                      initialRoute: AppRoutes.loginScreen,
+                    );
+                  },
                 ),
-
-                //**Routes */
-                onGenerateRoute: (settings) =>
-                    AppRoutes().onGenerateRoutes(settings),
-                initialRoute: AppRoutes.loginScreen,
               ),
             )
           : ScreenUtilInit(
