@@ -4,7 +4,7 @@ import 'package:store/core/theme/colors_extension.dart';
 
 import '../theme/assets_extension.dart';
 
-extension ConextExtension on BuildContext {
+extension ContextExtension on BuildContext {
 
   //Color
   MyColors get color => Theme.of(this).extension<MyColors>()!;

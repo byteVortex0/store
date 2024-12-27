@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:store/core/common/screens/under_build_screen.dart';
 import 'package:store/core/routes/base_routes.dart';
-import 'package:store/login_screen.dart';
+
+import '../../features/auth/presentation/screens/login_screen.dart';
+
 
 class AppRoutes {
   

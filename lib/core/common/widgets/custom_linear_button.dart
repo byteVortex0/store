@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:store/core/extensions/conext_extension.dart';
+import 'package:store/core/extensions/context_extension.dart';
 
 class CustomLinearButton extends StatelessWidget {
   const CustomLinearButton({
