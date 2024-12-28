@@ -1,0 +1,53 @@
+import 'dart:async';
+import 'package:flutter/widgets.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:store/core/services/shared_pref/pref_keys.dart';
+import 'package:store/core/services/shared_pref/shared_pref.dart';
+import 'package:store/features/auth/data/models/login_request_body.dart';
+import 'package:store/features/auth/data/repos/auth_repo.dart';
+
+import '../../../../core/utils/app_strings.dart';
+
+part 'auth_event.dart';
+part 'auth_state.dart';
+part 'auth_bloc.freezed.dart';
+
+class AuthBloc extends Bloc<AuthEvent, AuthState> {
+  AuthBloc(this.authRepo) : super(const _Initial()) {
+    on<LoginEvent>(_login);
+  }
+
+  final AuthRepo authRepo;
+  final TextEditingController emailController = TextEditingController();
+  final TextEditingController passwordController = TextEditingController();
+
+  FutureOr<void> _login(LoginEvent event, Emitter<AuthState> emit) async {
+    //Loading
+    emit(const AuthState.loading());
+
+    //you get data from repoooooo
+    final result = await authRepo.login(
+      body: LoginRequestBody(
+        email: emailController.text.trim(),
+        password: passwordController.text,
+      ),
+    );
+
+    //finaly we get dataaaaaa, play by data hhhhhhhhhhhhh 
+    //Don't forget Do emit
+    result.when(
+      success: (loginData) async{
+        
+        final token = loginData.data.login.accessToken ?? '';
+        await SharedPref().setString(PrefKeys.accessToken, token);
+        final user = await authRepo.userRole(token: token);
+        await SharedPref().setInt(PrefKeys.userId, user.userId?? 0) ;
+        
+        emit(AuthState.success(userRole: user.userRole ?? 'customer'));
+      },
+      failure: (errorHandler) =>
+          emit(const AuthState.error(errorMassage: errorMassage)),
+    );
+  }
+}
