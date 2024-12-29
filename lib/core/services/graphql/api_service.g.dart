@@ -70,7 +70,7 @@ class _ApiService implements ApiService {
     )
         .compose(
           _dio.options,
-          'https://api.escuelajs.co/api/v1/auth/profile',
+          '/api/v1/auth/profile',
           queryParameters: queryParameters,
           data: _data,
         )

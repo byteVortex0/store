@@ -23,8 +23,8 @@ class AuthDataSource {
 
   // Role
   Future<UserRoleResponse> userRole(String token) async {
-    final Dio dio = Dio();
-    dio.options.headers['Authorization'] = 'Bearer + $token';
+    final dio = Dio();
+    dio.options.headers['Authorization'] = 'Bearer $token';
     final client = ApiService(dio);
     final response = await client.userRole(token);
     return response;
