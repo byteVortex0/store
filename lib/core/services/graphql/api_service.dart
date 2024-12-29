@@ -19,6 +19,6 @@ abstract class ApiService {
   );
 
   //admin or customer
-  @GET('https://api.escuelajs.co/api/v1/auth/profile')
+  @GET('/api/v1/auth/profile')
   Future<UserRoleResponse> userRole(String token);
 }

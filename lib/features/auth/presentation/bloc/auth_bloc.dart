@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:developer';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
@@ -22,32 +23,46 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
 
+  final formKey = GlobalKey<FormState>();
+
   FutureOr<void> _login(LoginEvent event, Emitter<AuthState> emit) async {
-    //Loading
-    emit(const AuthState.loading());
+    try {
+      //Loading
+      emit(const AuthState.loading());
 
-    //you get data from repoooooo
-    final result = await authRepo.login(
-      body: LoginRequestBody(
-        email: emailController.text.trim(),
-        password: passwordController.text,
-      ),
-    );
+      //you get data from repoooooo
+      final result = await authRepo.login(
+        body: LoginRequestBody(
+          email: emailController.text.trim(),
+          password: passwordController.text,
+        ),
+      );
 
-    //finaly we get dataaaaaa, play by data hhhhhhhhhhhhh 
-    //Don't forget Do emit
-    result.when(
-      success: (loginData) async{
-        
-        final token = loginData.data.login.accessToken ?? '';
-        await SharedPref().setString(PrefKeys.accessToken, token);
-        final user = await authRepo.userRole(token: token);
-        await SharedPref().setInt(PrefKeys.userId, user.userId?? 0) ;
-        
-        emit(AuthState.success(userRole: user.userRole ?? 'customer'));
-      },
-      failure: (errorHandler) =>
-          emit(const AuthState.error(errorMassage: errorMassage)),
-    );
+      //finaly we get dataaaaaa, play by data hhhhhhhhhhhhh
+      //Don't forget Do emit
+      await result.when(
+        success: (loginData) async {
+          //
+          final token = loginData.data.login.accessToken ?? '';
+          await SharedPref().setString(PrefKeys.accessToken, token);
+          
+          //
+          final user = await authRepo.userRole(token: token);
+          await SharedPref().setInt(PrefKeys.userId, user.userId ?? 0);
+          await SharedPref()
+              .setString(PrefKeys.userRole, user.userRole ?? 'customer');
+
+
+          emit(AuthState.success(userRole: user.userRole ?? 'customer'));
+        },
+        failure: (errorHandler) {
+          emit(const AuthState.error(errorMassage: errorMassage));
+        },
+      );
+    } catch (e, stackTrace) {
+      // Handle unexpected exceptions
+      log('Login failed: $e\n$stackTrace');
+      emit(const AuthState.error(errorMassage: 'An unexpected error occurred'));
+    }
   }
 }
