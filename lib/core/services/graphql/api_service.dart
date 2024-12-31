@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:retrofit/retrofit.dart';
+import 'package:store/core/app/upload_image/model/upload_image_response.dart';
 import 'package:store/features/auth/data/models/login_response.dart';
 import 'package:store/features/auth/data/models/user_role_response.dart';
 
@@ -20,5 +21,10 @@ abstract class ApiService {
 
   //admin or customer
   @GET('/api/v1/auth/profile')
-  Future<UserRoleResponse> userRole(String token);
+  Future<UserRoleResponse> userRole(String token);//admin or customer
+  
+  @POST('/api/v1/files/upload')
+  Future<UploadImageResponse> uploadImage(
+    @Body() FormData file,
+  );
 }
