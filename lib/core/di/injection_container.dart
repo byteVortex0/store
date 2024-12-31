@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 import 'package:store/core/app/app_cubit/app_cubit.dart';
 import 'package:store/core/services/graphql/api_service.dart';
@@ -16,9 +17,11 @@ Future<void> setupInjector() async {
 
 Future<void> _initCore() async {
   final dio = DioFactory.getDio();
+  final navigatorKey = GlobalKey<NavigatorState>();
   sl
     ..registerFactory(AppCubit.new)
-    ..registerLazySingleton<ApiService>(() => ApiService(dio));
+    ..registerLazySingleton<ApiService>(() => ApiService(dio))
+    ..registerSingleton<GlobalKey<NavigatorState>>(navigatorKey);
 }
 
 Future<void> _initAuth() async {

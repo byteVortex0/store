@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -34,7 +32,7 @@ class StoreApp extends StatelessWidget {
                   buildWhen: (previous, current) => previous != current,
                   builder: (context, state) {
                     final cubit = context.read<AppCubit>();
-                    
+
                     return MaterialApp(
                       debugShowCheckedModeBanner: false,
                       title: 'Store App',
@@ -66,16 +64,15 @@ class StoreApp extends StatelessWidget {
                       //**Routes */
                       onGenerateRoute: (settings) =>
                           AppRoutes().onGenerateRoutes(settings),
-                      initialRoute: SharedPref()
+                      initialRoute: /*SharedPref()
                                   .getString(PrefKeys.accessToken) !=
                               null
                           ? SharedPref().getString(PrefKeys.userRole) == 'admin'
                               ? AppRoutes.homeAdminScreen
                               : AppRoutes.homeCustomerScreen
-                          : AppRoutes.loginScreen,
-                          
+                          :*/ AppRoutes.loginScreen,
+                      navigatorKey: sl<GlobalKey<NavigatorState>>(),
                     );
-                   
                   },
                 ),
               ),
