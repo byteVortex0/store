@@ -3,6 +3,8 @@ import 'package:dio/dio.dart';
 import 'package:store/core/services/graphql/api_service.dart';
 import 'package:store/core/services/graphql/graphql_queries/auth_queries.dart';
 import 'package:store/features/auth/data/models/login_response.dart';
+import 'package:store/features/auth/data/models/sign_up_request_body.dart';
+import 'package:store/features/auth/data/models/sign_up_response.dart';
 import 'package:store/features/auth/data/models/user_role_response.dart';
 
 import '../models/login_request_body.dart';
@@ -29,4 +31,13 @@ class AuthDataSource {
     final response = await client.userRole(token);
     return response;
   }
+
+  //SignUp
+  Future<SignUpResponse> signUp({required SignUpRequestBody body}) async {
+    final response = await graphql.signUp(
+      AuthQueries().signUpMapQuery(body: body),
+    );
+    return response;
+  }
+
 }
