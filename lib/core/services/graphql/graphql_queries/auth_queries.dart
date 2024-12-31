@@ -1,7 +1,3 @@
-
-
-import 'dart:developer';
-
 import 'package:store/features/auth/data/models/login_request_body.dart';
 
 class AuthQueries {
