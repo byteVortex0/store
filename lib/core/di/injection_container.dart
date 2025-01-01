@@ -48,6 +48,6 @@ Future<void> _initDashBoard() async{
     ..registerFactory(() => NumberOfCategoriesBloc(sl()))
     ..registerFactory(() => NumberOfProductsBloc(sl()))
     ..registerFactory(() => NumberOfUsersBloc(sl()))
-    ..registerLazySingleton(() => DashBoardRepo(dataSource: sl()))
-    ..registerLazySingleton(() => DashBoardDataSource(graphql: sl()));
+    ..registerLazySingleton(() => DashBoardDataSource(graphql: sl()))
+    ..registerLazySingleton(() => DashBoardRepo(dataSource: sl()));
 }

@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:developer';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
@@ -21,18 +22,23 @@ class NumberOfUsersBloc extends Bloc<NumberOfUsersEvent, NumberOfUsersState> {
     GetNumberOfUsersEvent event,
     Emitter<NumberOfUsersState> emit,
   ) async {
+    try {
+      emit(const NumberOfUsersState.loading());
+      final result = await _repo.numberOfUsers();
 
-    emit(const NumberOfUsersState.loading());
-    final result = await _repo.numberOfUsers();
-
-    result.when(
-      success: (data) {
-        emit(NumberOfUsersState.success(
-            numberOfUsers: data.usersNumber));
-      },
-      failure: (errorHandler) {
-        emit(const NumberOfUsersState.error(error: errorMassage));
-      },
-    );
+      result.when(
+        success: (data) {
+          emit(NumberOfUsersState.success(numberOfUsers: data.usersNumber));
+        },
+        failure: (errorHandler) {
+          emit(const NumberOfUsersState.error(error: errorMassage));
+        },
+      );
+    } catch (e, stackTrace) {
+      // Handle unexpected exceptions
+      log('Number Of Users failed: $e\n$stackTrace');
+      emit(const NumberOfUsersState.error(
+          error: 'An unexpected error occurred'));
+    }
   }
 }

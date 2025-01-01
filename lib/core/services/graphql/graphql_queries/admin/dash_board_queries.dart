@@ -8,7 +8,7 @@ class DashBoardQueries {
   }
 
   //Products
-  Map<String, dynamic> queryOfProducts(){
+  Map<String, dynamic> queryOfProducts() {
     return {
       'query': '''
            {
@@ -16,12 +16,12 @@ class DashBoardQueries {
               title   
             }
           }     
-        '''
+        ''',
     };
   }
 
   //Categories
-  Map<String, dynamic> queryOfCategories(){
+  Map<String, dynamic> queryOfCategories() {
     return {
       'query': '''
            {
@@ -29,12 +29,12 @@ class DashBoardQueries {
               name   
             }
           }     
-        '''
+        ''',
     };
   }
-  
+
   //Users
-  Map<String, dynamic> queryOfUsers(){
+  Map<String, dynamic> queryOfUsers() {
     return {
       'query': '''
            {
@@ -42,11 +42,7 @@ class DashBoardQueries {
               name   
             }
           }     
-        '''
+        ''',
     };
   }
-
-
-
-
 }

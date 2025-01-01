@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:developer';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
@@ -12,7 +13,8 @@ part 'number_of_products_bloc.freezed.dart';
 
 class NumberOfProductsBloc
     extends Bloc<NumberOfProductsEvent, NumberOfProductsState> {
-  NumberOfProductsBloc(this._repo) : super(const NumberOfProductsState.loading()) {
+  NumberOfProductsBloc(this._repo)
+      : super(const NumberOfProductsState.loading()) {
     on<GetNumberOfProductsEvent>(_numberOfProducts);
   }
 
@@ -22,18 +24,24 @@ class NumberOfProductsBloc
     GetNumberOfProductsEvent event,
     Emitter<NumberOfProductsState> emit,
   ) async {
+    try {
+      emit(const NumberOfProductsState.loading());
+      final result = await _repo.numberOfProducts();
 
-    emit(const NumberOfProductsState.loading());
-    final result = await _repo.numberOfProducts();
-
-    result.when(
-      success: (data) {
-        emit(NumberOfProductsState.success(
-            numberOfProducts: data.productsNumber));
-      },
-      failure: (errorHandler) {
-        emit(const NumberOfProductsState.error(error: errorMassage));
-      },
-    );
+      result.when(
+        success: (data) {
+          emit(NumberOfProductsState.success(
+              numberOfProducts: data.productsNumber));
+        },
+        failure: (errorHandler) {
+          emit(const NumberOfProductsState.error(error: errorMassage));
+        },
+      );
+    } catch (e, stackTrace) {
+      // Handle unexpected exceptions
+      log('Number Of Products failed: $e\n$stackTrace');
+      emit(const NumberOfProductsState.error(
+          error: 'An unexpected error occurred'));
+    }
   }
 }
