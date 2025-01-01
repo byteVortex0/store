@@ -1,9 +1,13 @@
 import 'package:dio/dio.dart';
 import 'package:retrofit/retrofit.dart';
 import 'package:store/core/app/upload_image/model/upload_image_response.dart';
+import 'package:store/features/admin/dashboard/data/models/products_number_response.dart';
 import 'package:store/features/auth/data/models/login_response.dart';
 import 'package:store/features/auth/data/models/sign_up_response.dart';
 import 'package:store/features/auth/data/models/user_role_response.dart';
+
+import '../../../features/admin/dashboard/data/models/categories_number_response.dart';
+import '../../../features/admin/dashboard/data/models/users_number_response.dart';
 
 part 'api_service.g.dart';
 
@@ -29,9 +33,29 @@ abstract class ApiService {
     @Body() FormData file,
   );
 
-  //Login
+  //signUp
   @POST(graphql)
   Future<SignUpResponse> signUp(
     @Body() Map<String, dynamic> mutation,
+  ); 
+  
+  //Products
+  @POST(graphql)
+  Future<ProductsNumberResponse> numberOfProducts(
+    @Body() Map<String, dynamic> query,
+  ); 
+  
+  //Categories
+  @POST(graphql)
+  Future<CategoriesNumberResponse> numberOfCategories(
+    @Body() Map<String, dynamic> query,
   );
+
+  //Users
+  @POST(graphql)
+  Future<UsersNumberResponse> numberOfUsers(
+    @Body() Map<String, dynamic> query,
+  );
+
+  
 }
