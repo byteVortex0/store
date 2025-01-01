@@ -4,6 +4,11 @@ import 'package:store/core/app/app_cubit/app_cubit.dart';
 import 'package:store/core/app/upload_image/cubit/upload_image_cubit.dart';
 import 'package:store/core/services/graphql/api_service.dart';
 import 'package:store/core/services/graphql/dio_factory.dart';
+import 'package:store/features/admin/dashboard/data/data_source/dash_board_data_source.dart';
+import 'package:store/features/admin/dashboard/data/repos/dash_board_repo.dart';
+import 'package:store/features/admin/dashboard/presentation/blocs/number_of_categories/number_of_categories_bloc.dart';
+import 'package:store/features/admin/dashboard/presentation/blocs/number_of_products/number_of_products_bloc.dart';
+import 'package:store/features/admin/dashboard/presentation/blocs/number_of_users/number_of_users_bloc.dart';
 import 'package:store/features/auth/presentation/bloc/auth_bloc.dart';
 
 import '../../features/auth/data/data_source/auth_data_source.dart';
@@ -16,6 +21,7 @@ final sl = GetIt.instance;
 Future<void> setupInjector() async {
   await _initCore();
   await _initAuth();
+  await _initDashBoard();
 }
 
 Future<void> _initCore() async {
@@ -35,4 +41,13 @@ Future<void> _initAuth() async {
     ..registerFactory(() => AuthBloc(sl()))
     ..registerLazySingleton(() => AuthRepo(authDataSource: sl()))
     ..registerLazySingleton(() => AuthDataSource(graphql: sl()));
+}
+
+Future<void> _initDashBoard() async{
+  sl
+    ..registerFactory(() => NumberOfCategoriesBloc(sl()))
+    ..registerFactory(() => NumberOfProductsBloc(sl()))
+    ..registerFactory(() => NumberOfUsersBloc(sl()))
+    ..registerLazySingleton(() => DashBoardRepo(dataSource: sl()))
+    ..registerLazySingleton(() => DashBoardDataSource(graphql: sl()));
 }
