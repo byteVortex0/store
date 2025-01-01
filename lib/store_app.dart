@@ -52,25 +52,29 @@ class StoreApp extends StatelessWidget {
                           AppLocalizationsSetup.localeResolutionCallback,
 
                       //**Check NetWorks */
-                      builder: (context, child) => Scaffold(
-                        body: Builder(
-                          builder: (context) {
-                            ConnectivityController.instance.init();
-                            return child!;
-                          },
+                      builder: (context, child) => GestureDetector(
+                        onTap: () {
+                          FocusManager.instance.primaryFocus?.unfocus();
+                        },
+                        child: Scaffold(
+                          body: Builder(
+                            builder: (context) {
+                              ConnectivityController.instance.init();
+                              return child!;
+                            },
+                          ),
                         ),
                       ),
 
                       //**Routes */
-                      onGenerateRoute: (settings) =>
-                          AppRoutes().onGenerateRoutes(settings),
-                      initialRoute: /*SharedPref()
+                      onGenerateRoute: AppRoutes.onGenerateRoutes,
+                      initialRoute: SharedPref()
                                   .getString(PrefKeys.accessToken) !=
                               null
                           ? SharedPref().getString(PrefKeys.userRole) == 'admin'
                               ? AppRoutes.homeAdminScreen
                               : AppRoutes.homeCustomerScreen
-                          :*/ AppRoutes.loginScreen,
+                          : AppRoutes.loginScreen,
                       navigatorKey: sl<GlobalKey<NavigatorState>>(),
                     );
                   },

@@ -8,7 +8,7 @@ import 'package:store/features/auth/presentation/bloc/auth_bloc.dart';
 import 'package:store/features/auth/presentation/screens/sign_up_screen.dart';
 import 'package:store/features/customer/presentation/screens/home_customer_screen.dart';
 
-import '../../features/admin/presentation/screens/home_admin_screen.dart';
+import '../../features/admin/home_admin/presentation/screens/home_admin_screen.dart';
 import '../../features/auth/presentation/screens/login_screen.dart';
 
 class AppRoutes {
@@ -17,7 +17,7 @@ class AppRoutes {
   static const String homeAdminScreen = '/HomeAdminScreen';
   static const String homeCustomerScreen = '/homecustomerScreen';
 
-  Route onGenerateRoutes(RouteSettings settings) {
+  static Route onGenerateRoutes(RouteSettings settings) {
     //final arg = settings.arguments;
     switch (settings.name) {
       case loginScreen:

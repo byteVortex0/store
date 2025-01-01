@@ -53,7 +53,7 @@ class DarkAndLangButton extends StatelessWidget {
               text: context.trenslate(LangKeys.language),
               theme: context.textStyle.copyWith(
                 fontSize: 16.sp,
-                fontWeight: FontWeightHelper.body,
+                fontWeight: FontWeightHelper.bold,
                 color: Colors.white,
               ),
             ),

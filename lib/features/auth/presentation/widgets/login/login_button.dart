@@ -61,7 +61,7 @@ class LoginButton extends StatelessWidget {
                   text: context.trenslate(LangKeys.login),
                   theme: context.textStyle.copyWith(
                     fontSize: 18.sp,
-                    fontWeight: FontWeightHelper.body,
+                    fontWeight: FontWeightHelper.bold,
                   ),
                 ),
               );
