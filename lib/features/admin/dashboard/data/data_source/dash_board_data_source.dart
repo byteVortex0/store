@@ -24,7 +24,7 @@ class DashBoardDataSource {
 
   Future<UsersNumberResponse> numberOfUsers() async {
     final response =
-        await graphql.numberOfUsers(DashBoardQueries().queryOfProducts());
+        await graphql.numberOfUsers(DashBoardQueries().queryOfUsers());
     return response;
   }
 }

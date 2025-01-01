@@ -19,39 +19,38 @@ mixin _$NumberOfProductsEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() started,
-    required TResult Function() numberOfCategories,
+    required TResult Function() numberOfProducts,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? started,
-    TResult? Function()? numberOfCategories,
+    TResult? Function()? numberOfProducts,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? started,
-    TResult Function()? numberOfCategories,
+    TResult Function()? numberOfProducts,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Started value) started,
-    required TResult Function(GetNumberOfProductsEvent value)
-        numberOfCategories,
+    required TResult Function(GetNumberOfProductsEvent value) numberOfProducts,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Started value)? started,
-    TResult? Function(GetNumberOfProductsEvent value)? numberOfCategories,
+    TResult? Function(GetNumberOfProductsEvent value)? numberOfProducts,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Started value)? started,
-    TResult Function(GetNumberOfProductsEvent value)? numberOfCategories,
+    TResult Function(GetNumberOfProductsEvent value)? numberOfProducts,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -121,7 +120,7 @@ class _$StartedImpl implements _Started {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() started,
-    required TResult Function() numberOfCategories,
+    required TResult Function() numberOfProducts,
   }) {
     return started();
   }
@@ -130,7 +129,7 @@ class _$StartedImpl implements _Started {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? started,
-    TResult? Function()? numberOfCategories,
+    TResult? Function()? numberOfProducts,
   }) {
     return started?.call();
   }
@@ -139,7 +138,7 @@ class _$StartedImpl implements _Started {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? started,
-    TResult Function()? numberOfCategories,
+    TResult Function()? numberOfProducts,
     required TResult orElse(),
   }) {
     if (started != null) {
@@ -152,8 +151,7 @@ class _$StartedImpl implements _Started {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Started value) started,
-    required TResult Function(GetNumberOfProductsEvent value)
-        numberOfCategories,
+    required TResult Function(GetNumberOfProductsEvent value) numberOfProducts,
   }) {
     return started(this);
   }
@@ -162,7 +160,7 @@ class _$StartedImpl implements _Started {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Started value)? started,
-    TResult? Function(GetNumberOfProductsEvent value)? numberOfCategories,
+    TResult? Function(GetNumberOfProductsEvent value)? numberOfProducts,
   }) {
     return started?.call(this);
   }
@@ -171,7 +169,7 @@ class _$StartedImpl implements _Started {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Started value)? started,
-    TResult Function(GetNumberOfProductsEvent value)? numberOfCategories,
+    TResult Function(GetNumberOfProductsEvent value)? numberOfProducts,
     required TResult orElse(),
   }) {
     if (started != null) {
@@ -214,7 +212,7 @@ class _$GetNumberOfProductsEventImpl implements GetNumberOfProductsEvent {
 
   @override
   String toString() {
-    return 'NumberOfProductsEvent.numberOfCategories()';
+    return 'NumberOfProductsEvent.numberOfProducts()';
   }
 
   @override
@@ -231,29 +229,29 @@ class _$GetNumberOfProductsEventImpl implements GetNumberOfProductsEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() started,
-    required TResult Function() numberOfCategories,
+    required TResult Function() numberOfProducts,
   }) {
-    return numberOfCategories();
+    return numberOfProducts();
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? started,
-    TResult? Function()? numberOfCategories,
+    TResult? Function()? numberOfProducts,
   }) {
-    return numberOfCategories?.call();
+    return numberOfProducts?.call();
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? started,
-    TResult Function()? numberOfCategories,
+    TResult Function()? numberOfProducts,
     required TResult orElse(),
   }) {
-    if (numberOfCategories != null) {
-      return numberOfCategories();
+    if (numberOfProducts != null) {
+      return numberOfProducts();
     }
     return orElse();
   }
@@ -262,30 +260,29 @@ class _$GetNumberOfProductsEventImpl implements GetNumberOfProductsEvent {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Started value) started,
-    required TResult Function(GetNumberOfProductsEvent value)
-        numberOfCategories,
+    required TResult Function(GetNumberOfProductsEvent value) numberOfProducts,
   }) {
-    return numberOfCategories(this);
+    return numberOfProducts(this);
   }
 
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Started value)? started,
-    TResult? Function(GetNumberOfProductsEvent value)? numberOfCategories,
+    TResult? Function(GetNumberOfProductsEvent value)? numberOfProducts,
   }) {
-    return numberOfCategories?.call(this);
+    return numberOfProducts?.call(this);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Started value)? started,
-    TResult Function(GetNumberOfProductsEvent value)? numberOfCategories,
+    TResult Function(GetNumberOfProductsEvent value)? numberOfProducts,
     required TResult orElse(),
   }) {
-    if (numberOfCategories != null) {
-      return numberOfCategories(this);
+    if (numberOfProducts != null) {
+      return numberOfProducts(this);
     }
     return orElse();
   }
