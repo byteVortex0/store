@@ -65,7 +65,7 @@ List<DrawerItemModel> adminDrawerList(BuildContext context) {
           fontWeight: FontWeightHelper.bold,
         ),
       ),
-      page: const AddProductsScreen(),
+      page: const AddProdcutsScreen(),
     ),
     //Users
     DrawerItemModel(

@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import '../../../../../core/colors/colors_dark.dart';
 import '../../../../../core/common/widgets/admin_app_bar.dart';
 
-class AddProductsScreen extends StatelessWidget {
-  const AddProductsScreen({super.key});
+class AddProdcutsScreen extends StatelessWidget {
+  const AddProdcutsScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
