@@ -46,7 +46,7 @@ class SignUpBody extends StatelessWidget {
                   text: context.trenslate(LangKeys.youHaveAccount),
                   theme: context.textStyle.copyWith(
                     fontSize: 16.sp,
-                    fontWeight: FontWeightHelper.body,
+                    fontWeight: FontWeightHelper.bold,
                     color: context.color.bluePinkLight
                   ),
                   textAlign: TextAlign.center,

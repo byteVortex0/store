@@ -58,7 +58,7 @@ class SignUpButton extends StatelessWidget {
                   text: context.trenslate(LangKeys.signUp),
                   theme: context.textStyle.copyWith(
                     fontSize: 18.sp,
-                    fontWeight: FontWeightHelper.body,
+                    fontWeight: FontWeightHelper.bold,
                   ),
                 ),
               );
