@@ -33,6 +33,10 @@ class AppRoutes {
           BlocProvider(
             create: (context) => sl<UploadImageCubit>(),
           ),
+          BlocProvider(
+            create: (context) => sl<AuthBloc>(),
+          ),
+          
         ], child: const SignUpScreen()));
       case homeAdminScreen:
         return BaseRoute(page: const HomeAdminScreen());

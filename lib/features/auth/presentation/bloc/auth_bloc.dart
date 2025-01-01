@@ -83,9 +83,9 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         ),
       );
 
-      await result.when(
-        success: (loginData) async {
-          on<LoginEvent>(_login);
+      result.when(
+        success: (loginData)  {
+          add(const AuthEvent.login());
         },
         failure: (errorHandler) {
           emit(const AuthState.error(errorMassage: errorMassage));
@@ -93,7 +93,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       );
     } catch (e, stackTrace) {
       // Handle unexpected exceptions
-      log('Login failed: $e\n$stackTrace');
+      log('SignUp failed: $e\n$stackTrace');
       emit(const AuthState.error(errorMassage: 'An unexpected error occurred'));
     }
   }
