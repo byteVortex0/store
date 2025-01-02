@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:store/core/extensions/context_extension.dart';
-import 'package:store/features/admin/add_categories/presentation/widgets/create/creat_category_buttom_sheet.dart';
+import 'package:store/features/admin/add_categories/presentation/widgets/create/create_category_buttom_sheet.dart';
 
 import '../../../../../../core/colors/colors_dark.dart';
 import '../../../../../../core/common/buttom_sheet/custom_buttom_sheet.dart';
@@ -30,7 +30,7 @@ class CreateCategory extends StatelessWidget {
           onPressed: () {
             CustomBottomSheet.showBottomSheet(
               context: context,
-              child: const CreatCategoryButtomSheet(),
+              child: const CreateCategoryButtomSheet(),
             );
           },
           text: 'Add',
