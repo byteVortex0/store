@@ -1,24 +1,24 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:store/core/common/widgets/custom_button.dart';
-import 'package:store/core/common/widgets/custom_text_field.dart';
 import 'package:store/core/extensions/context_extension.dart';
-import 'package:store/features/admin/add_categories/presentation/widgets/create/category_upload_image.dart';
+import 'package:store/features/admin/add_categories/presentation/widgets/update/update_upload_image.dart';
 
 import '../../../../../../core/colors/colors_dark.dart';
+import '../../../../../../core/common/widgets/custom_button.dart';
+import '../../../../../../core/common/widgets/custom_text_field.dart';
 import '../../../../../../core/common/widgets/text_app.dart';
 import '../../../../../../core/style/fonts/font_family_helper.dart';
 import '../../../../../../core/style/fonts/font_weight_helper.dart';
 
-class CreatCategoryButtomSheet extends StatefulWidget {
-  const CreatCategoryButtomSheet({super.key});
+class UpdateCategoryButtomSheet extends StatefulWidget {
+  const UpdateCategoryButtomSheet({super.key});
 
   @override
-  State<CreatCategoryButtomSheet> createState() =>
-      _CreatCategoryButtomSheetState();
+  State<UpdateCategoryButtomSheet> createState() =>
+      _UpdateCategoryButtomSheetState();
 }
 
-class _CreatCategoryButtomSheetState extends State<CreatCategoryButtomSheet> {
+class _UpdateCategoryButtomSheetState extends State<UpdateCategoryButtomSheet> {
   final formKey = GlobalKey<FormState>();
 
   TextEditingController nameController = TextEditingController();
@@ -38,42 +38,34 @@ class _CreatCategoryButtomSheetState extends State<CreatCategoryButtomSheet> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            TextApp(
-              text: 'Create Category',
-              theme: context.textStyle.copyWith(
-                fontSize: 20.sp,
-                fontFamily: FontFamilyHelper.poppinsEnglish,
-                fontWeight: FontWeightHelper.bold,
+            Align(
+              child: TextApp(
+                text: 'Update Category',
+                theme: context.textStyle.copyWith(
+                  fontSize: 20.sp,
+                  fontFamily: FontFamilyHelper.poppinsEnglish,
+                  fontWeight: FontWeightHelper.bold,
+                ),
               ),
             ),
             SizedBox(height: 20.h),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                TextApp(
-                  text: 'Add a photo',
-                  theme: context.textStyle.copyWith(
-                    fontSize: 16.sp,
-                    fontFamily: FontFamilyHelper.poppinsEnglish,
-                    fontWeight: FontWeightHelper.regular,
-                  ),
-                ),
-                CustomButton(
-                  onPressed: () {},
-                  text: 'Remove',
-                  width: 120.w,
-                  height: 35.h,
-                  lastRadius: 10.r,
-                  threeRadius: 10.r,
-                  backgroundColor: Colors.red,
-                ),
-              ],
+            TextApp(
+              text: 'Update a photo',
+              theme: context.textStyle.copyWith(
+                fontSize: 16.sp,
+                fontFamily: FontFamilyHelper.poppinsEnglish,
+                fontWeight: FontWeightHelper.regular,
+              ),
             ),
             SizedBox(height: 10.h),
-            const CategoryUploadImage(),
+            const UpdateUploadImage(
+              imageUrl:
+              'https://images.unsplash.com/photo-1607799279861-4dd421887fb3?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+            ),
             SizedBox(height: 20.h),
             TextApp(
-              text: 'Enter the category name',
+              textAlign: TextAlign.start,
+              text: 'Update the category name',
               theme: context.textStyle.copyWith(
                 fontSize: 16.sp,
                 fontFamily: FontFamilyHelper.poppinsEnglish,
@@ -94,7 +86,7 @@ class _CreatCategoryButtomSheetState extends State<CreatCategoryButtomSheet> {
             SizedBox(height: 20.h),
             CustomButton(
               onPressed: () {},
-              text: 'Create a new category',
+              text: 'Update a new category',
               textColor: ColorsDark.blueDark,
               width: MediaQuery.of(context).size.width,
               height: 50.h,

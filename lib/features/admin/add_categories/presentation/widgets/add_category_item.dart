@@ -5,8 +5,10 @@ import 'package:store/core/common/widgets/custom_container_linear_admin.dart';
 import 'package:store/core/common/widgets/text_app.dart';
 import 'package:store/core/extensions/context_extension.dart';
 
+import '../../../../../core/common/buttom_sheet/custom_buttom_sheet.dart';
 import '../../../../../core/style/fonts/font_family_helper.dart';
 import '../../../../../core/style/fonts/font_weight_helper.dart';
+import 'update/update_category_buttom_sheet.dart';
 
 class AddCategoryItem extends StatelessWidget {
   const AddCategoryItem({
@@ -52,7 +54,12 @@ class AddCategoryItem extends StatelessWidget {
                       ),
                     ),
                     IconButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        CustomBottomSheet.showBottomSheet(
+                          context: context,
+                          child: const UpdateCategoryButtomSheet(),
+                        );
+                      },
                       icon: const Icon(
                         Icons.edit,
                         color: Colors.green,
