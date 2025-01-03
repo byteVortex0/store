@@ -15,6 +15,7 @@ import 'package:store/features/auth/presentation/bloc/auth_bloc.dart';
 
 import '../../features/admin/add_categories/data/data_source/categories_admin_data_source.dart';
 import '../../features/admin/add_categories/presentation/blocs/create_category/create_category_bloc.dart';
+import '../../features/admin/add_categories/presentation/blocs/delete_category/delete_category_bloc.dart';
 import '../../features/auth/data/data_source/auth_data_source.dart';
 import '../../features/auth/data/repos/auth_repo.dart';
 import '../app/upload_image/data_source/upload_image_data_source.dart';
@@ -61,6 +62,7 @@ Future<void> _initCategory() async{
   sl
     ..registerFactory(() => GetAllAdminCategoriesBloc(sl()))
     ..registerFactory(() => CreateCategoryBloc(sl()))
+    ..registerFactory(() => DeleteCategoryBloc(sl()))
     ..registerLazySingleton(() => CategoriesAdminDataSource(graphql: sl()))
     ..registerLazySingleton(() => CategoriesAdminRepo(dataSource: sl()));
 }

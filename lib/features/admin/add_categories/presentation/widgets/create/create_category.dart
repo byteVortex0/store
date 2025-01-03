@@ -49,7 +49,7 @@ class CreateCategory extends StatelessWidget {
               whenComplete: () {
                 context.read<GetAllAdminCategoriesBloc>().add(
                       const GetAllAdminCategoriesEvent.fetchAllCategories(
-                          isLoading: false),
+                          isNotLoading: false),
                     );
               },
             );

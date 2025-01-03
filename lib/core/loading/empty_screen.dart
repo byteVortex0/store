@@ -1,6 +1,5 @@
 import 'package:flutter/widgets.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:store/core/common/widgets/admin_app_bar.dart';
 import 'package:store/core/common/widgets/text_app.dart';
 import 'package:store/core/extensions/context_extension.dart';
 import 'package:store/core/style/images/app_images.dart';

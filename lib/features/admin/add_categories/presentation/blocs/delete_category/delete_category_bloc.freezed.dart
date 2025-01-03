@@ -3,7 +3,7 @@
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
-part of 'get_all_admin_categories_bloc.dart';
+part of 'delete_category_bloc.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -15,67 +15,65 @@ final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
-mixin _$GetAllAdminCategoriesEvent {
+mixin _$DeleteCategoryEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() started,
-    required TResult Function(bool isNotLoading) fetchAllCategories,
+    required TResult Function(String id) removeCategory,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? started,
-    TResult? Function(bool isNotLoading)? fetchAllCategories,
+    TResult? Function(String id)? removeCategory,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? started,
-    TResult Function(bool isNotLoading)? fetchAllCategories,
+    TResult Function(String id)? removeCategory,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Started value) started,
-    required TResult Function(FetchAllCategoriesEvent value) fetchAllCategories,
+    required TResult Function(RemoveCategoryEvent value) removeCategory,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Started value)? started,
-    TResult? Function(FetchAllCategoriesEvent value)? fetchAllCategories,
+    TResult? Function(RemoveCategoryEvent value)? removeCategory,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Started value)? started,
-    TResult Function(FetchAllCategoriesEvent value)? fetchAllCategories,
+    TResult Function(RemoveCategoryEvent value)? removeCategory,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $GetAllAdminCategoriesEventCopyWith<$Res> {
-  factory $GetAllAdminCategoriesEventCopyWith(GetAllAdminCategoriesEvent value,
-          $Res Function(GetAllAdminCategoriesEvent) then) =
-      _$GetAllAdminCategoriesEventCopyWithImpl<$Res,
-          GetAllAdminCategoriesEvent>;
+abstract class $DeleteCategoryEventCopyWith<$Res> {
+  factory $DeleteCategoryEventCopyWith(
+          DeleteCategoryEvent value, $Res Function(DeleteCategoryEvent) then) =
+      _$DeleteCategoryEventCopyWithImpl<$Res, DeleteCategoryEvent>;
 }
 
 /// @nodoc
-class _$GetAllAdminCategoriesEventCopyWithImpl<$Res,
-        $Val extends GetAllAdminCategoriesEvent>
-    implements $GetAllAdminCategoriesEventCopyWith<$Res> {
-  _$GetAllAdminCategoriesEventCopyWithImpl(this._value, this._then);
+class _$DeleteCategoryEventCopyWithImpl<$Res, $Val extends DeleteCategoryEvent>
+    implements $DeleteCategoryEventCopyWith<$Res> {
+  _$DeleteCategoryEventCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
   // ignore: unused_field
   final $Res Function($Val) _then;
 
-  /// Create a copy of GetAllAdminCategoriesEvent
+  /// Create a copy of DeleteCategoryEvent
   /// with the given fields replaced by the non-null parameter values.
 }
 
@@ -88,13 +86,13 @@ abstract class _$$StartedImplCopyWith<$Res> {
 
 /// @nodoc
 class __$$StartedImplCopyWithImpl<$Res>
-    extends _$GetAllAdminCategoriesEventCopyWithImpl<$Res, _$StartedImpl>
+    extends _$DeleteCategoryEventCopyWithImpl<$Res, _$StartedImpl>
     implements _$$StartedImplCopyWith<$Res> {
   __$$StartedImplCopyWithImpl(
       _$StartedImpl _value, $Res Function(_$StartedImpl) _then)
       : super(_value, _then);
 
-  /// Create a copy of GetAllAdminCategoriesEvent
+  /// Create a copy of DeleteCategoryEvent
   /// with the given fields replaced by the non-null parameter values.
 }
 
@@ -105,7 +103,7 @@ class _$StartedImpl implements _Started {
 
   @override
   String toString() {
-    return 'GetAllAdminCategoriesEvent.started()';
+    return 'DeleteCategoryEvent.started()';
   }
 
   @override
@@ -121,7 +119,7 @@ class _$StartedImpl implements _Started {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() started,
-    required TResult Function(bool isNotLoading) fetchAllCategories,
+    required TResult Function(String id) removeCategory,
   }) {
     return started();
   }
@@ -130,7 +128,7 @@ class _$StartedImpl implements _Started {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? started,
-    TResult? Function(bool isNotLoading)? fetchAllCategories,
+    TResult? Function(String id)? removeCategory,
   }) {
     return started?.call();
   }
@@ -139,7 +137,7 @@ class _$StartedImpl implements _Started {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? started,
-    TResult Function(bool isNotLoading)? fetchAllCategories,
+    TResult Function(String id)? removeCategory,
     required TResult orElse(),
   }) {
     if (started != null) {
@@ -152,7 +150,7 @@ class _$StartedImpl implements _Started {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Started value) started,
-    required TResult Function(FetchAllCategoriesEvent value) fetchAllCategories,
+    required TResult Function(RemoveCategoryEvent value) removeCategory,
   }) {
     return started(this);
   }
@@ -161,7 +159,7 @@ class _$StartedImpl implements _Started {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Started value)? started,
-    TResult? Function(FetchAllCategoriesEvent value)? fetchAllCategories,
+    TResult? Function(RemoveCategoryEvent value)? removeCategory,
   }) {
     return started?.call(this);
   }
@@ -170,7 +168,7 @@ class _$StartedImpl implements _Started {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Started value)? started,
-    TResult Function(FetchAllCategoriesEvent value)? fetchAllCategories,
+    TResult Function(RemoveCategoryEvent value)? removeCategory,
     required TResult orElse(),
   }) {
     if (started != null) {
@@ -180,107 +178,103 @@ class _$StartedImpl implements _Started {
   }
 }
 
-abstract class _Started implements GetAllAdminCategoriesEvent {
+abstract class _Started implements DeleteCategoryEvent {
   const factory _Started() = _$StartedImpl;
 }
 
 /// @nodoc
-abstract class _$$FetchAllCategoriesEventImplCopyWith<$Res> {
-  factory _$$FetchAllCategoriesEventImplCopyWith(
-          _$FetchAllCategoriesEventImpl value,
-          $Res Function(_$FetchAllCategoriesEventImpl) then) =
-      __$$FetchAllCategoriesEventImplCopyWithImpl<$Res>;
+abstract class _$$RemoveCategoryEventImplCopyWith<$Res> {
+  factory _$$RemoveCategoryEventImplCopyWith(_$RemoveCategoryEventImpl value,
+          $Res Function(_$RemoveCategoryEventImpl) then) =
+      __$$RemoveCategoryEventImplCopyWithImpl<$Res>;
   @useResult
-  $Res call({bool isNotLoading});
+  $Res call({String id});
 }
 
 /// @nodoc
-class __$$FetchAllCategoriesEventImplCopyWithImpl<$Res>
-    extends _$GetAllAdminCategoriesEventCopyWithImpl<$Res,
-        _$FetchAllCategoriesEventImpl>
-    implements _$$FetchAllCategoriesEventImplCopyWith<$Res> {
-  __$$FetchAllCategoriesEventImplCopyWithImpl(
-      _$FetchAllCategoriesEventImpl _value,
-      $Res Function(_$FetchAllCategoriesEventImpl) _then)
+class __$$RemoveCategoryEventImplCopyWithImpl<$Res>
+    extends _$DeleteCategoryEventCopyWithImpl<$Res, _$RemoveCategoryEventImpl>
+    implements _$$RemoveCategoryEventImplCopyWith<$Res> {
+  __$$RemoveCategoryEventImplCopyWithImpl(_$RemoveCategoryEventImpl _value,
+      $Res Function(_$RemoveCategoryEventImpl) _then)
       : super(_value, _then);
 
-  /// Create a copy of GetAllAdminCategoriesEvent
+  /// Create a copy of DeleteCategoryEvent
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? isNotLoading = null,
+    Object? id = null,
   }) {
-    return _then(_$FetchAllCategoriesEventImpl(
-      isNotLoading: null == isNotLoading
-          ? _value.isNotLoading
-          : isNotLoading // ignore: cast_nullable_to_non_nullable
-              as bool,
+    return _then(_$RemoveCategoryEventImpl(
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 }
 
 /// @nodoc
 
-class _$FetchAllCategoriesEventImpl implements FetchAllCategoriesEvent {
-  const _$FetchAllCategoriesEventImpl({required this.isNotLoading});
+class _$RemoveCategoryEventImpl implements RemoveCategoryEvent {
+  const _$RemoveCategoryEventImpl({required this.id});
 
   @override
-  final bool isNotLoading;
+  final String id;
 
   @override
   String toString() {
-    return 'GetAllAdminCategoriesEvent.fetchAllCategories(isNotLoading: $isNotLoading)';
+    return 'DeleteCategoryEvent.removeCategory(id: $id)';
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$FetchAllCategoriesEventImpl &&
-            (identical(other.isNotLoading, isNotLoading) ||
-                other.isNotLoading == isNotLoading));
+            other is _$RemoveCategoryEventImpl &&
+            (identical(other.id, id) || other.id == id));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, isNotLoading);
+  int get hashCode => Object.hash(runtimeType, id);
 
-  /// Create a copy of GetAllAdminCategoriesEvent
+  /// Create a copy of DeleteCategoryEvent
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
-  _$$FetchAllCategoriesEventImplCopyWith<_$FetchAllCategoriesEventImpl>
-      get copyWith => __$$FetchAllCategoriesEventImplCopyWithImpl<
-          _$FetchAllCategoriesEventImpl>(this, _$identity);
+  _$$RemoveCategoryEventImplCopyWith<_$RemoveCategoryEventImpl> get copyWith =>
+      __$$RemoveCategoryEventImplCopyWithImpl<_$RemoveCategoryEventImpl>(
+          this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() started,
-    required TResult Function(bool isNotLoading) fetchAllCategories,
+    required TResult Function(String id) removeCategory,
   }) {
-    return fetchAllCategories(isNotLoading);
+    return removeCategory(id);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? started,
-    TResult? Function(bool isNotLoading)? fetchAllCategories,
+    TResult? Function(String id)? removeCategory,
   }) {
-    return fetchAllCategories?.call(isNotLoading);
+    return removeCategory?.call(id);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? started,
-    TResult Function(bool isNotLoading)? fetchAllCategories,
+    TResult Function(String id)? removeCategory,
     required TResult orElse(),
   }) {
-    if (fetchAllCategories != null) {
-      return fetchAllCategories(isNotLoading);
+    if (removeCategory != null) {
+      return removeCategory(id);
     }
     return orElse();
   }
@@ -289,95 +283,95 @@ class _$FetchAllCategoriesEventImpl implements FetchAllCategoriesEvent {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Started value) started,
-    required TResult Function(FetchAllCategoriesEvent value) fetchAllCategories,
+    required TResult Function(RemoveCategoryEvent value) removeCategory,
   }) {
-    return fetchAllCategories(this);
+    return removeCategory(this);
   }
 
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Started value)? started,
-    TResult? Function(FetchAllCategoriesEvent value)? fetchAllCategories,
+    TResult? Function(RemoveCategoryEvent value)? removeCategory,
   }) {
-    return fetchAllCategories?.call(this);
+    return removeCategory?.call(this);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Started value)? started,
-    TResult Function(FetchAllCategoriesEvent value)? fetchAllCategories,
+    TResult Function(RemoveCategoryEvent value)? removeCategory,
     required TResult orElse(),
   }) {
-    if (fetchAllCategories != null) {
-      return fetchAllCategories(this);
+    if (removeCategory != null) {
+      return removeCategory(this);
     }
     return orElse();
   }
 }
 
-abstract class FetchAllCategoriesEvent implements GetAllAdminCategoriesEvent {
-  const factory FetchAllCategoriesEvent({required final bool isNotLoading}) =
-      _$FetchAllCategoriesEventImpl;
+abstract class RemoveCategoryEvent implements DeleteCategoryEvent {
+  const factory RemoveCategoryEvent({required final String id}) =
+      _$RemoveCategoryEventImpl;
 
-  bool get isNotLoading;
+  String get id;
 
-  /// Create a copy of GetAllAdminCategoriesEvent
+  /// Create a copy of DeleteCategoryEvent
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$FetchAllCategoriesEventImplCopyWith<_$FetchAllCategoriesEventImpl>
-      get copyWith => throw _privateConstructorUsedError;
+  _$$RemoveCategoryEventImplCopyWith<_$RemoveCategoryEventImpl> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-mixin _$GetAllAdminCategoriesState {
+mixin _$DeleteCategoryState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() loading,
-    required TResult Function(GetAllCategoriesResponse categories) success,
-    required TResult Function() empty,
+    required TResult Function() initial,
+    required TResult Function(String id) loading,
+    required TResult Function() success,
     required TResult Function(String error) error,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? loading,
-    TResult? Function(GetAllCategoriesResponse categories)? success,
-    TResult? Function()? empty,
+    TResult? Function()? initial,
+    TResult? Function(String id)? loading,
+    TResult? Function()? success,
     TResult? Function(String error)? error,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? loading,
-    TResult Function(GetAllCategoriesResponse categories)? success,
-    TResult Function()? empty,
+    TResult Function()? initial,
+    TResult Function(String id)? loading,
+    TResult Function()? success,
     TResult Function(String error)? error,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
+    required TResult Function(_Initial value) initial,
     required TResult Function(LoadingState value) loading,
     required TResult Function(SuccessState value) success,
-    required TResult Function(EmptyState value) empty,
     required TResult Function(ErrorState value) error,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Initial value)? initial,
     TResult? Function(LoadingState value)? loading,
     TResult? Function(SuccessState value)? success,
-    TResult? Function(EmptyState value)? empty,
     TResult? Function(ErrorState value)? error,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Initial value)? initial,
     TResult Function(LoadingState value)? loading,
     TResult Function(SuccessState value)? success,
-    TResult Function(EmptyState value)? empty,
     TResult Function(ErrorState value)? error,
     required TResult orElse(),
   }) =>
@@ -385,61 +379,59 @@ mixin _$GetAllAdminCategoriesState {
 }
 
 /// @nodoc
-abstract class $GetAllAdminCategoriesStateCopyWith<$Res> {
-  factory $GetAllAdminCategoriesStateCopyWith(GetAllAdminCategoriesState value,
-          $Res Function(GetAllAdminCategoriesState) then) =
-      _$GetAllAdminCategoriesStateCopyWithImpl<$Res,
-          GetAllAdminCategoriesState>;
+abstract class $DeleteCategoryStateCopyWith<$Res> {
+  factory $DeleteCategoryStateCopyWith(
+          DeleteCategoryState value, $Res Function(DeleteCategoryState) then) =
+      _$DeleteCategoryStateCopyWithImpl<$Res, DeleteCategoryState>;
 }
 
 /// @nodoc
-class _$GetAllAdminCategoriesStateCopyWithImpl<$Res,
-        $Val extends GetAllAdminCategoriesState>
-    implements $GetAllAdminCategoriesStateCopyWith<$Res> {
-  _$GetAllAdminCategoriesStateCopyWithImpl(this._value, this._then);
+class _$DeleteCategoryStateCopyWithImpl<$Res, $Val extends DeleteCategoryState>
+    implements $DeleteCategoryStateCopyWith<$Res> {
+  _$DeleteCategoryStateCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
   // ignore: unused_field
   final $Res Function($Val) _then;
 
-  /// Create a copy of GetAllAdminCategoriesState
+  /// Create a copy of DeleteCategoryState
   /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
-abstract class _$$LoadingStateImplCopyWith<$Res> {
-  factory _$$LoadingStateImplCopyWith(
-          _$LoadingStateImpl value, $Res Function(_$LoadingStateImpl) then) =
-      __$$LoadingStateImplCopyWithImpl<$Res>;
+abstract class _$$InitialImplCopyWith<$Res> {
+  factory _$$InitialImplCopyWith(
+          _$InitialImpl value, $Res Function(_$InitialImpl) then) =
+      __$$InitialImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$LoadingStateImplCopyWithImpl<$Res>
-    extends _$GetAllAdminCategoriesStateCopyWithImpl<$Res, _$LoadingStateImpl>
-    implements _$$LoadingStateImplCopyWith<$Res> {
-  __$$LoadingStateImplCopyWithImpl(
-      _$LoadingStateImpl _value, $Res Function(_$LoadingStateImpl) _then)
+class __$$InitialImplCopyWithImpl<$Res>
+    extends _$DeleteCategoryStateCopyWithImpl<$Res, _$InitialImpl>
+    implements _$$InitialImplCopyWith<$Res> {
+  __$$InitialImplCopyWithImpl(
+      _$InitialImpl _value, $Res Function(_$InitialImpl) _then)
       : super(_value, _then);
 
-  /// Create a copy of GetAllAdminCategoriesState
+  /// Create a copy of DeleteCategoryState
   /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
 
-class _$LoadingStateImpl implements LoadingState {
-  const _$LoadingStateImpl();
+class _$InitialImpl implements _Initial {
+  const _$InitialImpl();
 
   @override
   String toString() {
-    return 'GetAllAdminCategoriesState.loading()';
+    return 'DeleteCategoryState.initial()';
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$LoadingStateImpl);
+        (other.runtimeType == runtimeType && other is _$InitialImpl);
   }
 
   @override
@@ -448,36 +440,36 @@ class _$LoadingStateImpl implements LoadingState {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() loading,
-    required TResult Function(GetAllCategoriesResponse categories) success,
-    required TResult Function() empty,
+    required TResult Function() initial,
+    required TResult Function(String id) loading,
+    required TResult Function() success,
     required TResult Function(String error) error,
   }) {
-    return loading();
+    return initial();
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? loading,
-    TResult? Function(GetAllCategoriesResponse categories)? success,
-    TResult? Function()? empty,
+    TResult? Function()? initial,
+    TResult? Function(String id)? loading,
+    TResult? Function()? success,
     TResult? Function(String error)? error,
   }) {
-    return loading?.call();
+    return initial?.call();
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? loading,
-    TResult Function(GetAllCategoriesResponse categories)? success,
-    TResult Function()? empty,
+    TResult Function()? initial,
+    TResult Function(String id)? loading,
+    TResult Function()? success,
     TResult Function(String error)? error,
     required TResult orElse(),
   }) {
-    if (loading != null) {
-      return loading();
+    if (initial != null) {
+      return initial();
     }
     return orElse();
   }
@@ -485,9 +477,153 @@ class _$LoadingStateImpl implements LoadingState {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
+    required TResult Function(_Initial value) initial,
     required TResult Function(LoadingState value) loading,
     required TResult Function(SuccessState value) success,
-    required TResult Function(EmptyState value) empty,
+    required TResult Function(ErrorState value) error,
+  }) {
+    return initial(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Initial value)? initial,
+    TResult? Function(LoadingState value)? loading,
+    TResult? Function(SuccessState value)? success,
+    TResult? Function(ErrorState value)? error,
+  }) {
+    return initial?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Initial value)? initial,
+    TResult Function(LoadingState value)? loading,
+    TResult Function(SuccessState value)? success,
+    TResult Function(ErrorState value)? error,
+    required TResult orElse(),
+  }) {
+    if (initial != null) {
+      return initial(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _Initial implements DeleteCategoryState {
+  const factory _Initial() = _$InitialImpl;
+}
+
+/// @nodoc
+abstract class _$$LoadingStateImplCopyWith<$Res> {
+  factory _$$LoadingStateImplCopyWith(
+          _$LoadingStateImpl value, $Res Function(_$LoadingStateImpl) then) =
+      __$$LoadingStateImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({String id});
+}
+
+/// @nodoc
+class __$$LoadingStateImplCopyWithImpl<$Res>
+    extends _$DeleteCategoryStateCopyWithImpl<$Res, _$LoadingStateImpl>
+    implements _$$LoadingStateImplCopyWith<$Res> {
+  __$$LoadingStateImplCopyWithImpl(
+      _$LoadingStateImpl _value, $Res Function(_$LoadingStateImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of DeleteCategoryState
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? id = null,
+  }) {
+    return _then(_$LoadingStateImpl(
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$LoadingStateImpl implements LoadingState {
+  const _$LoadingStateImpl({required this.id});
+
+  @override
+  final String id;
+
+  @override
+  String toString() {
+    return 'DeleteCategoryState.loading(id: $id)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$LoadingStateImpl &&
+            (identical(other.id, id) || other.id == id));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, id);
+
+  /// Create a copy of DeleteCategoryState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$LoadingStateImplCopyWith<_$LoadingStateImpl> get copyWith =>
+      __$$LoadingStateImplCopyWithImpl<_$LoadingStateImpl>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initial,
+    required TResult Function(String id) loading,
+    required TResult Function() success,
+    required TResult Function(String error) error,
+  }) {
+    return loading(id);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? initial,
+    TResult? Function(String id)? loading,
+    TResult? Function()? success,
+    TResult? Function(String error)? error,
+  }) {
+    return loading?.call(id);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function(String id)? loading,
+    TResult Function()? success,
+    TResult Function(String error)? error,
+    required TResult orElse(),
+  }) {
+    if (loading != null) {
+      return loading(id);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Initial value) initial,
+    required TResult Function(LoadingState value) loading,
+    required TResult Function(SuccessState value) success,
     required TResult Function(ErrorState value) error,
   }) {
     return loading(this);
@@ -496,9 +632,9 @@ class _$LoadingStateImpl implements LoadingState {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Initial value)? initial,
     TResult? Function(LoadingState value)? loading,
     TResult? Function(SuccessState value)? success,
-    TResult? Function(EmptyState value)? empty,
     TResult? Function(ErrorState value)? error,
   }) {
     return loading?.call(this);
@@ -507,9 +643,9 @@ class _$LoadingStateImpl implements LoadingState {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Initial value)? initial,
     TResult Function(LoadingState value)? loading,
     TResult Function(SuccessState value)? success,
-    TResult Function(EmptyState value)? empty,
     TResult Function(ErrorState value)? error,
     required TResult orElse(),
   }) {
@@ -520,8 +656,16 @@ class _$LoadingStateImpl implements LoadingState {
   }
 }
 
-abstract class LoadingState implements GetAllAdminCategoriesState {
-  const factory LoadingState() = _$LoadingStateImpl;
+abstract class LoadingState implements DeleteCategoryState {
+  const factory LoadingState({required final String id}) = _$LoadingStateImpl;
+
+  String get id;
+
+  /// Create a copy of DeleteCategoryState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$LoadingStateImplCopyWith<_$LoadingStateImpl> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -529,100 +673,72 @@ abstract class _$$SuccessStateImplCopyWith<$Res> {
   factory _$$SuccessStateImplCopyWith(
           _$SuccessStateImpl value, $Res Function(_$SuccessStateImpl) then) =
       __$$SuccessStateImplCopyWithImpl<$Res>;
-  @useResult
-  $Res call({GetAllCategoriesResponse categories});
 }
 
 /// @nodoc
 class __$$SuccessStateImplCopyWithImpl<$Res>
-    extends _$GetAllAdminCategoriesStateCopyWithImpl<$Res, _$SuccessStateImpl>
+    extends _$DeleteCategoryStateCopyWithImpl<$Res, _$SuccessStateImpl>
     implements _$$SuccessStateImplCopyWith<$Res> {
   __$$SuccessStateImplCopyWithImpl(
       _$SuccessStateImpl _value, $Res Function(_$SuccessStateImpl) _then)
       : super(_value, _then);
 
-  /// Create a copy of GetAllAdminCategoriesState
+  /// Create a copy of DeleteCategoryState
   /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? categories = null,
-  }) {
-    return _then(_$SuccessStateImpl(
-      categories: null == categories
-          ? _value.categories
-          : categories // ignore: cast_nullable_to_non_nullable
-              as GetAllCategoriesResponse,
-    ));
-  }
 }
 
 /// @nodoc
 
 class _$SuccessStateImpl implements SuccessState {
-  const _$SuccessStateImpl({required this.categories});
-
-  @override
-  final GetAllCategoriesResponse categories;
+  const _$SuccessStateImpl();
 
   @override
   String toString() {
-    return 'GetAllAdminCategoriesState.success(categories: $categories)';
+    return 'DeleteCategoryState.success()';
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$SuccessStateImpl &&
-            (identical(other.categories, categories) ||
-                other.categories == categories));
+        (other.runtimeType == runtimeType && other is _$SuccessStateImpl);
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, categories);
-
-  /// Create a copy of GetAllAdminCategoriesState
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$SuccessStateImplCopyWith<_$SuccessStateImpl> get copyWith =>
-      __$$SuccessStateImplCopyWithImpl<_$SuccessStateImpl>(this, _$identity);
+  int get hashCode => runtimeType.hashCode;
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() loading,
-    required TResult Function(GetAllCategoriesResponse categories) success,
-    required TResult Function() empty,
+    required TResult Function() initial,
+    required TResult Function(String id) loading,
+    required TResult Function() success,
     required TResult Function(String error) error,
   }) {
-    return success(categories);
+    return success();
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? loading,
-    TResult? Function(GetAllCategoriesResponse categories)? success,
-    TResult? Function()? empty,
+    TResult? Function()? initial,
+    TResult? Function(String id)? loading,
+    TResult? Function()? success,
     TResult? Function(String error)? error,
   }) {
-    return success?.call(categories);
+    return success?.call();
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? loading,
-    TResult Function(GetAllCategoriesResponse categories)? success,
-    TResult Function()? empty,
+    TResult Function()? initial,
+    TResult Function(String id)? loading,
+    TResult Function()? success,
     TResult Function(String error)? error,
     required TResult orElse(),
   }) {
     if (success != null) {
-      return success(categories);
+      return success();
     }
     return orElse();
   }
@@ -630,9 +746,9 @@ class _$SuccessStateImpl implements SuccessState {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
+    required TResult Function(_Initial value) initial,
     required TResult Function(LoadingState value) loading,
     required TResult Function(SuccessState value) success,
-    required TResult Function(EmptyState value) empty,
     required TResult Function(ErrorState value) error,
   }) {
     return success(this);
@@ -641,9 +757,9 @@ class _$SuccessStateImpl implements SuccessState {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Initial value)? initial,
     TResult? Function(LoadingState value)? loading,
     TResult? Function(SuccessState value)? success,
-    TResult? Function(EmptyState value)? empty,
     TResult? Function(ErrorState value)? error,
   }) {
     return success?.call(this);
@@ -652,9 +768,9 @@ class _$SuccessStateImpl implements SuccessState {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Initial value)? initial,
     TResult Function(LoadingState value)? loading,
     TResult Function(SuccessState value)? success,
-    TResult Function(EmptyState value)? empty,
     TResult Function(ErrorState value)? error,
     required TResult orElse(),
   }) {
@@ -665,135 +781,8 @@ class _$SuccessStateImpl implements SuccessState {
   }
 }
 
-abstract class SuccessState implements GetAllAdminCategoriesState {
-  const factory SuccessState(
-          {required final GetAllCategoriesResponse categories}) =
-      _$SuccessStateImpl;
-
-  GetAllCategoriesResponse get categories;
-
-  /// Create a copy of GetAllAdminCategoriesState
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$SuccessStateImplCopyWith<_$SuccessStateImpl> get copyWith =>
-      throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class _$$EmptyStateImplCopyWith<$Res> {
-  factory _$$EmptyStateImplCopyWith(
-          _$EmptyStateImpl value, $Res Function(_$EmptyStateImpl) then) =
-      __$$EmptyStateImplCopyWithImpl<$Res>;
-}
-
-/// @nodoc
-class __$$EmptyStateImplCopyWithImpl<$Res>
-    extends _$GetAllAdminCategoriesStateCopyWithImpl<$Res, _$EmptyStateImpl>
-    implements _$$EmptyStateImplCopyWith<$Res> {
-  __$$EmptyStateImplCopyWithImpl(
-      _$EmptyStateImpl _value, $Res Function(_$EmptyStateImpl) _then)
-      : super(_value, _then);
-
-  /// Create a copy of GetAllAdminCategoriesState
-  /// with the given fields replaced by the non-null parameter values.
-}
-
-/// @nodoc
-
-class _$EmptyStateImpl implements EmptyState {
-  const _$EmptyStateImpl();
-
-  @override
-  String toString() {
-    return 'GetAllAdminCategoriesState.empty()';
-  }
-
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$EmptyStateImpl);
-  }
-
-  @override
-  int get hashCode => runtimeType.hashCode;
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() loading,
-    required TResult Function(GetAllCategoriesResponse categories) success,
-    required TResult Function() empty,
-    required TResult Function(String error) error,
-  }) {
-    return empty();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? loading,
-    TResult? Function(GetAllCategoriesResponse categories)? success,
-    TResult? Function()? empty,
-    TResult? Function(String error)? error,
-  }) {
-    return empty?.call();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? loading,
-    TResult Function(GetAllCategoriesResponse categories)? success,
-    TResult Function()? empty,
-    TResult Function(String error)? error,
-    required TResult orElse(),
-  }) {
-    if (empty != null) {
-      return empty();
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(LoadingState value) loading,
-    required TResult Function(SuccessState value) success,
-    required TResult Function(EmptyState value) empty,
-    required TResult Function(ErrorState value) error,
-  }) {
-    return empty(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(LoadingState value)? loading,
-    TResult? Function(SuccessState value)? success,
-    TResult? Function(EmptyState value)? empty,
-    TResult? Function(ErrorState value)? error,
-  }) {
-    return empty?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(LoadingState value)? loading,
-    TResult Function(SuccessState value)? success,
-    TResult Function(EmptyState value)? empty,
-    TResult Function(ErrorState value)? error,
-    required TResult orElse(),
-  }) {
-    if (empty != null) {
-      return empty(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class EmptyState implements GetAllAdminCategoriesState {
-  const factory EmptyState() = _$EmptyStateImpl;
+abstract class SuccessState implements DeleteCategoryState {
+  const factory SuccessState() = _$SuccessStateImpl;
 }
 
 /// @nodoc
@@ -807,13 +796,13 @@ abstract class _$$ErrorStateImplCopyWith<$Res> {
 
 /// @nodoc
 class __$$ErrorStateImplCopyWithImpl<$Res>
-    extends _$GetAllAdminCategoriesStateCopyWithImpl<$Res, _$ErrorStateImpl>
+    extends _$DeleteCategoryStateCopyWithImpl<$Res, _$ErrorStateImpl>
     implements _$$ErrorStateImplCopyWith<$Res> {
   __$$ErrorStateImplCopyWithImpl(
       _$ErrorStateImpl _value, $Res Function(_$ErrorStateImpl) _then)
       : super(_value, _then);
 
-  /// Create a copy of GetAllAdminCategoriesState
+  /// Create a copy of DeleteCategoryState
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
@@ -839,7 +828,7 @@ class _$ErrorStateImpl implements ErrorState {
 
   @override
   String toString() {
-    return 'GetAllAdminCategoriesState.error(error: $error)';
+    return 'DeleteCategoryState.error(error: $error)';
   }
 
   @override
@@ -853,7 +842,7 @@ class _$ErrorStateImpl implements ErrorState {
   @override
   int get hashCode => Object.hash(runtimeType, error);
 
-  /// Create a copy of GetAllAdminCategoriesState
+  /// Create a copy of DeleteCategoryState
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
@@ -864,9 +853,9 @@ class _$ErrorStateImpl implements ErrorState {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() loading,
-    required TResult Function(GetAllCategoriesResponse categories) success,
-    required TResult Function() empty,
+    required TResult Function() initial,
+    required TResult Function(String id) loading,
+    required TResult Function() success,
     required TResult Function(String error) error,
   }) {
     return error(this.error);
@@ -875,9 +864,9 @@ class _$ErrorStateImpl implements ErrorState {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? loading,
-    TResult? Function(GetAllCategoriesResponse categories)? success,
-    TResult? Function()? empty,
+    TResult? Function()? initial,
+    TResult? Function(String id)? loading,
+    TResult? Function()? success,
     TResult? Function(String error)? error,
   }) {
     return error?.call(this.error);
@@ -886,9 +875,9 @@ class _$ErrorStateImpl implements ErrorState {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? loading,
-    TResult Function(GetAllCategoriesResponse categories)? success,
-    TResult Function()? empty,
+    TResult Function()? initial,
+    TResult Function(String id)? loading,
+    TResult Function()? success,
     TResult Function(String error)? error,
     required TResult orElse(),
   }) {
@@ -901,9 +890,9 @@ class _$ErrorStateImpl implements ErrorState {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
+    required TResult Function(_Initial value) initial,
     required TResult Function(LoadingState value) loading,
     required TResult Function(SuccessState value) success,
-    required TResult Function(EmptyState value) empty,
     required TResult Function(ErrorState value) error,
   }) {
     return error(this);
@@ -912,9 +901,9 @@ class _$ErrorStateImpl implements ErrorState {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Initial value)? initial,
     TResult? Function(LoadingState value)? loading,
     TResult? Function(SuccessState value)? success,
-    TResult? Function(EmptyState value)? empty,
     TResult? Function(ErrorState value)? error,
   }) {
     return error?.call(this);
@@ -923,9 +912,9 @@ class _$ErrorStateImpl implements ErrorState {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Initial value)? initial,
     TResult Function(LoadingState value)? loading,
     TResult Function(SuccessState value)? success,
-    TResult Function(EmptyState value)? empty,
     TResult Function(ErrorState value)? error,
     required TResult orElse(),
   }) {
@@ -936,12 +925,12 @@ class _$ErrorStateImpl implements ErrorState {
   }
 }
 
-abstract class ErrorState implements GetAllAdminCategoriesState {
+abstract class ErrorState implements DeleteCategoryState {
   const factory ErrorState({required final String error}) = _$ErrorStateImpl;
 
   String get error;
 
-  /// Create a copy of GetAllAdminCategoriesState
+  /// Create a copy of DeleteCategoryState
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
   _$$ErrorStateImplCopyWith<_$ErrorStateImpl> get copyWith =>

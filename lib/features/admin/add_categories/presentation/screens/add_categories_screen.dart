@@ -5,6 +5,7 @@ import 'package:store/features/admin/add_categories/presentation/blocs/get_all_a
 import '../../../../../core/colors/colors_dark.dart';
 import '../../../../../core/common/widgets/admin_app_bar.dart';
 import '../../../../../core/di/injection_container.dart';
+import '../blocs/delete_category/delete_category_bloc.dart';
 import '../refactors/add_categories_body.dart';
 
 class AddCategoriesScreen extends StatelessWidget {
@@ -16,7 +17,11 @@ class AddCategoriesScreen extends StatelessWidget {
       providers: [
         BlocProvider(
           create: (context) => sl<GetAllAdminCategoriesBloc>()
-            ..add(const FetchAllCategoriesEvent(isLoading: true)),
+            ..add(const FetchAllCategoriesEvent(isNotLoading: true)),
+        ),
+        
+        BlocProvider(
+          create: (context) => sl<DeleteCategoryBloc>(),
         ),
         
       ],
