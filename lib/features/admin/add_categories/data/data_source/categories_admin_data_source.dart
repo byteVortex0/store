@@ -12,16 +12,26 @@ class CategoriesAdminDataSource {
 
   //Get All Categories
   Future<GetAllCategoriesResponse> getAllCategories() async {
-    final response = await graphql
-        .getAllCategories(CategoriesQuery().queryOfGetAllCategories());
+    final response = await graphql.getAllCategories(
+      CategoriesQuery().queryOfGetAllCategories(),
+    );
     return response;
   }
 
   //Create Categories
   Future<CreateCategoryResponse> createCategory(
       {required CreateCategoryRequest body}) async {
-    final response = await graphql
-        .createCategory(CategoriesQuery().queryOfCreateCategory(body: body));
+    final response = await graphql.createCategory(
+      CategoriesQuery().queryOfCreateCategory(body: body),
+    );
+    return response;
+  }
+
+  //Delete Categories
+  Future<void> deleteCategory({required String id}) async {
+    final response = await graphql.deleteCategory(
+      CategoriesQuery().queryOfDeleteCategory(id: id),
+    );
     return response;
   }
 }

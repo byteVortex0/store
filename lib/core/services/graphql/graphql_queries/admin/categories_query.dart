@@ -24,7 +24,7 @@ class CategoriesQuery {
     };
   }
 
-  //creeate category
+  //create category
   Map<String, dynamic> queryOfCreateCategory(
       {required CreateCategoryRequest body}) {
     return {
@@ -42,6 +42,22 @@ class CategoriesQuery {
       'variables': {
         'name': body.name,
         'image': body.image,
+      }
+    };
+  }
+  
+  // delete category
+  Map<String, dynamic> queryOfDeleteCategory(
+      {required String id}) {
+    return {
+      'query': r'''
+           mutation DeleteCategory($id: ID!){
+              deleteCategory(id: $id)
+            } ,
+             
+        ''',
+      'variables': {
+        'id': id,
       }
     };
   }

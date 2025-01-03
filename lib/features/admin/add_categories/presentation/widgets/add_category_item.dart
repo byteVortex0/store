@@ -8,6 +8,7 @@ import 'package:store/core/extensions/context_extension.dart';
 import '../../../../../core/common/buttom_sheet/custom_buttom_sheet.dart';
 import '../../../../../core/style/fonts/font_family_helper.dart';
 import '../../../../../core/style/fonts/font_weight_helper.dart';
+import 'delete/delete_category_widget.dart';
 import 'update/update_category_buttom_sheet.dart';
 
 class AddCategoryItem extends StatelessWidget {
@@ -31,10 +32,10 @@ class AddCategoryItem extends StatelessWidget {
         padding: EdgeInsets.symmetric(horizontal: 15.h),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Column(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 TextApp(
                   text: name,
@@ -45,14 +46,9 @@ class AddCategoryItem extends StatelessWidget {
                   ),
                 ),
                 Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
                   children: [
-                    IconButton(
-                      onPressed: () {},
-                      icon: const Icon(
-                        Icons.delete,
-                        color: Colors.red,
-                      ),
-                    ),
+                    DeleteCategoryWidget(id: categoryId),
                     IconButton(
                       onPressed: () {
                         CustomBottomSheet.showBottomSheet(
