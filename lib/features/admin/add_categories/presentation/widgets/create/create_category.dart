@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:store/core/app/upload_image/cubit/upload_image_cubit.dart';
 import 'package:store/core/extensions/context_extension.dart';
 import 'package:store/features/admin/add_categories/presentation/widgets/create/create_category_buttom_sheet.dart';
 
@@ -7,8 +9,11 @@ import '../../../../../../core/colors/colors_dark.dart';
 import '../../../../../../core/common/buttom_sheet/custom_buttom_sheet.dart';
 import '../../../../../../core/common/widgets/custom_button.dart';
 import '../../../../../../core/common/widgets/text_app.dart';
+import '../../../../../../core/di/injection_container.dart';
 import '../../../../../../core/style/fonts/font_family_helper.dart';
 import '../../../../../../core/style/fonts/font_weight_helper.dart';
+import '../../blocs/create_category/create_category_bloc.dart';
+import '../../blocs/get_all_admin_categories/get_all_admin_categories_bloc.dart';
 
 class CreateCategory extends StatelessWidget {
   const CreateCategory({super.key});
@@ -30,7 +35,23 @@ class CreateCategory extends StatelessWidget {
           onPressed: () {
             CustomBottomSheet.showBottomSheet(
               context: context,
-              child: const CreateCategoryButtomSheet(),
+              child: MultiBlocProvider(
+                providers: [
+                  BlocProvider(
+                    create: (context) => sl<CreateCategoryBloc>(),
+                  ),
+                  BlocProvider(
+                    create: (context) => sl<UploadImageCubit>(),
+                  ),
+                ],
+                child: const CreateCategoryButtomSheet(),
+              ),
+              whenComplete: () {
+                context.read<GetAllAdminCategoriesBloc>().add(
+                      const GetAllAdminCategoriesEvent.fetchAllCategories(
+                          isLoading: false),
+                    );
+              },
             );
           },
           text: 'Add',

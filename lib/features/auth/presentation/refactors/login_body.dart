@@ -25,8 +25,8 @@ class LoginBody extends StatelessWidget {
             const DarkAndLangButton(),
             SizedBox(height: 50.h),
             AuthTitleInfo(
-              title: context.trenslate(LangKeys.login),
-              description: context.trenslate(LangKeys.welcome),
+              title: context.translate(LangKeys.login),
+              description: context.translate(LangKeys.welcome),
             ),
             SizedBox(height: 30.h),
             const LoginTextForm(),
@@ -40,7 +40,7 @@ class LoginBody extends StatelessWidget {
               child: CustomFadeInDown(
                 duration: 400,
                 child: TextApp(
-                  text: context.trenslate(LangKeys.createAccount),
+                  text: context.translate(LangKeys.createAccount),
                   theme: context.textStyle.copyWith(
                       fontSize: 16.sp,
                       fontWeight: FontWeightHelper.bold,

@@ -25,13 +25,13 @@ class SignUpButton extends StatelessWidget {
           state.whenOrNull(
             success: (_) {
               ShowToast.showToastSuccessTop(
-                message: context.trenslate(LangKeys.loggedSuccessfully),
+                message: context.translate(LangKeys.loggedSuccessfully),
               );
 
               context.pushNamedAndRemoveUntil(AppRoutes.homeCustomerScreen);
             },
             error: (massage) => ShowToast.showToastErrorTop(
-              message: context.trenslate(massage),
+              message: context.translate(massage),
             ),
           );
         },
@@ -55,7 +55,7 @@ class SignUpButton extends StatelessWidget {
                 height: 50.h,
                 width: MediaQuery.of(context).size.width,
                 child: TextApp(
-                  text: context.trenslate(LangKeys.signUp),
+                  text: context.translate(LangKeys.signUp),
                   theme: context.textStyle.copyWith(
                     fontSize: 18.sp,
                     fontWeight: FontWeightHelper.bold,
@@ -77,7 +77,7 @@ class SignUpButton extends StatelessWidget {
         uploadCubit.imageUrl.isEmpty) {
       if (uploadCubit.imageUrl.isEmpty) {
         ShowToast.showToastErrorTop(
-          message: context.trenslate(LangKeys.validPickImage),
+          message: context.translate(LangKeys.validPickImage),
         );
       }
     } else {

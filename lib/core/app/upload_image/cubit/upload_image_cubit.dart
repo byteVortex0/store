@@ -7,32 +7,35 @@ part 'upload_image_state.dart';
 part 'upload_image_cubit.freezed.dart';
 
 class UploadImageCubit extends Cubit<UploadImageState> {
-  UploadImageCubit(this.uploadImageRepo) : super(const UploadImageState.initial());
+  UploadImageCubit(this.uploadImageRepo)
+      : super(const UploadImageState.initial());
 
   final UploadImageRepo uploadImageRepo;
 
   String imageUrl = '';
 
-  Future<void> uploadImage() async{
-
+  Future<void> uploadImage() async {
     final pickImage = await PickImageUtils().pickImage();
     if (pickImage == null) {
       return;
     }
-    
+
     emit(const UploadImageState.loading());
     final result = await uploadImageRepo.uploadImage(imageFile: pickImage);
 
-    result.when(success: (data) {
-      imageUrl = data.location ?? '';
+    result.when(
+      success: (data) {
+        imageUrl = data.location ?? '';
 
-      emit(const UploadImageState.success());
-    }, failure: (errorHandler) {
-      emit(UploadImageState.error(errorMessage: errorHandler));
-    },);
+        emit(const UploadImageState.success());
+      },
+      failure: (errorHandler) {
+        emit(UploadImageState.error(errorMessage: errorHandler));
+      },
+    );
   }
 
-  void removeImage(){
+  void removeImage() {
     imageUrl = '';
     emit(UploadImageState.removeImage(imageURL: imageUrl));
   }

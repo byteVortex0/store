@@ -23,7 +23,7 @@ class LoginButton extends StatelessWidget {
           state.whenOrNull(
             success: (userRole) {
               ShowToast.showToastSuccessTop(
-                message: context.trenslate(LangKeys.loggedSuccessfully),
+                message: context.translate(LangKeys.loggedSuccessfully),
               );
               
               if (userRole == 'admin') {
@@ -34,7 +34,7 @@ class LoginButton extends StatelessWidget {
             },
             
             error: (massage) => ShowToast.showToastErrorTop(
-              message: context.trenslate(massage),
+              message: context.translate(massage),
             ),
           );
         },
@@ -58,7 +58,7 @@ class LoginButton extends StatelessWidget {
                 height: 50.h,
                 width: MediaQuery.of(context).size.width,
                 child: TextApp(
-                  text: context.trenslate(LangKeys.login),
+                  text: context.translate(LangKeys.login),
                   theme: context.textStyle.copyWith(
                     fontSize: 18.sp,
                     fontWeight: FontWeightHelper.bold,

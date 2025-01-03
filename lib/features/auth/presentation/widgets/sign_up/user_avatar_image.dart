@@ -21,13 +21,13 @@ class UserAvatarImage extends StatelessWidget {
           state.whenOrNull(
             success: () {
               ShowToast.showToastSuccessTop(
-                message: context.trenslate(LangKeys.imageUploaded),
+                message: context.translate(LangKeys.imageUploaded),
                 seconds: 2,
               );
             },
             removeImage: (imageURL) {
               ShowToast.showToastSuccessTop(
-                message: context.trenslate(LangKeys.imageRemoved),
+                message: context.translate(LangKeys.imageRemoved),
                 seconds: 2,
               );
             },

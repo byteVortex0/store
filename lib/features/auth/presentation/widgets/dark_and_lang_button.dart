@@ -50,7 +50,7 @@ class DarkAndLangButton extends StatelessWidget {
               }
             },
             child: TextApp(
-              text: context.trenslate(LangKeys.language),
+              text: context.translate(LangKeys.language),
               theme: context.textStyle.copyWith(
                 fontSize: 16.sp,
                 fontWeight: FontWeightHelper.bold,
