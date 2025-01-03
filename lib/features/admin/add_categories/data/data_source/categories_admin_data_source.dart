@@ -2,6 +2,9 @@ import 'package:store/core/services/graphql/api_service.dart';
 import 'package:store/core/services/graphql/graphql_queries/admin/categories_query.dart';
 import 'package:store/features/admin/add_categories/data/models/get_all_categories_response.dart';
 
+import '../models/create_category_response.dart';
+import '../models/create_category_request.dart';
+
 class CategoriesAdminDataSource {
   final ApiService graphql;
 
@@ -9,8 +12,16 @@ class CategoriesAdminDataSource {
 
   //Get All Categories
   Future<GetAllCategoriesResponse> getAllCategories() async {
-    final response = await graphql.getAllCategories(CategoriesQuery().queryOfGetAllCategories());
+    final response = await graphql
+        .getAllCategories(CategoriesQuery().queryOfGetAllCategories());
     return response;
   }
-  
+
+  //Create Categories
+  Future<CreateCategoryResponse> createCategory(
+      {required CreateCategoryRequest body}) async {
+    final response = await graphql
+        .createCategory(CategoriesQuery().queryOfCreateCategory(body: body));
+    return response;
+  }
 }

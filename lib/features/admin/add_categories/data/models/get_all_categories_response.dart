@@ -11,11 +11,11 @@ class GetAllCategoriesResponse {
   factory GetAllCategoriesResponse.fromJson(Map<String, dynamic> json) =>
       _$GetAllCategoriesResponseFromJson(json);
 
-  List<CategoriesModel> get categorisNumber {
+  List<CategoriesModel> get getCategoriesList {
     if (data.listCategories.isEmpty) {
       return [];
     }
-    return data.listCategories;
+    return data.listCategories.reversed.toList();
   }
 }
 

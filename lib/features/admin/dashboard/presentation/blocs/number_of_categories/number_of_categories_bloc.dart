@@ -27,7 +27,6 @@ class NumberOfCategoriesBloc
       emit(const NumberOfCategoriesState.loading());
       final result = await _repo.numberOfCategories();
 
-
       result.when(
         success: (data) {
           emit(NumberOfCategoriesState.success(

@@ -45,10 +45,10 @@ class _LoginTextFormState extends State<LoginTextForm> {
           child: CustomTextField(
             controller: _bloc.emailController,
             keyboardType: TextInputType.emailAddress,
-            hintText: context.trenslate(LangKeys.email),
+            hintText: context.translate(LangKeys.email),
             validator: (value) {
               if (!AppRegex.isEmailValid(_bloc.emailController.text)) {
-                return context.trenslate(LangKeys.validEmail);
+                return context.translate(LangKeys.validEmail);
               }
               return null;
             },
@@ -61,10 +61,10 @@ class _LoginTextFormState extends State<LoginTextForm> {
             controller: _bloc.passwordController,
             keyboardType: TextInputType.visiblePassword,
             obscureText: isVisiable,
-            hintText: context.trenslate(LangKeys.password),
+            hintText: context.translate(LangKeys.password),
             validator: (value) {
               if (value == null || value.isEmpty || value.length < 6) {
-                return context.trenslate(LangKeys.validPasswrod);
+                return context.translate(LangKeys.validPasswrod);
               }
               return null;
             },

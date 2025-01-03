@@ -4,7 +4,7 @@ import 'package:store/core/app/app_cubit/app_cubit.dart';
 import 'package:store/core/app/upload_image/cubit/upload_image_cubit.dart';
 import 'package:store/core/services/graphql/api_service.dart';
 import 'package:store/core/services/graphql/dio_factory.dart';
-import 'package:store/features/admin/add_categories/blocs/get_all_admin_categories/get_all_admin_categories_bloc.dart';
+import 'package:store/features/admin/add_categories/presentation/blocs/get_all_admin_categories/get_all_admin_categories_bloc.dart';
 import 'package:store/features/admin/add_categories/data/repos/categories_admin_repo.dart';
 import 'package:store/features/admin/dashboard/data/data_source/dash_board_data_source.dart';
 import 'package:store/features/admin/dashboard/data/repos/dash_board_repo.dart';
@@ -14,6 +14,7 @@ import 'package:store/features/admin/dashboard/presentation/blocs/number_of_user
 import 'package:store/features/auth/presentation/bloc/auth_bloc.dart';
 
 import '../../features/admin/add_categories/data/data_source/categories_admin_data_source.dart';
+import '../../features/admin/add_categories/presentation/blocs/create_category/create_category_bloc.dart';
 import '../../features/auth/data/data_source/auth_data_source.dart';
 import '../../features/auth/data/repos/auth_repo.dart';
 import '../app/upload_image/data_source/upload_image_data_source.dart';
@@ -59,6 +60,7 @@ Future<void> _initDashBoard() async{
 Future<void> _initCategory() async{
   sl
     ..registerFactory(() => GetAllAdminCategoriesBloc(sl()))
+    ..registerFactory(() => CreateCategoryBloc(sl()))
     ..registerLazySingleton(() => CategoriesAdminDataSource(graphql: sl()))
     ..registerLazySingleton(() => CategoriesAdminRepo(dataSource: sl()));
 }

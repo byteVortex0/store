@@ -26,8 +26,8 @@ class SignUpBody extends StatelessWidget {
             const DarkAndLangButton(),
             SizedBox(height: 30.h),
             AuthTitleInfo(
-              title: context.trenslate(LangKeys.signUp),
-              description: context.trenslate(LangKeys.signUpWelcome),
+              title: context.translate(LangKeys.signUp),
+              description: context.translate(LangKeys.signUpWelcome),
             ),
             SizedBox(height: 10.h),
             const UserAvatarImage(),
@@ -43,7 +43,7 @@ class SignUpBody extends StatelessWidget {
               child: CustomFadeInDown(
                 duration: 400,
                 child: TextApp(
-                  text: context.trenslate(LangKeys.youHaveAccount),
+                  text: context.translate(LangKeys.youHaveAccount),
                   theme: context.textStyle.copyWith(
                     fontSize: 16.sp,
                     fontWeight: FontWeightHelper.bold,
