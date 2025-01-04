@@ -1,13 +1,18 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:store/core/common/widgets/custom_container_linear_admin.dart';
 import 'package:store/core/common/widgets/text_app.dart';
 import 'package:store/core/extensions/context_extension.dart';
 
+import '../../../../../core/app/upload_image/cubit/upload_image_cubit.dart';
 import '../../../../../core/common/buttom_sheet/custom_buttom_sheet.dart';
+import '../../../../../core/di/injection_container.dart';
 import '../../../../../core/style/fonts/font_family_helper.dart';
 import '../../../../../core/style/fonts/font_weight_helper.dart';
+import '../blocs/get_all_admin_categories/get_all_admin_categories_bloc.dart';
+import '../blocs/update_category/update_category_bloc.dart';
 import 'delete/delete_category_widget.dart';
 import 'update/update_category_buttom_sheet.dart';
 
@@ -53,7 +58,29 @@ class AddCategoryItem extends StatelessWidget {
                       onPressed: () {
                         CustomBottomSheet.showBottomSheet(
                           context: context,
-                          child: const UpdateCategoryButtomSheet(),
+                          child: MultiBlocProvider(
+                            providers: [
+                              BlocProvider(
+                                create: (context) => sl<UpdateCategoryBloc>(),
+                              ),
+                              BlocProvider(
+                                create: (context) => sl<UploadImageCubit>(),
+                              ),
+                            ],
+                            child: UpdateCategoryButtomSheet(
+                              id: categoryId,
+                              name: name,
+                              imageUrl: image,
+                            ),
+                          ),
+                          whenComplete: () {
+                            context.read<GetAllAdminCategoriesBloc>().add(
+                                  const GetAllAdminCategoriesEvent
+                                      .fetchAllCategories(
+                                    isNotLoading: false,
+                                  ),
+                                );
+                          },
                         );
                       },
                       icon: const Icon(
