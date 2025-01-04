@@ -1,4 +1,5 @@
 import 'package:store/features/admin/add_categories/data/models/create_category_request.dart';
+import 'package:store/features/admin/add_categories/data/models/update_category_request.dart';
 
 class CategoriesQuery {
   const CategoriesQuery._();
@@ -36,8 +37,7 @@ class CategoriesQuery {
                 name
                 image
               }
-            } ,
-             
+            } 
         ''',
       'variables': {
         'name': body.name,
@@ -53,12 +53,32 @@ class CategoriesQuery {
       'query': r'''
            mutation DeleteCategory($id: ID!){
               deleteCategory(id: $id)
-            } ,
-             
+            } 
         ''',
       'variables': {
         'id': id,
       }
     };
   }
+
+  // delete category
+  Map<String, dynamic> queryOfUpdateCategory(
+      {required UpdateCategoryRequest body}) {
+    return {
+      'query': r'''
+           mutation UpdateCategory($id: ID!, $name: String!, $image: String!){
+              updateCategory(id: $id, changes: { name: $name, image: $image }) {
+                id
+              }
+            }
+        ''',
+      'variables': {
+        'id': body.id,
+        'name': body.name,
+        'image': body.image,
+      }
+    };
+  }
+
+
 }

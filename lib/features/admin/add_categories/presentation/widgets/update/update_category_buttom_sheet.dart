@@ -1,17 +1,34 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:store/core/extensions/context_extension.dart';
 import 'package:store/features/admin/add_categories/presentation/widgets/update/update_upload_image.dart';
 
+import '../../../../../../core/app/upload_image/cubit/upload_image_cubit.dart';
 import '../../../../../../core/colors/colors_dark.dart';
 import '../../../../../../core/common/widgets/custom_button.dart';
+import '../../../../../../core/common/widgets/custom_container_linear_admin.dart';
 import '../../../../../../core/common/widgets/custom_text_field.dart';
 import '../../../../../../core/common/widgets/text_app.dart';
+import '../../../../../../core/language/lang_keys.dart';
 import '../../../../../../core/style/fonts/font_family_helper.dart';
 import '../../../../../../core/style/fonts/font_weight_helper.dart';
+import '../../../../../../core/toast/show_toast.dart';
+import '../../../data/models/update_category_request.dart';
+import '../../blocs/get_all_admin_categories/get_all_admin_categories_bloc.dart';
+import '../../blocs/update_category/update_category_bloc.dart';
 
 class UpdateCategoryButtomSheet extends StatefulWidget {
-  const UpdateCategoryButtomSheet({super.key});
+  const UpdateCategoryButtomSheet({
+    super.key,
+    required this.id,
+    required this.name,
+    required this.imageUrl,
+  });
+
+  final String id;
+  final String name;
+  final String imageUrl;
 
   @override
   State<UpdateCategoryButtomSheet> createState() =>
@@ -22,6 +39,12 @@ class _UpdateCategoryButtomSheetState extends State<UpdateCategoryButtomSheet> {
   final formKey = GlobalKey<FormState>();
 
   TextEditingController nameController = TextEditingController();
+
+  @override
+  void initState() {
+    super.initState();
+    nameController.text = widget.name;
+  }
 
   @override
   void dispose() {
@@ -58,10 +81,7 @@ class _UpdateCategoryButtomSheetState extends State<UpdateCategoryButtomSheet> {
               ),
             ),
             SizedBox(height: 10.h),
-            const UpdateUploadImage(
-              imageUrl:
-              'https://images.unsplash.com/photo-1607799279861-4dd421887fb3?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
-            ),
+            UpdateUploadImage(imageUrl: widget.imageUrl),
             SizedBox(height: 20.h),
             TextApp(
               textAlign: TextAlign.start,
@@ -84,19 +104,67 @@ class _UpdateCategoryButtomSheetState extends State<UpdateCategoryButtomSheet> {
               },
             ),
             SizedBox(height: 20.h),
-            CustomButton(
-              onPressed: () {},
-              text: 'Update a new category',
-              textColor: ColorsDark.blueDark,
-              width: MediaQuery.of(context).size.width,
-              height: 50.h,
-              lastRadius: 20.r,
-              threeRadius: 20.r,
-              backgroundColor: ColorsDark.white,
+            BlocConsumer<UpdateCategoryBloc, UpdateCategoryState>(
+              listener: (context, state) {
+                state.whenOrNull(
+                  success: () {
+                    ShowToast.showToastSuccessTop(
+                      message: '${nameController.text} has been updated',
+                    );
+                    context.pop();
+                  },
+                  error: (error) {
+                    ShowToast.showToastErrorTop(
+                      message: error,
+                    );
+                  },
+                );
+              },
+              builder: (context, state) {
+                return state.maybeWhen(
+                  loading: () => CustomContainerLinearAdmin(
+                    height: 50.h,
+                    width: MediaQuery.of(context).size.width,
+                    child: const Center(
+                      child: CircularProgressIndicator.adaptive(
+                        backgroundColor: ColorsDark.blueDark,
+                      ),
+                    ),
+                  ),
+                  orElse: () => CustomButton(
+                    onPressed: () {
+                      _validateUpdateCategory(context);
+                    },
+                    text: 'Update a new category',
+                    textColor: ColorsDark.blueDark,
+                    width: MediaQuery.of(context).size.width,
+                    height: 50.h,
+                    lastRadius: 20.r,
+                    threeRadius: 20.r,
+                    backgroundColor: ColorsDark.white,
+                  ),
+                );
+              },
             ),
           ],
         ),
       ),
     );
+  }
+
+  void _validateUpdateCategory(BuildContext context) {
+    if (formKey.currentState!.validate()) {
+      context.read<UpdateCategoryBloc>().add(
+            EditCategoryEvent(
+              body: UpdateCategoryRequest(
+                id: widget.id,
+                name: nameController.text.trim(),
+                image: context.read<UploadImageCubit>().imageUrl.isNotEmpty
+                    ? context.read<UploadImageCubit>().imageUrl
+                    : widget.imageUrl,
+              ),
+            ),
+          );
+    }
   }
 }

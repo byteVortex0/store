@@ -49,19 +49,15 @@ class CategoryUploadImage extends StatelessWidget {
             ),
           ),
           orElse: () => cubit.imageUrl.isNotEmpty
-              ? InkWell(
-                  onTap: () {
-                    cubit.uploadImage();
-                  },
-                  child: Container(
-                    height: 120.h,
-                    width: MediaQuery.of(context).size.width,
-                    decoration: BoxDecoration(
-                      color: Colors.grey.withOpacity(0.8),
-                      borderRadius: BorderRadius.circular(15.r),
-                      image: DecorationImage(
-                        image: NetworkImage(
-                            context.read<UploadImageCubit>().imageUrl),
+              ? Container(
+                  height: 120.h,
+                  width: MediaQuery.of(context).size.width,
+                  decoration: BoxDecoration(
+                    color: Colors.grey.withOpacity(0.8),
+                    borderRadius: BorderRadius.circular(15.r),
+                    image: DecorationImage(
+                      image: NetworkImage(
+                        context.read<UploadImageCubit>().imageUrl,
                       ),
                     ),
                   ),
