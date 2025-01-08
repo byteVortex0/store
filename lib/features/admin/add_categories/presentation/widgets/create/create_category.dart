@@ -6,7 +6,7 @@ import 'package:store/core/extensions/context_extension.dart';
 import 'package:store/features/admin/add_categories/presentation/widgets/create/create_category_buttom_sheet.dart';
 
 import '../../../../../../core/colors/colors_dark.dart';
-import '../../../../../../core/common/buttom_sheet/custom_buttom_sheet.dart';
+import '../../../../../../core/common/button_sheet/custom_button_sheet.dart';
 import '../../../../../../core/common/widgets/custom_button.dart';
 import '../../../../../../core/common/widgets/text_app.dart';
 import '../../../../../../core/di/injection_container.dart';
@@ -33,7 +33,7 @@ class CreateCategory extends StatelessWidget {
         ),
         CustomButton(
           onPressed: () {
-            CustomBottomSheet.showBottomSheet(
+            CustomBottonSheet.showBottomSheet(
               context: context,
               child: MultiBlocProvider(
                 providers: [

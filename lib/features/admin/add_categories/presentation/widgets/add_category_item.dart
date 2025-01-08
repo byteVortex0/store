@@ -7,7 +7,7 @@ import 'package:store/core/common/widgets/text_app.dart';
 import 'package:store/core/extensions/context_extension.dart';
 
 import '../../../../../core/app/upload_image/cubit/upload_image_cubit.dart';
-import '../../../../../core/common/buttom_sheet/custom_buttom_sheet.dart';
+import '../../../../../core/common/button_sheet/custom_button_sheet.dart';
 import '../../../../../core/di/injection_container.dart';
 import '../../../../../core/style/fonts/font_family_helper.dart';
 import '../../../../../core/style/fonts/font_weight_helper.dart';
@@ -56,7 +56,7 @@ class AddCategoryItem extends StatelessWidget {
                     DeleteCategoryWidget(id: categoryId),
                     IconButton(
                       onPressed: () {
-                        CustomBottomSheet.showBottomSheet(
+                        CustomBottonSheet.showBottomSheet(
                           context: context,
                           child: MultiBlocProvider(
                             providers: [
