@@ -1,3 +1,4 @@
+
 class ProductsQueries {
 
   const ProductsQueries._();
@@ -16,13 +17,13 @@ class ProductsQueries {
             products{
               id
               title
-              price	
+              price
               description
               images
               category {
-                  id
-                  name
-                }
+                id
+                name
+              }
             }
           }     
         ''',

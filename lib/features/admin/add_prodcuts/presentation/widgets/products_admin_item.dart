@@ -2,13 +2,14 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:store/core/extensions/context_extension.dart';
-import 'package:store/features/admin/add_prodcuts/widgets/update/update_products_buttom_sheet.dart';
+import 'package:store/core/extensions/string_extension.dart';
+import 'package:store/features/admin/add_prodcuts/presentation/widgets/update/update_products_buttom_sheet.dart';
 
-import '../../../../core/common/button_sheet/custom_button_sheet.dart';
-import '../../../../core/common/widgets/custom_container_linear_admin.dart';
-import '../../../../core/common/widgets/text_app.dart';
-import '../../../../core/style/fonts/font_family_helper.dart';
-import '../../../../core/style/fonts/font_weight_helper.dart';
+import '../../../../../core/common/button_sheet/custom_button_sheet.dart';
+import '../../../../../core/common/widgets/custom_container_linear_admin.dart';
+import '../../../../../core/common/widgets/text_app.dart';
+import '../../../../../core/style/fonts/font_family_helper.dart';
+import '../../../../../core/style/fonts/font_weight_helper.dart';
 
 class ProductsAdminItem extends StatelessWidget {
   const ProductsAdminItem({
@@ -69,7 +70,7 @@ class ProductsAdminItem extends StatelessWidget {
             ),
             Flexible(
               child: CachedNetworkImage(
-                imageUrl: imageUrl,
+                imageUrl: imageUrl.imageProductFormate(),
                 height: 200.h,
                 width: 120.w,
                 fit: BoxFit.fill,

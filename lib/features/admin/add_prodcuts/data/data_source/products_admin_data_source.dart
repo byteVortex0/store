@@ -1,3 +1,4 @@
+
 import 'package:store/core/services/graphql/graphql_queries/admin/products_queries.dart';
 import 'package:store/features/admin/add_prodcuts/data/models/get_all_products_response.dart';
 
@@ -8,7 +9,7 @@ class ProductsAdminDataSource {
 
   const ProductsAdminDataSource({required this.graphql});
 
-  //Get All Categories
+  //Get All Products
   Future<GetAllProductsResponse> getAllProducts() async {
     final response = await graphql.getAllProducts(
       ProductsQueries().queryOfGetAllProducts(),

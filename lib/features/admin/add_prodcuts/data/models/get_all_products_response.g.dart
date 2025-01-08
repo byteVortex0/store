@@ -33,18 +33,20 @@ Map<String, dynamic> _$GetAllDataProductsToJson(GetAllDataProducts instance) =>
 GetAllProducts _$GetAllProductsFromJson(Map<String, dynamic> json) =>
     GetAllProducts(
       id: json['id'] as String?,
-      price: json['price'] as String?,
+      title: json['title'] as String?,
+      price: (json['price'] as num?)?.toDouble(),
       description: json['description'] as String?,
       images:
           (json['images'] as List<dynamic>?)?.map((e) => e as String).toList(),
-      category: (json['category'] as List<dynamic>?)
-          ?.map((e) => GetCategory.fromJson(e as Map<String, dynamic>))
-          .toList(),
+      category: json['category'] == null
+          ? null
+          : GetCategory.fromJson(json['category'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$GetAllProductsToJson(GetAllProducts instance) =>
     <String, dynamic>{
       'id': instance.id,
+      'title': instance.title,
       'price': instance.price,
       'description': instance.description,
       'images': instance.images,

@@ -1,5 +1,7 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 
+import 'dart:developer';
+
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'get_all_products_response.g.dart';
@@ -13,6 +15,14 @@ class GetAllProductsResponse {
 
   factory GetAllProductsResponse.fromJson(Map<String, dynamic> json) =>
       _$GetAllProductsResponseFromJson(json);
+
+  List<GetAllProducts> get getProductsList{
+    if (data.products.isEmpty) {
+      return [];
+    }
+    return data.products;
+  }
+
 }
 
 @JsonSerializable()
@@ -29,13 +39,15 @@ class GetAllDataProducts {
 @JsonSerializable()
 class GetAllProducts {
   final String? id;
-  final String? price;
+  final String? title;
+  final double? price;
   final String? description;
   final List<String>? images;
-  final List<GetCategory>? category;
+  final GetCategory? category;
 
   GetAllProducts({
     required this.id,
+    required this.title,
     required this.price,
     required this.description,
     required this.images,
