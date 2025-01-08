@@ -7,7 +7,7 @@ class CreateProductsRequestBody {
   final String? title;
   final double? price;
   final String? description;
-  final int? categoryId;
+  final double? categoryId;
   final List<String>? image;
 
   CreateProductsRequestBody({
