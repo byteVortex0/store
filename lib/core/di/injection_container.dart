@@ -6,6 +6,7 @@ import 'package:store/core/services/graphql/api_service.dart';
 import 'package:store/core/services/graphql/dio_factory.dart';
 import 'package:store/features/admin/add_categories/presentation/blocs/get_all_admin_categories/get_all_admin_categories_bloc.dart';
 import 'package:store/features/admin/add_categories/data/repos/categories_admin_repo.dart';
+import 'package:store/features/admin/add_prodcuts/presentation/blocs/create_products/create_products_bloc.dart';
 import 'package:store/features/admin/dashboard/data/data_source/dash_board_data_source.dart';
 import 'package:store/features/admin/dashboard/data/repos/dash_board_repo.dart';
 import 'package:store/features/admin/dashboard/presentation/blocs/number_of_categories/number_of_categories_bloc.dart';
@@ -76,6 +77,7 @@ Future<void> _initCategory() async{
 Future<void> _initProducts() async{
   sl
     ..registerFactory(() => GetAllAdminProductsBloc(sl()))
+    ..registerFactory(() => CreateProductsBloc(sl()))
     ..registerLazySingleton(() => ProductsAdminDataSource(graphql: sl()))
     ..registerLazySingleton(() => ProductsAdminRepo(dataSource: sl()));
 }

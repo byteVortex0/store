@@ -2,6 +2,7 @@
 import '../../../../../core/services/graphql/api_result.dart';
 import '../../../../../core/utils/app_strings.dart';
 import '../data_source/products_admin_data_source.dart';
+import '../models/create_products_request_body.dart';
 import '../models/get_all_products_response.dart';
 
 class ProductsAdminRepo {
@@ -18,4 +19,16 @@ class ProductsAdminRepo {
       return const ApiResult.failure(errorMassage);
     }
   }
+  
+  //Create Categories
+  Future<ApiResult<void>> createProducts({required CreateProductsRequestBody body}) async {
+    try {
+      final response = await dataSource.createProducts(body: body);
+      return ApiResult.success(response);
+    } catch (e) {
+      return const ApiResult.failure(errorMassage);
+    }
+  }
+
+  
 }
