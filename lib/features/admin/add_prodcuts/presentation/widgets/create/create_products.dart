@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:store/core/app/upload_image/cubit/upload_image_cubit.dart';
 import 'package:store/core/extensions/context_extension.dart';
+import 'package:store/features/admin/add_categories/presentation/blocs/get_all_admin_categories/get_all_admin_categories_bloc.dart';
 import 'package:store/features/admin/add_prodcuts/presentation/widgets/create/create_products_buttom_sheet.dart';
 
 import '../../../../../../core/colors/colors_dark.dart';
@@ -12,6 +14,7 @@ import '../../../../../../core/style/fonts/font_family_helper.dart';
 import '../../../../../../core/style/fonts/font_weight_helper.dart';
 import '../../../../../../core/common/button_sheet/custom_button_sheet.dart';
 import '../../blocs/create_products/create_products_bloc.dart';
+import '../../blocs/get_all_admin_products/get_all_admin_products_bloc.dart';
 
 class CreateProducts extends StatelessWidget {
   const CreateProducts({super.key});
@@ -38,9 +41,27 @@ class CreateProducts extends StatelessWidget {
                   BlocProvider(
                     create: (context) => sl<CreateProductsBloc>(),
                   ),
+                  BlocProvider(
+                    create: (context) => sl<UploadImageCubit>(),
+                  ),
+                  BlocProvider(
+                    create: (context) => sl<GetAllAdminCategoriesBloc>()
+                      ..add(
+                        const GetAllAdminCategoriesEvent.fetchAllCategories(
+                          isNotLoading: false,
+                        ),
+                      ),
+                  ),
                 ],
                 child: const CreateProductsButtomSheet(),
               ),
+              whenComplete: () {
+                context.read<GetAllAdminProductsBloc>().add(
+                      const GetAllAdminProductsEvent.getAllProducts(
+                        isNotLoading: false,
+                      ),
+                    );
+              },
             );
           },
           text: 'Add',

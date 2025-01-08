@@ -17,6 +17,13 @@ class GetAllCategoriesResponse {
     }
     return data.listCategories.reversed.toList();
   }
+  
+  List<String> get categoriesDropDownList {
+    final list = data.listCategories.map((e) => e.name ?? '').toList();
+    return list;
+  }
+
+
 }
 
 @JsonSerializable()

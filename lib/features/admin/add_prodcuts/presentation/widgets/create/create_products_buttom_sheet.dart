@@ -1,14 +1,21 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:store/core/extensions/context_extension.dart';
+import 'package:store/features/admin/add_categories/presentation/blocs/get_all_admin_categories/get_all_admin_categories_bloc.dart';
 
+import '../../../../../../core/app/upload_image/cubit/upload_image_cubit.dart';
 import '../../../../../../core/colors/colors_dark.dart';
 import '../../../../../../core/common/widgets/custom_button.dart';
+import '../../../../../../core/common/widgets/custom_container_linear_admin.dart';
 import '../../../../../../core/common/widgets/custom_drop_down.dart';
 import '../../../../../../core/common/widgets/custom_text_field.dart';
 import '../../../../../../core/common/widgets/text_app.dart';
 import '../../../../../../core/style/fonts/font_family_helper.dart';
 import '../../../../../../core/style/fonts/font_weight_helper.dart';
+import '../../../../../../core/toast/show_toast.dart';
+import '../../../data/models/create_products_request_body.dart';
+import '../../blocs/create_products/create_products_bloc.dart';
 import 'products_upload_image.dart';
 
 class CreateProductsButtomSheet extends StatefulWidget {
@@ -27,6 +34,7 @@ class _CreateProductsButtomSheetState extends State<CreateProductsButtomSheet> {
   TextEditingController priceController = TextEditingController();
 
   String? categoryName;
+  double? categoryId;
 
   @override
   void dispose() {
@@ -90,7 +98,6 @@ class _CreateProductsButtomSheetState extends State<CreateProductsButtomSheet> {
                     return null;
                   },
                 ),
-
                 SizedBox(height: 10.h),
                 TextApp(
                   textAlign: TextAlign.right,
@@ -135,7 +142,6 @@ class _CreateProductsButtomSheetState extends State<CreateProductsButtomSheet> {
                     return null;
                   },
                 ),
-
                 SizedBox(height: 10.h),
                 TextApp(
                   textAlign: TextAlign.right,
@@ -147,25 +153,42 @@ class _CreateProductsButtomSheetState extends State<CreateProductsButtomSheet> {
                   ),
                 ),
                 SizedBox(height: 10.h),
-                CustomCreateDropDown(
-                  items: const ['Mac', 'Air', 'lap'],
-                  hintText: 'Select a category',
-                  onChanged: (value) {
-                    setState(() {
-                      categoryName = value;
-                    });
+                BlocBuilder<GetAllAdminCategoriesBloc,
+                    GetAllAdminCategoriesState>(
+                  builder: (context, state) {
+                    return state.maybeWhen(
+                      success: (categories) => CustomCreateDropDown(
+                        items: categories.categoriesDropDownList,
+                        hintText: 'Select a category',
+                        onChanged: (value) {
+                          setState(() {
+                            categoryName = value;
+                            final categoryIdString = categories
+                                .getCategoriesList
+                                .firstWhere((element) => element.name == value)
+                                .id!;
+                            categoryId = double.parse(categoryIdString);
+                          });
+                        },
+                        value: categoryName,
+                      ),
+                      orElse: () => CustomCreateDropDown(
+                        items: const [''],
+                        hintText: 'Select a category',
+                        onChanged: (value) {},
+                        value: '',
+                      ),
+                    );
                   },
-                  value: categoryName,
                 ),
                 SizedBox(height: 20.h),
-
-                /*BlocConsumer<CreateCategoryBloc, CreateCategoryState>(
+                BlocConsumer<CreateProductsBloc, CreateProductsState>(
                   listener: (context, state) {
                     state.whenOrNull(
-                      success: (category) {
+                      success: () {
                         context.pop();
                         ShowToast.showToastSuccessTop(
-                          message: '${nameController.text} Created Success',
+                          message: '${titleController.text} Created Success',
                           seconds: 2,
                         );
                       },
@@ -187,23 +210,21 @@ class _CreateProductsButtomSheetState extends State<CreateProductsButtomSheet> {
                           ),
                         ),
                       ),
-                      orElse: () => */
-                CustomButton(
-                  onPressed: () {
-                    // _validateCreateCategory(context);
+                      orElse: () => CustomButton(
+                        onPressed: () {
+                          _validateCreateProducts(context);
+                        },
+                        text: 'Create product',
+                        textColor: ColorsDark.blueDark,
+                        width: MediaQuery.of(context).size.width,
+                        height: 50.h,
+                        lastRadius: 20.r,
+                        threeRadius: 20.r,
+                        backgroundColor: ColorsDark.white,
+                      ),
+                    );
                   },
-                  text: 'Create product',
-                  textColor: ColorsDark.blueDark,
-                  width: MediaQuery.of(context).size.width,
-                  height: 50.h,
-                  lastRadius: 20.r,
-                  threeRadius: 20.r,
-                  backgroundColor: ColorsDark.white,
                 ),
-                // ) ;
-                //},
-                // ),
-
                 SizedBox(height: 40.h),
               ],
             ),
@@ -211,5 +232,27 @@ class _CreateProductsButtomSheetState extends State<CreateProductsButtomSheet> {
         ),
       ),
     );
+  }
+
+  void _validateCreateProducts(BuildContext context) {
+    if (formKey.currentState!.validate() ||
+        context.read<UploadImageCubit>().imageList.isNotEmpty) {
+      if (context.read<UploadImageCubit>().imageList.isEmpty) {
+        ShowToast.showToastErrorTop(
+          message: 'Pick at least one image',
+        );
+      }
+      context.read<CreateProductsBloc>().add(
+            CreateProductsEvent.createProducts(
+              body: CreateProductsRequestBody(
+                title: titleController.text,
+                description: descriptionController.text,
+                price: double.parse(priceController.text.trim()),
+                categoryId: categoryId ?? 0.0,
+                image: context.read<UploadImageCubit>().imageList,
+              ),
+            ),
+          );
+    }
   }
 }
