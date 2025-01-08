@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:store/core/colors/colors_dark.dart';
 
-class CustomBottomSheet {
-  const CustomBottomSheet._();
+class CustomBottonSheet {
+  const CustomBottonSheet._();
 
   static void showBottomSheet({
     required BuildContext context,
