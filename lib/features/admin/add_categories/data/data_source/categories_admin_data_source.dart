@@ -1,5 +1,5 @@
 import 'package:store/core/services/graphql/api_service.dart';
-import 'package:store/core/services/graphql/graphql_queries/admin/categories_query.dart';
+import 'package:store/core/services/graphql/graphql_queries/admin/categories_queries.dart';
 import 'package:store/features/admin/add_categories/data/models/get_all_categories_response.dart';
 import 'package:store/features/admin/add_categories/data/models/update_category_request.dart';
 
