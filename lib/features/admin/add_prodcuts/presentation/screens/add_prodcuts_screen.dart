@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:store/core/di/injection_container.dart';
+import 'package:store/features/admin/add_prodcuts/presentation/blocs/delete_product/delete_product_bloc.dart';
 import 'package:store/features/admin/add_prodcuts/presentation/blocs/get_all_admin_products/get_all_admin_products_bloc.dart';
 
 import '../../../../../core/colors/colors_dark.dart';
@@ -16,8 +17,12 @@ class AddProdcutsScreen extends StatelessWidget {
       providers: [
         BlocProvider(
           create: (context) => sl<GetAllAdminProductsBloc>()
-            ..add(const GetAllAdminProductsEvent.getAllProducts(
-                isNotLoading: true)),
+            ..add(
+              const GetAllAdminProductsEvent.getAllProducts(isNotLoading: true),
+            ),
+        ),
+        BlocProvider(
+          create: (context) => sl<DeleteProductBloc>(),
         ),
       ],
       child: const Scaffold(

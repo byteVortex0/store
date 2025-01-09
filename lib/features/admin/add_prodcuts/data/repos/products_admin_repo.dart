@@ -29,6 +29,16 @@ class ProductsAdminRepo {
       return const ApiResult.failure(errorMassage);
     }
   }
+  
+  //Delete Categories
+  Future<ApiResult<void>> deleteProducts({required String id}) async {
+    try {
+      final response = await dataSource.deleteProducts(id: id);
+      return ApiResult.success(response);
+    } catch (e) {
+      return const ApiResult.failure(errorMassage);
+    }
+  }
 
   
 }

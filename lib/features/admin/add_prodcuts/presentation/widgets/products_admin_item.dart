@@ -10,17 +10,20 @@ import '../../../../../core/common/widgets/custom_container_linear_admin.dart';
 import '../../../../../core/common/widgets/text_app.dart';
 import '../../../../../core/style/fonts/font_family_helper.dart';
 import '../../../../../core/style/fonts/font_weight_helper.dart';
+import 'delete/delete_products_widget.dart';
 
 class ProductsAdminItem extends StatelessWidget {
   const ProductsAdminItem({
     super.key,
     required this.title,
+    required this.productId,
     required this.categoryName,
     required this.imageUrl,
     required this.price,
   });
 
   final String title;
+  final String productId;
   final String categoryName;
   final String imageUrl;
   final String price;
@@ -38,15 +41,7 @@ class ProductsAdminItem extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-                IconButton(
-                  onPressed: () {
-                    //TODO:
-                  },
-                  icon: const Icon(
-                    Icons.delete,
-                    color: Colors.red,
-                  ),
-                ),
+                DeleteProductsWidget(productId: productId),
                 IconButton(
                   onPressed: () {
                     CustomBottonSheet.showBottomSheet(

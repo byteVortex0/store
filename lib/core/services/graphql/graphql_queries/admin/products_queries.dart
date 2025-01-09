@@ -58,21 +58,20 @@ class ProductsQueries {
       }
     };
   }
-}
 
-/**
- * 
- * mutation {
-	addProduct(
-		data: {
-			title: "New Product"
-			price: 10
-			description: "A description"
-			categoryId: 1
-			images: ["https://placeimg.com/640/480/any"]
-		}
-	) {
-		title
-	}
+  // delete product
+  Map<String, dynamic> queryOfDeleteProduct(
+      {required String id}) {
+    return {
+      'query': r'''
+           mutation DeleteProduct($id: ID!){
+              deleteProduct(id: $id)
+            } 
+        ''',
+      'variables': {
+        'id': id,
+      }
+    };
+  }
+
 }
- */
