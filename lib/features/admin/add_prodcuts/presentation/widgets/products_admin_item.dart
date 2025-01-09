@@ -1,15 +1,21 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:store/core/extensions/context_extension.dart';
 import 'package:store/core/extensions/string_extension.dart';
+import 'package:store/features/admin/add_categories/presentation/blocs/get_all_admin_categories/get_all_admin_categories_bloc.dart';
 import 'package:store/features/admin/add_prodcuts/presentation/widgets/update/update_products_buttom_sheet.dart';
 
+import '../../../../../core/app/upload_image/cubit/upload_image_cubit.dart';
 import '../../../../../core/common/button_sheet/custom_button_sheet.dart';
 import '../../../../../core/common/widgets/custom_container_linear_admin.dart';
 import '../../../../../core/common/widgets/text_app.dart';
+import '../../../../../core/di/injection_container.dart';
 import '../../../../../core/style/fonts/font_family_helper.dart';
 import '../../../../../core/style/fonts/font_weight_helper.dart';
+import '../blocs/get_all_admin_products/get_all_admin_products_bloc.dart';
+import '../blocs/update_products/update_products_bloc.dart';
 import 'delete/delete_products_widget.dart';
 
 class ProductsAdminItem extends StatelessWidget {
@@ -17,15 +23,21 @@ class ProductsAdminItem extends StatelessWidget {
     super.key,
     required this.title,
     required this.productId,
+    required this.categoryId,
+    required this.description,
     required this.categoryName,
     required this.imageUrl,
     required this.price,
+    required this.imagesList,
   });
 
   final String title;
   final String productId;
+  final String categoryId;
+  final String description;
   final String categoryName;
   final String imageUrl;
+  final List<String> imagesList;
   final String price;
 
   @override
@@ -46,14 +58,39 @@ class ProductsAdminItem extends StatelessWidget {
                   onPressed: () {
                     CustomBottonSheet.showBottomSheet(
                       context: context,
-                      child: const UpdateProductsButtomSheet(
-                        id: '1',
-                        title: 'title',
-                        description: 'categoryName',
-                        imageUrl:
-                            'https://images.unsplash.com/photo-1719937206667-ac87c15ad3e9?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
-                        price: '\$ 1200',
+                      child: MultiBlocProvider(
+                        providers: [
+                          BlocProvider(
+                            create: (context) => sl<UpdateProductsBloc>(),
+                          ),
+                          BlocProvider(
+                            create: (context) => sl<UploadImageCubit>(),
+                          ),
+                          BlocProvider(
+                            create: (context) => sl<GetAllAdminCategoriesBloc>()
+                              ..add(
+                                const GetAllAdminCategoriesEvent
+                                    .fetchAllCategories(isNotLoading: false),
+                              ),
+                          ),
+                        ],
+                        child: UpdateProductsButtomSheet(
+                          productId: productId,
+                          title: title,
+                          description: description,
+                          imagesList: imagesList,
+                          imageUrl: imageUrl,
+                          price: '\$ $price',
+                          categoryName: categoryName,
+                          categoryId: categoryId,
+                        ),
                       ),
+                      whenComplete: () {
+                        context.read<GetAllAdminProductsBloc>().add(
+                              const GetAllAdminProductsEvent.getAllProducts(
+                                  isNotLoading: false),
+                            );
+                      },
                     );
                   },
                   icon: const Icon(
@@ -89,7 +126,7 @@ class ProductsAdminItem extends StatelessWidget {
             ),
             SizedBox(height: 5.h),
             TextApp(
-              text: categoryName,
+              text: description,
               theme: context.textStyle.copyWith(
                 fontSize: 13.sp,
                 fontFamily: FontFamilyHelper.poppinsEnglish,
