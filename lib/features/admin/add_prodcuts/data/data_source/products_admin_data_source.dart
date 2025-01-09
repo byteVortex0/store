@@ -25,4 +25,12 @@ class ProductsAdminDataSource {
     );
     return response;
   }
+  
+  //Delete Products
+  Future<void> deleteProducts({required String id}) async {
+    final response = await graphql.createProducts(
+      ProductsQueries().queryOfDeleteProduct(id: id),
+    );
+    return response;
+  }
 }

@@ -89,6 +89,11 @@ abstract class ApiService {
   Future<void> createProducts(
     @Body() Map<String, dynamic> mutation,
   );
+  
+  @POST(graphql)
+  Future<void> deleteProducts(
+    @Body() Map<String, dynamic> mutation,
+  );
 
   
 }

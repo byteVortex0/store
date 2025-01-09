@@ -20,6 +20,7 @@ import '../../features/admin/add_categories/presentation/blocs/delete_category/d
 import '../../features/admin/add_categories/presentation/blocs/update_category/update_category_bloc.dart';
 import '../../features/admin/add_prodcuts/data/data_source/products_admin_data_source.dart';
 import '../../features/admin/add_prodcuts/data/repos/products_admin_repo.dart';
+import '../../features/admin/add_prodcuts/presentation/blocs/delete_product/delete_product_bloc.dart';
 import '../../features/admin/add_prodcuts/presentation/blocs/get_all_admin_products/get_all_admin_products_bloc.dart';
 import '../../features/auth/data/data_source/auth_data_source.dart';
 import '../../features/auth/data/repos/auth_repo.dart';
@@ -78,6 +79,7 @@ Future<void> _initProducts() async{
   sl
     ..registerFactory(() => GetAllAdminProductsBloc(sl()))
     ..registerFactory(() => CreateProductsBloc(sl()))
+    ..registerFactory(() => DeleteProductBloc(sl()))
     ..registerLazySingleton(() => ProductsAdminDataSource(graphql: sl()))
     ..registerLazySingleton(() => ProductsAdminRepo(dataSource: sl()));
 }
