@@ -1,4 +1,5 @@
 import '../../../../../features/admin/add_prodcuts/data/models/create_products_request_body.dart';
+import '../../../../../features/admin/add_prodcuts/data/models/update_products_request_body.dart';
 
 class ProductsQueries {
   const ProductsQueries._();
@@ -70,6 +71,37 @@ class ProductsQueries {
         ''',
       'variables': {
         'id': id,
+      }
+    };
+  }
+
+  //Create Products
+  Map<String, dynamic> queryOfUpdateProducts(
+      {required UpdateProductsRequestBody body}) {
+    return {
+      'query': r'''
+           mutation UpdateProduct($id: ID!, $title: String!, $price: Float!, $description: String!, $images: [String!]!, $categoryId: Float!){
+            updateProduct(
+              id: $id,
+              changes: {
+                title: $title
+                price: $price
+                description: $description
+                categoryId: $categoryId
+                images: $images
+              }
+            ) {
+              title
+            }
+          }     
+        ''',
+      'variables': {
+        'id': body.productId,
+        'title': body.title,
+        'price': body.price,
+        'description': body.description,
+        'images': body.image,
+        'categoryId': body.categoryId,
       }
     };
   }

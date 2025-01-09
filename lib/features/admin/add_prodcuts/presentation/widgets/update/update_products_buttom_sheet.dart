@@ -1,31 +1,44 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:store/core/common/widgets/custom_drop_down.dart';
 import 'package:store/core/extensions/context_extension.dart';
+import 'package:store/features/admin/add_categories/presentation/blocs/get_all_admin_categories/get_all_admin_categories_bloc.dart';
 
+import '../../../../../../core/app/upload_image/cubit/upload_image_cubit.dart';
 import '../../../../../../core/colors/colors_dark.dart';
 import '../../../../../../core/common/widgets/custom_button.dart';
+import '../../../../../../core/common/widgets/custom_container_linear_admin.dart';
 import '../../../../../../core/common/widgets/custom_text_field.dart';
 import '../../../../../../core/common/widgets/text_app.dart';
 import '../../../../../../core/style/fonts/font_family_helper.dart';
 import '../../../../../../core/style/fonts/font_weight_helper.dart';
+import '../../../../../../core/toast/show_toast.dart';
+import '../../../data/models/update_products_request_body.dart';
+import '../../blocs/update_products/update_products_bloc.dart';
 import 'update_products_image.dart';
 
 class UpdateProductsButtomSheet extends StatefulWidget {
   const UpdateProductsButtomSheet({
     super.key,
-    required this.id,
+    required this.productId,
+    required this.categoryId,
     required this.title,
     required this.description,
+    required this.categoryName,
     required this.imageUrl,
     required this.price,
+    required this.imagesList,
   });
 
-  final String id;
+  final String productId;
+  final String categoryId;
   final String title;
   final String description;
+  final String categoryName;
   final String imageUrl;
   final String price;
+  final List<String> imagesList;
 
   @override
   State<UpdateProductsButtomSheet> createState() =>
@@ -40,6 +53,7 @@ class _UpdateProductsButtomSheetState extends State<UpdateProductsButtomSheet> {
   TextEditingController priceController = TextEditingController();
 
   String? categoryName;
+  double? categoryId;
 
   @override
   void initState() {
@@ -47,6 +61,8 @@ class _UpdateProductsButtomSheetState extends State<UpdateProductsButtomSheet> {
     titleController.text = widget.title;
     descriptionController.text = widget.description;
     priceController.text = widget.price;
+    categoryName = widget.categoryName;
+    categoryId = double.parse(widget.categoryId);
   }
 
   @override
@@ -89,9 +105,8 @@ class _UpdateProductsButtomSheetState extends State<UpdateProductsButtomSheet> {
                   ),
                 ),
                 SizedBox(height: 10.h),
-                const UpdateproductsImage(
-                  imageUrl:
-                      'https://images.unsplash.com/photo-1719937206667-ac87c15ad3e9?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+                UpdateproductsImage(
+                  imagesList: widget.imagesList,
                 ),
                 SizedBox(height: 20.h),
                 TextApp(
@@ -114,7 +129,6 @@ class _UpdateProductsButtomSheetState extends State<UpdateProductsButtomSheet> {
                     return null;
                   },
                 ),
-
                 SizedBox(height: 10.h),
                 TextApp(
                   textAlign: TextAlign.right,
@@ -171,24 +185,44 @@ class _UpdateProductsButtomSheetState extends State<UpdateProductsButtomSheet> {
                   ),
                 ),
                 SizedBox(height: 10.h),
-                CustomCreateDropDown(
-                  items: const ['Mac', 'Air', 'lap'],
-                  hintText: 'Mac Book',
-                  onChanged: (value) {
-                    setState(() {
-                      categoryName = value;
-                    });
+                BlocBuilder<GetAllAdminCategoriesBloc,
+                    GetAllAdminCategoriesState>(
+                  builder: (context, state) {
+                    return state.maybeWhen(
+                      success: (categories) => CustomCreateDropDown(
+                        items: categories.categoriesDropDownList,
+                        hintText: 'Select Category',
+                        onChanged: (value) {
+                          setState(() {
+                            categoryName = value;
+
+                            final categoryIdString = categories
+                                .getCategoriesList
+                                .firstWhere((element) => element.name == value)
+                                .id!;
+
+                            categoryId = double.parse(categoryIdString);
+                          });
+                        },
+                        value: categoryName,
+                      ),
+                      orElse: () => CustomCreateDropDown(
+                        items: const [''],
+                        hintText: '',
+                        onChanged: (value) {},
+                        value: '',
+                      ),
+                    );
                   },
-                  value: categoryName,
                 ),
                 SizedBox(height: 20.h),
-                /*BlocConsumer<CreateCategoryBloc, CreateCategoryState>(
+                BlocConsumer<UpdateProductsBloc, UpdateProductsState>(
                   listener: (context, state) {
                     state.whenOrNull(
-                      success: (category) {
+                      success: () {
                         context.pop();
                         ShowToast.showToastSuccessTop(
-                          message: '${nameController.text} Created Success',
+                          message: '${titleController.text} Updated Success',
                           seconds: 2,
                         );
                       },
@@ -210,23 +244,21 @@ class _UpdateProductsButtomSheetState extends State<UpdateProductsButtomSheet> {
                           ),
                         ),
                       ),
-                      orElse: () => */
-                CustomButton(
-                  onPressed: () {
-                    // _validateCreateCategory(context);
+                      orElse: () => CustomButton(
+                        onPressed: () {
+                          _validateCreateCategory(context);
+                        },
+                        text: 'Update product',
+                        textColor: ColorsDark.blueDark,
+                        width: MediaQuery.of(context).size.width,
+                        height: 50.h,
+                        lastRadius: 20.r,
+                        threeRadius: 20.r,
+                        backgroundColor: ColorsDark.white,
+                      ),
+                    );
                   },
-                  text: 'Update product',
-                  textColor: ColorsDark.blueDark,
-                  width: MediaQuery.of(context).size.width,
-                  height: 50.h,
-                  lastRadius: 20.r,
-                  threeRadius: 20.r,
-                  backgroundColor: ColorsDark.white,
                 ),
-                // ) ;
-                //},
-                // ),
-
                 SizedBox(height: 40.h),
               ],
             ),
@@ -234,5 +266,34 @@ class _UpdateProductsButtomSheetState extends State<UpdateProductsButtomSheet> {
         ),
       ),
     );
+  }
+
+  void _validateCreateCategory(BuildContext context) {
+    if (formKey.currentState!.validate()) {
+      context.read<UpdateProductsBloc>().add(
+            UpdateProductsEvent.updateProducts(
+              body: UpdateProductsRequestBody(
+                title: titleController.text,
+                description: descriptionController.text,
+                price: processValue(priceController.text.trim()),
+                categoryId: categoryId,
+                image: context.read<UploadImageCubit>().updateImagesList.isEmpty
+                    ? widget.imagesList
+                    : context.read<UploadImageCubit>().updateImagesList,
+                productId: widget.productId,
+              ),
+            ),
+          );
+    }
+  }
+
+  double processValue(String value) {
+     // إزالة علامة الدولار (إن وجدت)
+    String cleanValue = value.replaceAll('\$', '');
+
+     // تحويل القيمة إلى رقم
+    double numericValue = double.tryParse(cleanValue)!;
+
+    return numericValue;
   }
 }

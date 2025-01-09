@@ -4,6 +4,7 @@ import 'package:store/features/admin/add_prodcuts/data/models/get_all_products_r
 
 import '../../../../../core/services/graphql/api_service.dart';
 import '../models/create_products_request_body.dart';
+import '../models/update_products_request_body.dart';
 
 class ProductsAdminDataSource {
   final ApiService graphql;
@@ -22,6 +23,14 @@ class ProductsAdminDataSource {
   Future<void> createProducts({required CreateProductsRequestBody body}) async {
     final response = await graphql.createProducts(
       ProductsQueries().queryOfCreateProducts(body: body),
+    );
+    return response;
+  }
+  
+  //Update Products
+  Future<void> updateProducts({required UpdateProductsRequestBody body}) async {
+    final response = await graphql.updateProducts(
+      ProductsQueries().queryOfUpdateProducts(body: body),
     );
     return response;
   }

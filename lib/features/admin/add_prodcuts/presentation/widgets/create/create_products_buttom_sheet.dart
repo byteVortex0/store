@@ -110,6 +110,7 @@ class _CreateProductsButtomSheetState extends State<CreateProductsButtomSheet> {
                 ),
                 SizedBox(height: 10.h),
                 CustomTextField(
+                  prefixText: '\$ ',
                   controller: priceController,
                   hintText: 'Price',
                   validator: (p0) {

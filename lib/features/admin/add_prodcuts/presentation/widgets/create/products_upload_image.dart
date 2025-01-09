@@ -54,7 +54,7 @@ class ProductsUploadImage extends StatelessWidget {
                 onTap: () {
                   context
                       .read<UploadImageCubit>()
-                      .uploadImageList(index: index);
+                      .uploadImagesList(index: index);
                 }),
           );
         },

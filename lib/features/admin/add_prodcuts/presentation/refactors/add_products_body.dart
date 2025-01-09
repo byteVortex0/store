@@ -68,11 +68,13 @@ class AddProductsBody extends StatelessWidget {
                               return ProductsAdminItem(
                                 title: productsList[index].title!,
                                 productId: productsList[index].id ?? '',
-                                categoryName:
+                                description:
                                     productsList[index].category!.name!,
                                 imageUrl: productsList[index].images!.first,
-                                //  'https://images.unsplash.com/photo-1719937206667-ac87c15ad3e9?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
-                                price: productsList[index].price.toString(),
+                                price: productsList[index].price.toString(), 
+                                imagesList: productsList[index].images!, 
+                                categoryName: productsList[index].category!.name!, 
+                                categoryId: productsList[index].category!.id!,
                               );
                             },
                           ),

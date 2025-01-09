@@ -19,8 +19,13 @@ class GetAllCategoriesResponse {
   }
   
   List<String> get categoriesDropDownList {
-    final list = data.listCategories.map((e) => e.name ?? '').toList();
-    return list;
+    // استخراج الأسماء مع إزالة القيم الفارغة
+  final list = data.listCategories
+      .map((e) => e.name ?? '') // التعامل مع القيم null
+      .where((name) => name.isNotEmpty) // إزالة القيم الفارغة
+      .toSet() // إزالة التكرارات
+      .toList(); // تحويل إلى قائمة
+  return list;
   }
 
 
