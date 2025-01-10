@@ -5,6 +5,7 @@ import 'package:store/features/admin/add_categories/data/models/create_category_
 import 'package:store/features/admin/add_categories/data/models/get_all_categories_response.dart';
 import 'package:store/features/admin/add_prodcuts/data/models/get_all_products_response.dart';
 import 'package:store/features/admin/dashboard/data/models/products_number_response.dart';
+import 'package:store/features/admin/users/data/models/get_all_users_response.dart';
 import 'package:store/features/auth/data/models/login_response.dart';
 import 'package:store/features/auth/data/models/sign_up_response.dart';
 import 'package:store/features/auth/data/models/user_role_response.dart';
@@ -97,6 +98,16 @@ abstract class ApiService {
 
   @POST(graphql)
   Future<void> updateProducts(
+    @Body() Map<String, dynamic> mutation,
+  );
+  
+  @POST(graphql)
+  Future<GetAllUsersResponse> getAllUsers(
+    @Body() Map<String, dynamic> query,
+  );
+  
+  @POST(graphql)
+  Future<void> deleteUsers(
     @Body() Map<String, dynamic> mutation,
   );
 

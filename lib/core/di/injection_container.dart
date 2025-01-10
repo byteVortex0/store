@@ -12,6 +12,9 @@ import 'package:store/features/admin/dashboard/data/repos/dash_board_repo.dart';
 import 'package:store/features/admin/dashboard/presentation/blocs/number_of_categories/number_of_categories_bloc.dart';
 import 'package:store/features/admin/dashboard/presentation/blocs/number_of_products/number_of_products_bloc.dart';
 import 'package:store/features/admin/dashboard/presentation/blocs/number_of_users/number_of_users_bloc.dart';
+import 'package:store/features/admin/users/data/data_source/get_all_users_data_source.dart';
+import 'package:store/features/admin/users/data/repos/get_all_users_repo.dart';
+import 'package:store/features/admin/users/presentation/blocs/get_all_users/get_all_users_bloc.dart';
 import 'package:store/features/auth/presentation/bloc/auth_bloc.dart';
 
 import '../../features/admin/add_categories/data/data_source/categories_admin_data_source.dart';
@@ -23,6 +26,7 @@ import '../../features/admin/add_prodcuts/data/repos/products_admin_repo.dart';
 import '../../features/admin/add_prodcuts/presentation/blocs/delete_product/delete_product_bloc.dart';
 import '../../features/admin/add_prodcuts/presentation/blocs/get_all_admin_products/get_all_admin_products_bloc.dart';
 import '../../features/admin/add_prodcuts/presentation/blocs/update_products/update_products_bloc.dart';
+import '../../features/admin/users/presentation/blocs/delete_user/delete_user_bloc.dart';
 import '../../features/auth/data/data_source/auth_data_source.dart';
 import '../../features/auth/data/repos/auth_repo.dart';
 import '../app/upload_image/data_source/upload_image_data_source.dart';
@@ -33,9 +37,10 @@ final sl = GetIt.instance;
 Future<void> setupInjector() async {
   await _initCore();
   await _initAuth();
-  await _initDashBoard();
-  await _initCategory();
-  await _initProducts();
+  await _initDashBoardAdminPage();
+  await _initCategoryAdminPage();
+  await _initProductsAdminPage();
+  await _initUsersAdminPage();
 }
 
 Future<void> _initCore() async {
@@ -57,7 +62,7 @@ Future<void> _initAuth() async {
     ..registerLazySingleton(() => AuthDataSource(graphql: sl()));
 }
 
-Future<void> _initDashBoard() async{
+Future<void> _initDashBoardAdminPage() async{
   sl
     ..registerFactory(() => NumberOfCategoriesBloc(sl()))
     ..registerFactory(() => NumberOfProductsBloc(sl()))
@@ -66,7 +71,7 @@ Future<void> _initDashBoard() async{
     ..registerLazySingleton(() => DashBoardRepo(dataSource: sl()));
 }
 
-Future<void> _initCategory() async{
+Future<void> _initCategoryAdminPage() async{
   sl
     ..registerFactory(() => GetAllAdminCategoriesBloc(sl()))
     ..registerFactory(() => CreateCategoryBloc(sl()))
@@ -76,7 +81,7 @@ Future<void> _initCategory() async{
     ..registerLazySingleton(() => CategoriesAdminRepo(dataSource: sl()));
 }
 
-Future<void> _initProducts() async{
+Future<void> _initProductsAdminPage() async{
   sl
     ..registerFactory(() => GetAllAdminProductsBloc(sl()))
     ..registerFactory(() => CreateProductsBloc(sl()))
@@ -84,4 +89,12 @@ Future<void> _initProducts() async{
     ..registerFactory(() => UpdateProductsBloc(sl()))
     ..registerLazySingleton(() => ProductsAdminDataSource(graphql: sl()))
     ..registerLazySingleton(() => ProductsAdminRepo(dataSource: sl()));
+}
+
+Future<void> _initUsersAdminPage() async{
+  sl
+    ..registerFactory(() => GetAllUsersBloc(sl()))
+    ..registerFactory(() => DeleteUserBloc(sl()))
+    ..registerLazySingleton(() => GetAllUsersDataSource(graphql: sl()))
+    ..registerLazySingleton(() => GetAllUsersRepo(dataSource: sl()));
 }
