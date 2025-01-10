@@ -126,7 +126,7 @@ class ProductsAdminItem extends StatelessWidget {
             ),
             SizedBox(height: 5.h),
             TextApp(
-              text: description,
+              text: categoryName,
               theme: context.textStyle.copyWith(
                 fontSize: 13.sp,
                 fontFamily: FontFamilyHelper.poppinsEnglish,
