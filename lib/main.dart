@@ -4,6 +4,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:store/core/app/bloc_observer.dart';
 import 'package:store/core/app/env_variables.dart';
+import 'package:store/core/services/push_notification/firebase_cloud_messaging.dart';
 import 'package:store/core/services/shared_pref/shared_pref.dart';
 
 import 'core/di/injection_container.dart';
@@ -18,6 +19,8 @@ void main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
+
+  await FirebaseCloudMessaging().init();
 
   await SharedPref().instantiatePreferences();
 
