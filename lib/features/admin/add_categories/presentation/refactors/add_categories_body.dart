@@ -14,68 +14,68 @@ class AddCategoriesBody extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-        padding: EdgeInsets.symmetric(horizontal: 30.w, vertical: 30.h),
-        child: Column(
-          children: [
-            const CreateCategory(),
-            Expanded(
-              child: RefreshIndicator.adaptive(
-                onRefresh: () async {
-                  context.read<GetAllAdminCategoriesBloc>().add(
-                        const GetAllAdminCategoriesEvent.fetchAllCategories(
-                            isNotLoading: true),
-                      );
-                },
-                color: ColorsDark.blueLight,
-                child: CustomScrollView(
-                  slivers: [
-                    SliverToBoxAdapter(
-                      child: SizedBox(height: 20.h),
-                    ),
-                    SliverToBoxAdapter(
-                      child: BlocBuilder<GetAllAdminCategoriesBloc,
-                          GetAllAdminCategoriesState>(
-                        builder: (context, state) {
-                          return state.when(
-                            loading: () => ListView.separated(
-                              shrinkWrap: true,
-                              physics: const NeverScrollableScrollPhysics(),
-                              itemBuilder: (context, index) =>
-                                  const LoadingShimmer(),
-                              separatorBuilder: (context, index) =>
-                                  SizedBox(height: 15.h),
-                              itemCount: 4,
+      padding: EdgeInsets.symmetric(horizontal: 30.w, vertical: 30.h),
+      child: Column(
+        children: [
+          const CreateCategory(),
+          Expanded(
+            child: RefreshIndicator.adaptive(
+              onRefresh: () async {
+                context.read<GetAllAdminCategoriesBloc>().add(
+                      const GetAllAdminCategoriesEvent.fetchAllCategories(
+                          isNotLoading: true),
+                    );
+              },
+              color: ColorsDark.blueLight,
+              child: CustomScrollView(
+                slivers: [
+                  SliverToBoxAdapter(
+                    child: SizedBox(height: 20.h),
+                  ),
+                  SliverToBoxAdapter(
+                    child: BlocBuilder<GetAllAdminCategoriesBloc,
+                        GetAllAdminCategoriesState>(
+                      builder: (context, state) {
+                        return state.when(
+                          loading: () => ListView.separated(
+                            shrinkWrap: true,
+                            physics: const NeverScrollableScrollPhysics(),
+                            itemBuilder: (context, index) =>
+                                const LoadingShimmer(),
+                            separatorBuilder: (context, index) =>
+                                SizedBox(height: 15.h),
+                            itemCount: 4,
+                          ),
+                          success: (categories) => ListView.separated(
+                            shrinkWrap: true,
+                            physics: const NeverScrollableScrollPhysics(),
+                            itemBuilder: (context, index) => AddCategoryItem(
+                              name: shortenText(
+                                  categories.getCategoriesList[index].name ??
+                                      ''),
+                              categoryId:
+                                  categories.getCategoriesList[index].id ?? '',
+                              image:
+                                  categories.getCategoriesList[index].image ??
+                                      '',
                             ),
-                            success: (categories) => ListView.separated(
-                              shrinkWrap: true,
-                              physics: const NeverScrollableScrollPhysics(),
-                              itemBuilder: (context, index) => AddCategoryItem(
-                                name: shortenText(
-                                    categories.getCategoriesList[index].name ??
-                                        ''),
-                                categoryId:
-                                    categories.getCategoriesList[index].id ??
-                                        '',
-                                image:
-                                    categories.getCategoriesList[index].image ??
-                                        '',
-                              ),
-                              separatorBuilder: (context, index) =>
-                                  SizedBox(height: 15.h),
-                              itemCount: categories.getCategoriesList.length,
-                            ),
-                            empty: EmptyScreen.new,
-                            error: Text.new,
-                          );
-                        },
-                      ),
+                            separatorBuilder: (context, index) =>
+                                SizedBox(height: 15.h),
+                            itemCount: categories.getCategoriesList.length,
+                          ),
+                          empty: EmptyScreen.new,
+                          error: Text.new,
+                        );
+                      },
                     ),
-                  ],
-                ),
+                  ),
+                ],
               ),
             ),
-          ],
-        ));
+          ),
+        ],
+      ),
+    );
   }
 
   String shortenText(String text) {
