@@ -4,6 +4,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:store/core/app/bloc_observer.dart';
 import 'package:store/core/app/env_variables.dart';
+import 'package:store/core/services/hive/hive_database.dart';
 import 'package:store/core/services/push_notification/firebase_cloud_messaging.dart';
 import 'package:store/core/services/shared_pref/shared_pref.dart';
 
@@ -25,6 +26,8 @@ void main() async {
   await SharedPref().instantiatePreferences();
 
   await setupInjector();
+
+  await HiveDatabase().setup();
 
   Bloc.observer = AppBlocObserver();
 
