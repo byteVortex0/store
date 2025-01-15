@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:store/core/loading/empty_screen.dart';
+import 'package:store/features/admin/add_notification/presentation/blocs/get_all_notification_dart_bloc/get_all_notification_bloc.dart';
 import 'package:store/features/admin/add_notification/presentation/widgets/create/create_notification.dart';
 
 import '../../../../../core/colors/colors_dark.dart';
+import '../../../../../core/loading/loading_shimmer.dart';
 import '../widgets/add_notification_item.dart';
 
 class AddNotificationBody extends StatelessWidget {
@@ -18,7 +22,11 @@ class AddNotificationBody extends StatelessWidget {
           SizedBox(height: 10.h),
           Expanded(
             child: RefreshIndicator.adaptive(
-              onRefresh: () async {},
+              onRefresh: () async {
+                context.read<GetAllNotificationBloc>().add(
+                      const GetAllNotificationEvent.getAllNotification(),
+                    );
+              },
               color: ColorsDark.blueLight,
               child: CustomScrollView(
                 slivers: [
@@ -26,16 +34,41 @@ class AddNotificationBody extends StatelessWidget {
                     child: SizedBox(height: 20.h),
                   ),
                   SliverToBoxAdapter(
-                    child: ListView.separated(
-                      itemCount: 3,
-                      shrinkWrap: true,
-                      physics: const NeverScrollableScrollPhysics(),
-                      padding: EdgeInsets.zero,
-                      itemBuilder: (BuildContext context, int index) =>
-                          const AddNotificationItem(),
-                      separatorBuilder: (BuildContext context, int index) =>
-                          SizedBox(height: 20.h),
+                    child: BlocBuilder<GetAllNotificationBloc,
+                        GetAllNotificationState>(
+                      builder: (context, state) {
+                        return state.when(
+                          loading: () => ListView.separated(
+                            shrinkWrap: true,
+                            physics: const NeverScrollableScrollPhysics(),
+                            itemBuilder: (context, index) =>
+                                const LoadingShimmer(),
+                            separatorBuilder: (context, index) =>
+                                SizedBox(height: 15.h),
+                            itemCount: 4,
+                          ),
+                          success: (notificationsList) => ListView.separated(
+                            itemCount: notificationsList.length,
+                            shrinkWrap: true,
+                            physics: const NeverScrollableScrollPhysics(),
+                            padding: EdgeInsets.zero,
+                            itemBuilder: (BuildContext context, int index) =>
+                                AddNotificationItem(
+                              notificationModel: notificationsList[index],
+                              indexId: index,
+                            ),
+                            separatorBuilder:
+                                (BuildContext context, int index) =>
+                                    SizedBox(height: 20.h),
+                          ),
+                          empty: EmptyScreen.new,
+                          error: Text.new,
+                        );
+                      },
                     ),
+                  ),
+                  SliverToBoxAdapter(
+                    child: SizedBox(height: 20.h),
                   ),
                 ],
               ),

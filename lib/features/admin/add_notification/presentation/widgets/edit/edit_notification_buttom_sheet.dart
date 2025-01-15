@@ -8,9 +8,15 @@ import '../../../../../../core/common/widgets/custom_text_field.dart';
 import '../../../../../../core/common/widgets/text_app.dart';
 import '../../../../../../core/style/fonts/font_family_helper.dart';
 import '../../../../../../core/style/fonts/font_weight_helper.dart';
+import '../../../data/models/add_notification_model.dart';
 
 class EditNotificationButtomSheet extends StatefulWidget {
-  const EditNotificationButtomSheet({super.key});
+  const EditNotificationButtomSheet({
+    super.key,
+    required this.notificationModel,
+  });
+
+  final AddNotificationModel notificationModel;
 
   @override
   State<EditNotificationButtomSheet> createState() =>
@@ -24,6 +30,14 @@ class _EditNotificationButtomSheetState
   TextEditingController titleController = TextEditingController();
   TextEditingController bodyController = TextEditingController();
   TextEditingController productIdController = TextEditingController();
+
+  @override
+  void initState() {
+    super.initState();
+    titleController.text = widget.notificationModel.title;
+    bodyController.text = widget.notificationModel.body;
+    productIdController.text = widget.notificationModel.productId.toString();
+  }
 
   @override
   void dispose() {
@@ -68,7 +82,7 @@ class _EditNotificationButtomSheetState
               hintText: 'Title',
               validator: (p0) {
                 if (p0!.isEmpty || p0.length < 4) {
-                  return 'Edit the notification title';
+                  return 'At least enter the  4 characters';
                 }
                 return null;
               },
@@ -89,7 +103,7 @@ class _EditNotificationButtomSheetState
               hintText: 'Body',
               validator: (p0) {
                 if (p0!.isEmpty || p0.length < 4) {
-                  return 'Edit the notification body';
+                  return 'At least enter the  4 characters';
                 }
                 return null;
               },
@@ -110,8 +124,8 @@ class _EditNotificationButtomSheetState
               hintText: 'Product id',
               keyboardType: TextInputType.number,
               validator: (p0) {
-                if (p0!.isEmpty || p0.length < 4) {
-                  return 'Edit the notification product id';
+                if (p0!.isEmpty) {
+                  return 'At least enter the 1 number';
                 }
                 return null;
               },
@@ -119,7 +133,7 @@ class _EditNotificationButtomSheetState
             SizedBox(height: 20.h),
             CustomButton(
               onPressed: () {
-                _validateCreateNotification(context);
+                _validateEditNotification(context);
               },
               text: 'Edit a Notification',
               textColor: ColorsDark.blueDark,
@@ -135,5 +149,20 @@ class _EditNotificationButtomSheetState
     );
   }
 
-  void _validateCreateNotification(BuildContext context) {}
+  void _validateEditNotification(BuildContext context) {
+    if (formKey.currentState!.validate()) {
+      widget.notificationModel.title = titleController.text.isEmpty
+          ? widget.notificationModel.title
+          : titleController.text.trim();
+      widget.notificationModel.body = bodyController.text.isEmpty
+          ? widget.notificationModel.body
+          : bodyController.text.trim();
+      widget.notificationModel.productId = productIdController.text.isEmpty
+          ? widget.notificationModel.productId
+          : int.parse(productIdController.text.trim());
+
+      widget.notificationModel.save();
+      context.pop();
+    }
+  }
 }

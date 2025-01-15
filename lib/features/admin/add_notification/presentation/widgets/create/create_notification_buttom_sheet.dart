@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:store/core/extensions/context_extension.dart';
+import 'package:store/features/admin/add_notification/data/models/add_notification_model.dart';
+import 'package:store/features/admin/add_notification/presentation/blocs/add_notification/add_notification_bloc.dart';
 
 import '../../../../../../core/colors/colors_dark.dart';
 import '../../../../../../core/common/widgets/custom_button.dart';
@@ -8,6 +11,7 @@ import '../../../../../../core/common/widgets/custom_text_field.dart';
 import '../../../../../../core/common/widgets/text_app.dart';
 import '../../../../../../core/style/fonts/font_family_helper.dart';
 import '../../../../../../core/style/fonts/font_weight_helper.dart';
+import '../../../../../../core/toast/show_toast.dart';
 
 class CreateNotificationButtomSheet extends StatefulWidget {
   const CreateNotificationButtomSheet({super.key});
@@ -68,7 +72,7 @@ class _CreateNotificationButtomSheetState
               hintText: 'Title',
               validator: (p0) {
                 if (p0!.isEmpty || p0.length < 4) {
-                  return 'Enter the notification title';
+                  return 'At least enter the  4 characters';
                 }
                 return null;
               },
@@ -89,7 +93,7 @@ class _CreateNotificationButtomSheetState
               hintText: 'Body',
               validator: (p0) {
                 if (p0!.isEmpty || p0.length < 4) {
-                  return 'Enter the notification body';
+                  return 'At least enter the  4 characters';
                 }
                 return null;
               },
@@ -110,24 +114,55 @@ class _CreateNotificationButtomSheetState
               hintText: 'Product id',
               keyboardType: TextInputType.number,
               validator: (p0) {
-                if (p0!.isEmpty || p0.length < 4) {
-                  return 'Enter the notification product id';
+                if (p0!.isEmpty) {
+                  return 'At least enter the  1 number';
                 }
                 return null;
               },
             ),
             SizedBox(height: 20.h),
-            CustomButton(
-              onPressed: () {
-                _validateCreateNotification(context);
+            BlocConsumer<AddNotificationBloc, AddNotificationState>(
+              listener: (context, state) {
+                state.whenOrNull(
+                  success: () {
+                    context.pop();
+                    ShowToast.showToastSuccessTop(
+                      message: 'Notification added successfully',
+                    );
+                  },
+                  error: (error) => ShowToast.showToastErrorTop(
+                    message: error,
+                  ),
+                );
               },
-              text: 'Add a Notification',
-              textColor: ColorsDark.blueDark,
-              width: MediaQuery.of(context).size.width,
-              height: 50.h,
-              lastRadius: 20.r,
-              threeRadius: 20.r,
-              backgroundColor: ColorsDark.white,
+              builder: (context, state) {
+                return state.maybeWhen(
+                  loading: () => Container(
+                    height: 50.h,
+                    width: MediaQuery.of(context).size.width,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(20.r),
+                      color: ColorsDark.white,
+                    ),
+                    alignment: Alignment.center,
+                    child: const CircularProgressIndicator(
+                      color: ColorsDark.blueDark,
+                    ),
+                  ),
+                  orElse: () => CustomButton(
+                    onPressed: () {
+                      _validateCreateNotification(context);
+                    },
+                    text: 'Add a Notification',
+                    textColor: ColorsDark.blueDark,
+                    width: MediaQuery.of(context).size.width,
+                    height: 50.h,
+                    lastRadius: 20.r,
+                    threeRadius: 20.r,
+                    backgroundColor: ColorsDark.white,
+                  ),
+                );
+              },
             ),
           ],
         ),
@@ -135,5 +170,18 @@ class _CreateNotificationButtomSheetState
     );
   }
 
-  void _validateCreateNotification(BuildContext context) {}
+  void _validateCreateNotification(BuildContext context) {
+    if (formKey.currentState!.validate()) {
+      context.read<AddNotificationBloc>().add(
+            AddNotificationEvent.addNotification(
+              notification: AddNotificationModel(
+                title: titleController.text.trim(),
+                body: bodyController.text.trim(),
+                productId: int.parse(productIdController.text.trim()),
+                createdAt: DateTime.now(),
+              ),
+            ),
+          );
+    }
+  }
 }

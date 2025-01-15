@@ -2,7 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:store/core/colors/colors_dark.dart';
 import 'package:store/core/extensions/context_extension.dart';
+import 'package:store/core/extensions/data_extension.dart';
+import 'package:store/features/admin/add_notification/data/models/add_notification_model.dart';
+import 'package:store/features/admin/add_notification/presentation/widgets/delete/delete_notification.dart';
 import 'package:store/features/admin/add_notification/presentation/widgets/edit/edit_notification.dart';
+import 'package:store/features/admin/add_notification/presentation/widgets/send/send_notification.dart';
 
 import '../../../../../core/common/widgets/custom_container_linear_admin.dart';
 import '../../../../../core/common/widgets/text_app.dart';
@@ -10,7 +14,14 @@ import '../../../../../core/style/fonts/font_family_helper.dart';
 import '../../../../../core/style/fonts/font_weight_helper.dart';
 
 class AddNotificationItem extends StatelessWidget {
-  const AddNotificationItem({super.key});
+  const AddNotificationItem({
+    super.key,
+    required this.notificationModel,
+    required this.indexId,
+  });
+
+  final AddNotificationModel notificationModel;
+  final int indexId;
 
   @override
   Widget build(BuildContext context) {
@@ -23,40 +34,35 @@ class AddNotificationItem extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             const Spacer(),
-            const NotificationInfo(
+            NotificationInfo(
               title: 'Title:',
-              body: 'hiiiiiiiiii',
+              body: notificationModel.title,
             ),
             const Spacer(),
-            const NotificationInfo(
+            NotificationInfo(
               title: 'Body:',
-              body: 'hiiiiiiiiii',
+              body: notificationModel.body,
             ),
             const Spacer(),
-            const NotificationInfo(
+            NotificationInfo(
               title: 'Create At:',
-              body: '1-14-2024',
+              body: notificationModel.createdAt.formattedDate,
             ),
             const Spacer(),
             Row(
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
-                IconButton(
-                  onPressed: () {},
-                  icon: const Icon(
-                    Icons.delete,
-                    color: Colors.red,
-                  ),
+                DeleteNotification(
+                  notificationModel: notificationModel,
                 ),
                 SizedBox(width: 40.w),
-                const EditNotification(),
+                EditNotification(
+                  notificationModel: notificationModel,
+                ),
                 SizedBox(width: 40.w),
-                IconButton(
-                  onPressed: () {},
-                  icon: const Icon(
-                    Icons.send,
-                    color: Colors.green,
-                  ),
+                SendNotification(
+                  notificationModel: notificationModel,
+                  indexId: indexId,
                 ),
               ],
             ),
