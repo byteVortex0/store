@@ -25,14 +25,13 @@ class LoginButton extends StatelessWidget {
               ShowToast.showToastSuccessTop(
                 message: context.translate(LangKeys.loggedSuccessfully),
               );
-              
+
               if (userRole == 'admin') {
                 context.pushNamedAndRemoveUntil(AppRoutes.homeAdminScreen);
               } else {
-                context.pushNamedAndRemoveUntil(AppRoutes.homeCustomerScreen);
+                context.pushNamedAndRemoveUntil(AppRoutes.mainCustomerScreen);
               }
             },
-            
             error: (massage) => ShowToast.showToastErrorTop(
               message: context.translate(massage),
             ),
@@ -46,8 +45,8 @@ class LoginButton extends StatelessWidget {
                 height: 50.h,
                 width: MediaQuery.of(context).size.width,
                 child: const CircularProgressIndicator.adaptive(
-                    backgroundColor: Colors.white,
-                    ),
+                  backgroundColor: Colors.white,
+                ),
               );
             },
             orElse: () {

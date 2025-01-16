@@ -18,6 +18,7 @@ import 'package:store/features/admin/users/data/data_source/get_all_users_data_s
 import 'package:store/features/admin/users/data/repos/get_all_users_repo.dart';
 import 'package:store/features/admin/users/presentation/blocs/get_all_users/get_all_users_bloc.dart';
 import 'package:store/features/auth/presentation/bloc/auth_bloc.dart';
+import 'package:store/features/customer/main/presentation/cubit/main_cubit.dart';
 
 import '../../features/admin/add_categories/data/data_source/categories_admin_data_source.dart';
 import '../../features/admin/add_categories/presentation/blocs/create_category/create_category_bloc.dart';
@@ -47,6 +48,7 @@ Future<void> setupInjector() async {
   await _initProductsAdminPage();
   await _initUsersAdminPage();
   await _initNotificationAdminPage();
+  await _initMainCusromerPage();
 }
 
 Future<void> _initCore() async {
@@ -112,4 +114,8 @@ Future<void> _initNotificationAdminPage() async {
     ..registerFactory(() => SendNotificationBloc(sl()))
     ..registerLazySingleton(() => AddNotificationRepo(dataSource: sl()))
     ..registerLazySingleton(() => AddNotificationDataSource());
+}
+
+Future<void> _initMainCusromerPage() async {
+  sl.registerFactory(MainCubit.new);
 }
