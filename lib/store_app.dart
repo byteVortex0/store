@@ -73,7 +73,7 @@ class StoreApp extends StatelessWidget {
                               null
                           ? SharedPref().getString(PrefKeys.userRole) == 'admin'
                               ? AppRoutes.homeAdminScreen
-                              : AppRoutes.homeCustomerScreen
+                              : AppRoutes.mainCustomerScreen
                           : AppRoutes.loginScreen,
                       navigatorKey: sl<GlobalKey<NavigatorState>>(),
                     );
