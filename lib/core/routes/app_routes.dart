@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:store/core/app/upload_image/cubit/upload_image_cubit.dart';
+import 'package:store/core/common/screens/custom_web_view.dart';
 import 'package:store/core/common/screens/under_build_screen.dart';
 import 'package:store/core/di/injection_container.dart';
 import 'package:store/core/routes/base_routes.dart';
@@ -16,9 +17,10 @@ class AppRoutes {
   static const String signUpScreen = '/SignUpScreen';
   static const String homeAdminScreen = '/HomeAdminScreen';
   static const String mainCustomerScreen = '/maincustomerScreen';
+  static const String customWebView = '/CustomWebView';
 
   static Route onGenerateRoutes(RouteSettings settings) {
-    //final arg = settings.arguments;
+    final arg = settings.arguments;
     switch (settings.name) {
       case loginScreen:
         return BaseRoute(
@@ -41,6 +43,8 @@ class AppRoutes {
         return BaseRoute(page: const HomeAdminScreen());
       case mainCustomerScreen:
         return BaseRoute(page: const MainCustomerScreen());
+      case customWebView:
+        return BaseRoute(page: CustomWebView(url: arg as String));
 
       default:
         return BaseRoute(page: const PageUnderBuildScreen());

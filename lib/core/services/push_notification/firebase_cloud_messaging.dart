@@ -6,6 +6,9 @@ import 'package:flutter/material.dart';
 import 'package:googleapis_auth/auth_io.dart' as auth;
 import 'package:http/http.dart' as http;
 import 'package:store/core/app/env_variables.dart';
+import 'package:store/core/extensions/context_extension.dart';
+import 'package:store/core/language/lang_keys.dart';
+import 'package:store/core/toast/show_toast.dart';
 
 class FirebaseCloudMessaging {
   FirebaseCloudMessaging._();
@@ -26,14 +29,24 @@ class FirebaseCloudMessaging {
     await notificationPermission();
   }
 
-  Future<void> controlerForUserNotification() async {
+  Future<void> controlerForUserNotification(BuildContext context) async {
     if (isPeremisionNotification == false) {
       await notificationPermission();
     } else {
       if (isNotificationSubscribed.value == false) {
         await subscribeNotification();
+        if (!context.mounted) return;
+        ShowToast.showToastSuccessTop(
+          message: context.translate(LangKeys.subscribeToNotification),
+          seconds: 2,
+        );
       } else {
         await unsubscribeNotification();
+        if (!context.mounted) return;
+        ShowToast.showToastSuccessTop(
+          message: context.translate(LangKeys.unsubscribeToNotification),
+          seconds: 2,
+        );
       }
     }
   }

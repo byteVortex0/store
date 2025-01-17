@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:store/core/extensions/context_extension.dart';
+import 'package:store/core/utils/app_logout.dart';
 import 'package:store/features/admin/dashboard/presentation/screens/dashboard_screen.dart';
 
 import '../../features/admin/add_categories/presentation/screens/add_categories_screen.dart';
@@ -11,9 +12,6 @@ import '../../features/admin/add_prodcuts/presentation/screens/add_prodcuts_scre
 import '../../features/admin/users/presentation/screens/users_screen.dart';
 import '../common/widgets/text_app.dart';
 import '../dialogs/custom_dialogs.dart';
-import '../routes/app_routes.dart';
-import '../services/shared_pref/pref_keys.dart';
-import '../services/shared_pref/shared_pref.dart';
 import '../style/fonts/font_family_helper.dart';
 import '../style/fonts/font_weight_helper.dart';
 
@@ -116,14 +114,7 @@ List<DrawerItemModel> adminDrawerList(BuildContext context) {
             textButton2: 'No',
             isLoading: false,
             onPressed: () async {
-              final navigator = Navigator.of(context);
-              await SharedPref().removePreference(PrefKeys.accessToken);
-              await SharedPref().removePreference(PrefKeys.userId);
-              await SharedPref().removePreference(PrefKeys.userRole);
-              await navigator.pushNamedAndRemoveUntil(
-                AppRoutes.loginScreen,
-                (route) => false,
-              );
+              await AppLogout().logout();
             },
           );
         },

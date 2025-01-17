@@ -19,6 +19,7 @@ import 'package:store/features/admin/users/data/repos/get_all_users_repo.dart';
 import 'package:store/features/admin/users/presentation/blocs/get_all_users/get_all_users_bloc.dart';
 import 'package:store/features/auth/presentation/bloc/auth_bloc.dart';
 import 'package:store/features/customer/main/presentation/cubit/main_cubit.dart';
+import 'package:store/features/customer/profile/presentation/blocs/profile_bloc/profile_bloc.dart';
 
 import '../../features/admin/add_categories/data/data_source/categories_admin_data_source.dart';
 import '../../features/admin/add_categories/presentation/blocs/create_category/create_category_bloc.dart';
@@ -35,6 +36,8 @@ import '../../features/admin/add_prodcuts/presentation/blocs/update_products/upd
 import '../../features/admin/users/presentation/blocs/delete_user/delete_user_bloc.dart';
 import '../../features/auth/data/data_source/auth_data_source.dart';
 import '../../features/auth/data/repos/auth_repo.dart';
+import '../../features/customer/profile/data/data_source/profile_data_source.dart';
+import '../../features/customer/profile/data/repos/profile_repo.dart';
 import '../app/upload_image/data_source/upload_image_data_source.dart';
 import '../app/upload_image/repo/upload_image_repo.dart';
 
@@ -49,6 +52,7 @@ Future<void> setupInjector() async {
   await _initUsersAdminPage();
   await _initNotificationAdminPage();
   await _initMainCusromerPage();
+  await _initProfileCusromerPage();
 }
 
 Future<void> _initCore() async {
@@ -118,4 +122,11 @@ Future<void> _initNotificationAdminPage() async {
 
 Future<void> _initMainCusromerPage() async {
   sl.registerFactory(MainCubit.new);
+}
+
+Future<void> _initProfileCusromerPage() async {
+  sl
+    ..registerFactory(() => ProfileBloc(sl()))
+    ..registerLazySingleton(() => ProfileRepo(dataSource: sl()))
+    ..registerLazySingleton(() => ProfileDataSource(graphql: sl()));
 }

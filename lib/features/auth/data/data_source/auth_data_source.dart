@@ -28,7 +28,7 @@ class AuthDataSource {
     final dio = Dio();
     dio.options.headers['Authorization'] = 'Bearer $token';
     final client = ApiService(dio);
-    final response = await client.userRole(token);
+    final response = await client.userRole();
     return response;
   }
 
@@ -39,5 +39,4 @@ class AuthDataSource {
     );
     return response;
   }
-
 }

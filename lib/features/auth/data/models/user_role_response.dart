@@ -9,7 +9,20 @@ class UserRoleResponse {
   @JsonKey(name: 'id')
   final int? userId;
 
-  UserRoleResponse({required this.userId, required this.userRole});
+  @JsonKey(name: 'email')
+  final String? userEmail;
+  @JsonKey(name: 'name')
+  final String? userName;
+  @JsonKey(name: 'avatar')
+  final String? userAvatar;
+
+  UserRoleResponse({
+    required this.userId,
+    required this.userRole,
+    required this.userEmail,
+    required this.userName,
+    required this.userAvatar,
+  });
 
   factory UserRoleResponse.fromJson(Map<String, dynamic> json) =>
       _$UserRoleResponseFromJson(json);
