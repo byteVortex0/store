@@ -30,8 +30,8 @@ abstract class ApiService {
 
   //admin or customer
   @GET('/api/v1/auth/profile')
-  Future<UserRoleResponse> userRole(String token);//admin or customer
-  
+  Future<UserRoleResponse> userRole(); //admin or customer
+
   @POST('/api/v1/files/upload')
   Future<UploadImageResponse> uploadImage(
     @Body() FormData file,
@@ -41,14 +41,14 @@ abstract class ApiService {
   @POST(graphql)
   Future<SignUpResponse> signUp(
     @Body() Map<String, dynamic> mutation,
-  ); 
-  
+  );
+
   //Products
   @POST(graphql)
   Future<ProductsNumberResponse> numberOfProducts(
     @Body() Map<String, dynamic> query,
-  ); 
-  
+  );
+
   //Categories
   @POST(graphql)
   Future<CategoriesNumberResponse> numberOfCategories(
@@ -60,27 +60,27 @@ abstract class ApiService {
   Future<UsersNumberResponse> numberOfUsers(
     @Body() Map<String, dynamic> query,
   );
-  
+
   @POST(graphql)
   Future<GetAllCategoriesResponse> getAllCategories(
     @Body() Map<String, dynamic> query,
   );
-  
+
   @POST(graphql)
   Future<CreateCategoryResponse> createCategory(
     @Body() Map<String, dynamic> mutation,
   );
-  
+
   @POST(graphql)
   Future<void> deleteCategory(
     @Body() Map<String, dynamic> mutation,
   );
-  
+
   @POST(graphql)
   Future<void> updateCategory(
     @Body() Map<String, dynamic> mutation,
   );
-  
+
   @POST(graphql)
   Future<GetAllProductsResponse> getAllProducts(
     @Body() Map<String, dynamic> query,
@@ -90,7 +90,7 @@ abstract class ApiService {
   Future<void> createProducts(
     @Body() Map<String, dynamic> mutation,
   );
-  
+
   @POST(graphql)
   Future<void> deleteProducts(
     @Body() Map<String, dynamic> mutation,
@@ -100,16 +100,14 @@ abstract class ApiService {
   Future<void> updateProducts(
     @Body() Map<String, dynamic> mutation,
   );
-  
+
   @POST(graphql)
   Future<GetAllUsersResponse> getAllUsers(
     @Body() Map<String, dynamic> query,
   );
-  
+
   @POST(graphql)
   Future<void> deleteUsers(
     @Body() Map<String, dynamic> mutation,
   );
-
-  
 }

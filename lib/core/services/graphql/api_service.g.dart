@@ -58,7 +58,7 @@ class _ApiService implements ApiService {
   }
 
   @override
-  Future<UserRoleResponse> userRole(String token) async {
+  Future<UserRoleResponse> userRole() async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
