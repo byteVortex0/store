@@ -114,7 +114,7 @@ class _CreateProductsButtomSheetState extends State<CreateProductsButtomSheet> {
                   controller: priceController,
                   hintText: 'Price',
                   validator: (p0) {
-                    if (p0!.isEmpty || p0.length < 4) {
+                    if (p0!.isEmpty) {
                       return 'Enter Product Price';
                     }
                     return null;

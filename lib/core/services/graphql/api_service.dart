@@ -12,6 +12,7 @@ import 'package:store/features/auth/data/models/user_role_response.dart';
 
 import '../../../features/admin/dashboard/data/models/categories_number_response.dart';
 import '../../../features/admin/dashboard/data/models/users_number_response.dart';
+import '../../../features/customer/home/data/models/banner_response.dart';
 
 part 'api_service.g.dart';
 
@@ -109,5 +110,10 @@ abstract class ApiService {
   @POST(graphql)
   Future<void> deleteUsers(
     @Body() Map<String, dynamic> mutation,
+  );
+
+  @POST(graphql)
+  Future<BannerResponse> getBanners(
+    @Body() Map<String, dynamic> query,
   );
 }
