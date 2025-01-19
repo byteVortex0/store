@@ -34,5 +34,6 @@
     "lang_code": "English",
     "notification": "Notification",
     "subscribe_to_notification": "You have subscribed to notifications",
-    "unsubscribe_to_notification": "You have unsubscribed to notifications"
+    "unsubscribe_to_notification": "You have unsubscribed to notifications",
+    "view_all": "View All"
 }

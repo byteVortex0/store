@@ -35,4 +35,5 @@ class LangKeys {
   static const String notification = 'notification';
   static const String subscribeToNotification = 'subscribe_to_notification';
   static const String unsubscribeToNotification = 'unsubscribe_to_notification';
+  static const String viewAll = 'view_all';
 }

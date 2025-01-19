@@ -36,6 +36,11 @@ import '../../features/admin/add_prodcuts/presentation/blocs/update_products/upd
 import '../../features/admin/users/presentation/blocs/delete_user/delete_user_bloc.dart';
 import '../../features/auth/data/data_source/auth_data_source.dart';
 import '../../features/auth/data/repos/auth_repo.dart';
+import '../../features/customer/home/data/data_source/home_data_source.dart';
+import '../../features/customer/home/data/repos/home_repo.dart';
+import '../../features/customer/home/presentation/blocs/get_banners/get_banners_bloc.dart';
+import '../../features/customer/home/presentation/blocs/get_categories/get_categories_bloc.dart';
+import '../../features/customer/home/presentation/blocs/get_products/get_products_bloc.dart';
 import '../../features/customer/profile/data/data_source/profile_data_source.dart';
 import '../../features/customer/profile/data/repos/profile_repo.dart';
 import '../app/upload_image/data_source/upload_image_data_source.dart';
@@ -53,6 +58,7 @@ Future<void> setupInjector() async {
   await _initNotificationAdminPage();
   await _initMainCusromerPage();
   await _initProfileCusromerPage();
+  await _initHomeCusromerPage();
 }
 
 Future<void> _initCore() async {
@@ -129,4 +135,13 @@ Future<void> _initProfileCusromerPage() async {
     ..registerFactory(() => ProfileBloc(sl()))
     ..registerLazySingleton(() => ProfileRepo(dataSource: sl()))
     ..registerLazySingleton(() => ProfileDataSource(graphql: sl()));
+}
+
+Future<void> _initHomeCusromerPage() async {
+  sl
+    ..registerFactory(() => GetBannersBloc(sl()))
+    ..registerFactory(() => GetCategoriesBloc(sl()))
+    ..registerFactory(() => GetProductsBloc(sl()))
+    ..registerLazySingleton(() => HomeRepo(dataSource: sl()))
+    ..registerLazySingleton(() => HomeDataSource(graphql: sl()));
 }
