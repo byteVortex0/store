@@ -7,6 +7,7 @@ import 'package:store/core/di/injection_container.dart';
 import 'package:store/core/routes/base_routes.dart';
 import 'package:store/features/auth/presentation/bloc/auth_bloc.dart';
 import 'package:store/features/auth/presentation/screens/sign_up_screen.dart';
+import 'package:store/features/customer/category_details/presentation/screens/category_details_screen.dart';
 import 'package:store/features/customer/main/presentation/screens/main_customer_screen.dart';
 import 'package:store/features/customer/product_details/presentation/screens/product_details_screen.dart';
 
@@ -20,6 +21,7 @@ class AppRoutes {
   static const String mainCustomerScreen = '/maincustomerScreen';
   static const String customWebView = '/CustomWebView';
   static const String productDetails = '/ProductDetails';
+  static const String categoryDetails = '/CategoryDetails';
 
   static Route onGenerateRoutes(RouteSettings settings) {
     final arg = settings.arguments;
@@ -49,6 +51,10 @@ class AppRoutes {
         return BaseRoute(page: CustomWebView(url: arg as String));
       case productDetails:
         return BaseRoute(page: ProductDetialsScreen(productId: arg as int));
+      case categoryDetails:
+        return BaseRoute(
+            page: CategoryDetailsScreen(
+                categoryInfo: arg as ({String categoryName, int categoryId})));
 
       default:
         return BaseRoute(page: const PageUnderBuildScreen());
