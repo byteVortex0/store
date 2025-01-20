@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:store/features/customer/home/presentation/widgets/products/products_item.dart';
 
+import '../../../../../../core/common/widgets/custom_product_item.dart';
 import '../../../../../admin/add_prodcuts/data/models/get_all_products_response.dart';
 
 class ProductsList extends StatelessWidget {
@@ -24,11 +24,12 @@ class ProductsList extends StatelessWidget {
           mainAxisSpacing: 15.h,
           childAspectRatio: 165 / 250,
         ),
-        itemBuilder: (context, index) => ProductsItem(
+        itemBuilder: (context, index) => CustomProductsItem(
           imageUrl: products.getProductsList[index].images!,
           title: products.getProductsList[index].title!,
           price: products.getProductsList[index].price!,
           categoryName: products.getProductsList[index].category!.name!,
+          productId: int.parse(products.getProductsList[index].id!),
         ),
       ),
     );
