@@ -9,6 +9,7 @@ import 'package:store/features/admin/users/data/models/get_all_users_response.da
 import 'package:store/features/auth/data/models/login_response.dart';
 import 'package:store/features/auth/data/models/sign_up_response.dart';
 import 'package:store/features/auth/data/models/user_role_response.dart';
+import 'package:store/features/customer/product_details/data/models/product_details_response.dart';
 
 import '../../../features/admin/dashboard/data/models/categories_number_response.dart';
 import '../../../features/admin/dashboard/data/models/users_number_response.dart';
@@ -114,6 +115,11 @@ abstract class ApiService {
 
   @POST(graphql)
   Future<BannerResponse> getBanners(
+    @Body() Map<String, dynamic> query,
+  );
+
+  @POST(graphql)
+  Future<ProductDetailsResponse> getOneProduct(
     @Body() Map<String, dynamic> query,
   );
 }

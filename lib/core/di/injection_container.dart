@@ -19,6 +19,7 @@ import 'package:store/features/admin/users/data/repos/get_all_users_repo.dart';
 import 'package:store/features/admin/users/presentation/blocs/get_all_users/get_all_users_bloc.dart';
 import 'package:store/features/auth/presentation/bloc/auth_bloc.dart';
 import 'package:store/features/customer/main/presentation/cubit/main_cubit.dart';
+import 'package:store/features/customer/product_details/presentation/blocs/product_details/product_details_bloc.dart';
 import 'package:store/features/customer/profile/presentation/blocs/profile_bloc/profile_bloc.dart';
 
 import '../../features/admin/add_categories/data/data_source/categories_admin_data_source.dart';
@@ -41,6 +42,8 @@ import '../../features/customer/home/data/repos/home_repo.dart';
 import '../../features/customer/home/presentation/blocs/get_banners/get_banners_bloc.dart';
 import '../../features/customer/home/presentation/blocs/get_categories/get_categories_bloc.dart';
 import '../../features/customer/home/presentation/blocs/get_products/get_products_bloc.dart';
+import '../../features/customer/product_details/data/data_source/product_details_data_source.dart';
+import '../../features/customer/product_details/data/repos/product_details_repo.dart';
 import '../../features/customer/profile/data/data_source/profile_data_source.dart';
 import '../../features/customer/profile/data/repos/profile_repo.dart';
 import '../app/upload_image/data_source/upload_image_data_source.dart';
@@ -59,6 +62,7 @@ Future<void> setupInjector() async {
   await _initMainCusromerPage();
   await _initProfileCusromerPage();
   await _initHomeCusromerPage();
+  await _initProductDetailsCusromerPage();
 }
 
 Future<void> _initCore() async {
@@ -144,4 +148,11 @@ Future<void> _initHomeCusromerPage() async {
     ..registerFactory(() => GetProductsBloc(sl()))
     ..registerLazySingleton(() => HomeRepo(dataSource: sl()))
     ..registerLazySingleton(() => HomeDataSource(graphql: sl()));
+}
+
+Future<void> _initProductDetailsCusromerPage() async {
+  sl
+    ..registerFactory(() => ProductDetailsBloc(sl()))
+    ..registerLazySingleton(() => ProductDetailsRepo(dataSource: sl()))
+    ..registerLazySingleton(() => ProductDetailsDataSource(graphql: sl()));
 }
