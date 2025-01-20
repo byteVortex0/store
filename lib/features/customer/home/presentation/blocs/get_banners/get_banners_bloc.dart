@@ -37,7 +37,7 @@ class GetBannersBloc extends Bloc<GetBannersEvent, GetBannersState> {
       );
     } catch (e, stackTrace) {
       // Handle unexpected exceptions
-      log('Create Category failed: $e\n$stackTrace');
+      log('Banners failed: $e\n$stackTrace');
       emit(const GetBannersState.error(error: 'An unexpected error occurred'));
     }
   }

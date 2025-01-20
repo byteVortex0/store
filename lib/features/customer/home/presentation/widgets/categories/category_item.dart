@@ -4,6 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:store/core/common/widgets/custom_container_linear_customer.dart';
 import 'package:store/core/common/widgets/text_app.dart';
 import 'package:store/core/extensions/context_extension.dart';
+import 'package:store/core/routes/app_routes.dart';
 import 'package:store/core/style/fonts/font_weight_helper.dart';
 
 class CategoryItem extends StatelessWidget {
@@ -11,45 +12,55 @@ class CategoryItem extends StatelessWidget {
     super.key,
     required this.title,
     required this.image,
+    required this.id,
   });
 
   final String title;
   final String image;
+  final int id;
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        CustomContainerLinearCustomer(
-          height: 71.h,
-          width: 71.w,
-          child: ClipRRect(
-            borderRadius: BorderRadius.circular(15.r),
-            child: CachedNetworkImage(
-              imageUrl: image,
-              fit: BoxFit.contain,
-              errorWidget: (context, url, error) => const Icon(
-                Icons.error,
-                size: 30,
-                color: Colors.red,
+    return GestureDetector(
+      onTap: () {
+        context.pushName(
+          AppRoutes.categoryDetails,
+          arg: (categoryName: title, categoryId: id),
+        );
+      },
+      child: Column(
+        children: [
+          CustomContainerLinearCustomer(
+            height: 71.h,
+            width: 71.w,
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(15.r),
+              child: CachedNetworkImage(
+                imageUrl: image,
+                fit: BoxFit.contain,
+                errorWidget: (context, url, error) => const Icon(
+                  Icons.error,
+                  size: 30,
+                  color: Colors.red,
+                ),
               ),
             ),
           ),
-        ),
-        SizedBox(height: 10.h),
-        SizedBox(
-          height: 35.h,
-          width: 75.w,
-          child: TextApp(
-            text: title,
-            textAlign: TextAlign.center,
-            theme: context.textStyle.copyWith(
-              fontWeight: FontWeightHelper.bold,
-              fontSize: 12.sp,
+          SizedBox(height: 10.h),
+          SizedBox(
+            height: 35.h,
+            width: 75.w,
+            child: TextApp(
+              text: title,
+              textAlign: TextAlign.center,
+              theme: context.textStyle.copyWith(
+                fontWeight: FontWeightHelper.bold,
+                fontSize: 12.sp,
+              ),
             ),
-          ),
-        )
-      ],
+          )
+        ],
+      ),
     );
   }
 }

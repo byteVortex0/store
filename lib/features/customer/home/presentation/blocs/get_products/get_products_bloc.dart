@@ -40,7 +40,7 @@ class GetProductsBloc extends Bloc<GetProductsEvent, GetProductsState> {
       );
     } catch (e, stackTrace) {
       // Handle unexpected exceptions
-      log('Create Category failed: $e\n$stackTrace');
+      log('Products failed: $e\n$stackTrace');
       emit(const GetProductsState.error(error: 'An unexpected error occurred'));
     }
   }

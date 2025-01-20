@@ -37,6 +37,9 @@ import '../../features/admin/add_prodcuts/presentation/blocs/update_products/upd
 import '../../features/admin/users/presentation/blocs/delete_user/delete_user_bloc.dart';
 import '../../features/auth/data/data_source/auth_data_source.dart';
 import '../../features/auth/data/repos/auth_repo.dart';
+import '../../features/customer/category_details/data/data_source/category_details_data_source.dart';
+import '../../features/customer/category_details/data/repos/category_details_repo.dart';
+import '../../features/customer/category_details/presentation/blocs/get_category_details/get_category_details_bloc.dart';
 import '../../features/customer/home/data/data_source/home_data_source.dart';
 import '../../features/customer/home/data/repos/home_repo.dart';
 import '../../features/customer/home/presentation/blocs/get_banners/get_banners_bloc.dart';
@@ -63,6 +66,7 @@ Future<void> setupInjector() async {
   await _initProfileCusromerPage();
   await _initHomeCusromerPage();
   await _initProductDetailsCusromerPage();
+  await _initCategoryDetailsCusromerPage();
 }
 
 Future<void> _initCore() async {
@@ -155,4 +159,11 @@ Future<void> _initProductDetailsCusromerPage() async {
     ..registerFactory(() => ProductDetailsBloc(sl()))
     ..registerLazySingleton(() => ProductDetailsRepo(dataSource: sl()))
     ..registerLazySingleton(() => ProductDetailsDataSource(graphql: sl()));
+}
+
+Future<void> _initCategoryDetailsCusromerPage() async {
+  sl
+    ..registerFactory(() => GetCategoryDetailsBloc(sl()))
+    ..registerLazySingleton(() => CategoryDetailsRepo(dataSource: sl()))
+    ..registerLazySingleton(() => CategoryDetailsDataSource(graphql: sl()));
 }

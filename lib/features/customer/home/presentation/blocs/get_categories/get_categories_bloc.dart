@@ -37,7 +37,7 @@ class GetCategoriesBloc extends Bloc<GetCategoriesEvent, GetCategoriesState> {
       );
     } catch (e, stackTrace) {
       // Handle unexpected exceptions
-      log('Create Category failed: $e\n$stackTrace');
+      log('Category failed: $e\n$stackTrace');
       emit(const GetCategoriesState.error(
           error: 'An unexpected error occurred'));
     }
