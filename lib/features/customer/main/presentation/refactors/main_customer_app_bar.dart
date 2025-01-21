@@ -6,6 +6,7 @@ import 'package:store/core/common/widgets/custom_linear_button.dart';
 import 'package:store/core/common/widgets/text_app.dart';
 import 'package:store/core/extensions/context_extension.dart';
 import 'package:store/core/language/lang_keys.dart';
+import 'package:store/core/routes/app_routes.dart';
 import 'package:store/core/style/images/app_images.dart';
 import 'package:store/features/customer/main/presentation/cubit/main_cubit.dart';
 import 'package:svg_flutter/svg.dart';
@@ -45,7 +46,9 @@ class MainCustomerAppBar extends StatelessWidget
                 CustomFadeInLeft(
                   duration: 800,
                   child: CustomLinearButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      context.pushName(AppRoutes.searchScreen);
+                    },
                     child: Center(
                       child: SvgPicture.asset(AppImages.search),
                     ),

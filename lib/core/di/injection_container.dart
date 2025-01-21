@@ -22,6 +22,7 @@ import 'package:store/features/customer/main/presentation/cubit/main_cubit.dart'
 import 'package:store/features/customer/product_details/presentation/blocs/product_details/product_details_bloc.dart';
 import 'package:store/features/customer/products_view_all/presentation/blocs/products_view_all/products_view_all_bloc.dart';
 import 'package:store/features/customer/profile/presentation/blocs/profile_bloc/profile_bloc.dart';
+import 'package:store/features/customer/search/presentation/blocs/search_for_products/search_for_products_bloc.dart';
 
 import '../../features/admin/add_categories/data/data_source/categories_admin_data_source.dart';
 import '../../features/admin/add_categories/presentation/blocs/create_category/create_category_bloc.dart';
@@ -52,6 +53,8 @@ import '../../features/customer/products_view_all/data/data_source/products_view
 import '../../features/customer/products_view_all/data/repos/products_view_all_repo.dart';
 import '../../features/customer/profile/data/data_source/profile_data_source.dart';
 import '../../features/customer/profile/data/repos/profile_repo.dart';
+import '../../features/customer/search/data/data_source/search_data_source.dart';
+import '../../features/customer/search/data/repos/search_repo.dart';
 import '../app/upload_image/data_source/upload_image_data_source.dart';
 import '../app/upload_image/repo/upload_image_repo.dart';
 
@@ -71,6 +74,7 @@ Future<void> setupInjector() async {
   await _initProductDetailsCusromerPage();
   await _initCategoryDetailsCusromerPage();
   await _initViewAllProductsCusromerPage();
+  await _initSearchCusromerPage();
 }
 
 Future<void> _initCore() async {
@@ -177,4 +181,11 @@ Future<void> _initViewAllProductsCusromerPage() async {
     ..registerFactory(() => ProductsViewAllBloc(sl()))
     ..registerLazySingleton(() => ProductsViewAllRepo(dataSource: sl()))
     ..registerLazySingleton(() => ProductsViewAllDataSource(graphql: sl()));
+}
+
+Future<void> _initSearchCusromerPage() async {
+  sl
+    ..registerFactory(() => SearchForProductsBloc(sl()))
+    ..registerLazySingleton(() => SearchRepo(dataSource: sl()))
+    ..registerLazySingleton(() => SearchDataSource(graphql: sl()));
 }
