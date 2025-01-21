@@ -11,6 +11,7 @@ import 'package:store/features/customer/category_details/presentation/screens/ca
 import 'package:store/features/customer/main/presentation/screens/main_customer_screen.dart';
 import 'package:store/features/customer/product_details/presentation/screens/product_details_screen.dart';
 import 'package:store/features/customer/products_view_all/presentation/screens/products_view_all_screen.dart';
+import 'package:store/features/customer/search/presentation/screens/search_screen.dart';
 
 import '../../features/admin/home_admin/presentation/screens/home_admin_screen.dart';
 import '../../features/auth/presentation/screens/login_screen.dart';
@@ -24,6 +25,7 @@ class AppRoutes {
   static const String productDetails = '/ProductDetails';
   static const String categoryDetails = '/CategoryDetails';
   static const String productsViewAll = '/ProductsViewAll';
+  static const String searchScreen = '/SearchScreen';
 
   static Route onGenerateRoutes(RouteSettings settings) {
     final arg = settings.arguments;
@@ -59,6 +61,8 @@ class AppRoutes {
                 categoryInfo: arg as ({String categoryName, int categoryId})));
       case productsViewAll:
         return BaseRoute(page: const ProductsViewAllScreen());
+      case searchScreen:
+        return BaseRoute(page: const SearchScreen());
 
       default:
         return BaseRoute(page: const PageUnderBuildScreen());
