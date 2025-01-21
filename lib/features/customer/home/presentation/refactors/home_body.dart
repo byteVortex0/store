@@ -5,6 +5,7 @@ import 'package:store/core/common/widgets/custom_button.dart';
 import 'package:store/core/extensions/context_extension.dart';
 import 'package:store/core/language/lang_keys.dart';
 import 'package:store/core/loading/loading_shimmer.dart';
+import 'package:store/core/routes/app_routes.dart';
 import 'package:store/features/customer/home/presentation/widgets/banners/banner_sliders.dart';
 import 'package:store/features/customer/home/presentation/widgets/categories/categories_list.dart';
 import 'package:store/features/customer/home/presentation/widgets/products/products_list.dart';
@@ -92,7 +93,9 @@ class HomeBody extends StatelessWidget {
                   return Padding(
                     padding: EdgeInsets.symmetric(horizontal: 15.w),
                     child: CustomButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        context.pushName(AppRoutes.productsViewAll);
+                      },
                       text: context.translate(LangKeys.viewAll),
                       lastRadius: 10.r,
                       threeRadius: 10.r,

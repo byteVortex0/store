@@ -20,6 +20,7 @@ import 'package:store/features/admin/users/presentation/blocs/get_all_users/get_
 import 'package:store/features/auth/presentation/bloc/auth_bloc.dart';
 import 'package:store/features/customer/main/presentation/cubit/main_cubit.dart';
 import 'package:store/features/customer/product_details/presentation/blocs/product_details/product_details_bloc.dart';
+import 'package:store/features/customer/products_view_all/presentation/blocs/products_view_all/products_view_all_bloc.dart';
 import 'package:store/features/customer/profile/presentation/blocs/profile_bloc/profile_bloc.dart';
 
 import '../../features/admin/add_categories/data/data_source/categories_admin_data_source.dart';
@@ -47,6 +48,8 @@ import '../../features/customer/home/presentation/blocs/get_categories/get_categ
 import '../../features/customer/home/presentation/blocs/get_products/get_products_bloc.dart';
 import '../../features/customer/product_details/data/data_source/product_details_data_source.dart';
 import '../../features/customer/product_details/data/repos/product_details_repo.dart';
+import '../../features/customer/products_view_all/data/data_source/products_view_all_data_source.dart';
+import '../../features/customer/products_view_all/data/repos/products_view_all_repo.dart';
 import '../../features/customer/profile/data/data_source/profile_data_source.dart';
 import '../../features/customer/profile/data/repos/profile_repo.dart';
 import '../app/upload_image/data_source/upload_image_data_source.dart';
@@ -67,6 +70,7 @@ Future<void> setupInjector() async {
   await _initHomeCusromerPage();
   await _initProductDetailsCusromerPage();
   await _initCategoryDetailsCusromerPage();
+  await _initViewAllProductsCusromerPage();
 }
 
 Future<void> _initCore() async {
@@ -166,4 +170,11 @@ Future<void> _initCategoryDetailsCusromerPage() async {
     ..registerFactory(() => GetCategoryDetailsBloc(sl()))
     ..registerLazySingleton(() => CategoryDetailsRepo(dataSource: sl()))
     ..registerLazySingleton(() => CategoryDetailsDataSource(graphql: sl()));
+}
+
+Future<void> _initViewAllProductsCusromerPage() async {
+  sl
+    ..registerFactory(() => ProductsViewAllBloc(sl()))
+    ..registerLazySingleton(() => ProductsViewAllRepo(dataSource: sl()))
+    ..registerLazySingleton(() => ProductsViewAllDataSource(graphql: sl()));
 }
