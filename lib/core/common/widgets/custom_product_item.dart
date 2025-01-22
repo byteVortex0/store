@@ -1,5 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:store/core/common/widgets/custom_container_linear_customer.dart';
 import 'package:store/core/common/widgets/custom_favourite_button.dart';
@@ -9,6 +10,7 @@ import 'package:store/core/extensions/string_extension.dart';
 
 import '../../../../../../core/common/widgets/text_app.dart';
 import '../../../../../../core/style/fonts/font_weight_helper.dart';
+import '../../../features/customer/favourites/presentation/cubit/favourite_cubit.dart';
 import '../../routes/app_routes.dart';
 
 class CustomProductsItem extends StatelessWidget {
@@ -41,11 +43,31 @@ class CustomProductsItem extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const Row(
+              Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  CustomShareButton(size: 25),
-                  CustomFavouriteButton(size: 25),
+                  const CustomShareButton(size: 25),
+                  BlocBuilder<FavouriteCubit, FavouriteState>(
+                    builder: (context, state) {
+                      return CustomFavouriteButton(
+                        size: 25,
+                        isFavourite: context
+                            .read<FavouriteCubit>()
+                            .isFavourite(productId.toString()),
+                        onTap: () async {
+                          await context
+                              .read<FavouriteCubit>()
+                              .manageAddAndRemove(
+                                productId: productId.toString(),
+                                title: title,
+                                image: imageUrl,
+                                price: price,
+                                categoryName: categoryName,
+                              );
+                        },
+                      );
+                    },
+                  ),
                 ],
               ),
               Flexible(

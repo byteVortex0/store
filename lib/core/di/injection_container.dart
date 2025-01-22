@@ -18,6 +18,7 @@ import 'package:store/features/admin/users/data/data_source/get_all_users_data_s
 import 'package:store/features/admin/users/data/repos/get_all_users_repo.dart';
 import 'package:store/features/admin/users/presentation/blocs/get_all_users/get_all_users_bloc.dart';
 import 'package:store/features/auth/presentation/bloc/auth_bloc.dart';
+import 'package:store/features/customer/favourites/presentation/cubit/favourite_cubit.dart';
 import 'package:store/features/customer/main/presentation/cubit/main_cubit.dart';
 import 'package:store/features/customer/product_details/presentation/blocs/product_details/product_details_bloc.dart';
 import 'package:store/features/customer/products_view_all/presentation/blocs/products_view_all/products_view_all_bloc.dart';
@@ -75,6 +76,7 @@ Future<void> setupInjector() async {
   await _initCategoryDetailsCusromerPage();
   await _initViewAllProductsCusromerPage();
   await _initSearchCusromerPage();
+  await _initFavouriteCusromerPage();
 }
 
 Future<void> _initCore() async {
@@ -188,4 +190,8 @@ Future<void> _initSearchCusromerPage() async {
     ..registerFactory(() => SearchForProductsBloc(sl()))
     ..registerLazySingleton(() => SearchRepo(dataSource: sl()))
     ..registerLazySingleton(() => SearchDataSource(graphql: sl()));
+}
+
+Future<void> _initFavouriteCusromerPage() async {
+  sl.registerFactory(() => FavouriteCubit());
 }

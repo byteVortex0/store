@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:store/core/common/widgets/text_app.dart';
 import 'package:store/core/extensions/context_extension.dart';
@@ -6,6 +7,7 @@ import 'package:store/core/extensions/context_extension.dart';
 import '../../../../../core/common/widgets/custom_favourite_button.dart';
 import '../../../../../core/common/widgets/custom_share_button.dart';
 import '../../../../../core/style/fonts/font_weight_helper.dart';
+import '../../../favourites/presentation/cubit/favourite_cubit.dart';
 import '../../data/models/product_details_response.dart';
 import '../widgets/product_details_image_slider.dart';
 
@@ -25,11 +27,29 @@ class ProductDetialsBody extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Row(
+            Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                CustomShareButton(size: 30),
-                CustomFavouriteButton(size: 30),
+                const CustomShareButton(size: 30),
+                BlocBuilder<FavouriteCubit, FavouriteState>(
+                  builder: (context, state) {
+                    return CustomFavouriteButton(
+                      size: 30,
+                      isFavourite: context
+                          .read<FavouriteCubit>()
+                          .isFavourite(data.id.toString()),
+                      onTap: () async {
+                        await context.read<FavouriteCubit>().manageAddAndRemove(
+                              productId: data.id.toString(),
+                              title: data.title!,
+                              image: data.images!,
+                              price: data.price!,
+                              categoryName: data.category!.name!,
+                            );
+                      },
+                    );
+                  },
+                ),
               ],
             ),
             SizedBox(height: 10.h),

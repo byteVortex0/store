@@ -29,13 +29,17 @@ class ProductDetailsData {
 
 @JsonSerializable()
 class ProductData {
+  final String? id;
   final String? title;
   final double? price;
   final List<String>? images;
   final String? description;
+  final CategoryDataModel? category;
 
   ProductData({
+    required this.id,
     required this.title,
+    required this.category,
     required this.price,
     required this.images,
     required this.description,
@@ -43,4 +47,18 @@ class ProductData {
 
   factory ProductData.fromJson(Map<String, dynamic> json) =>
       _$ProductDataFromJson(json);
+}
+
+@JsonSerializable()
+class CategoryDataModel {
+  final String? id;
+  final String? name;
+
+  CategoryDataModel({
+    required this.id,
+    required this.name,
+  });
+
+  factory CategoryDataModel.fromJson(Map<String, dynamic> json) =>
+      _$CategoryDataModelFromJson(json);
 }
