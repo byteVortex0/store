@@ -56,6 +56,7 @@ import '../../features/customer/profile/data/data_source/profile_data_source.dar
 import '../../features/customer/profile/data/repos/profile_repo.dart';
 import '../../features/customer/search/data/data_source/search_data_source.dart';
 import '../../features/customer/search/data/repos/search_repo.dart';
+import '../app/share/share_cubit.dart';
 import '../app/upload_image/data_source/upload_image_data_source.dart';
 import '../app/upload_image/repo/upload_image_repo.dart';
 
@@ -84,6 +85,7 @@ Future<void> _initCore() async {
   final navigatorKey = GlobalKey<NavigatorState>();
   sl
     ..registerFactory(AppCubit.new)
+    ..registerFactory(ShareCubit.new)
     ..registerLazySingleton<ApiService>(() => ApiService(dio))
     ..registerSingleton<GlobalKey<NavigatorState>>(navigatorKey)
     ..registerFactory(() => UploadImageCubit(sl()))

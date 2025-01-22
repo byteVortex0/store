@@ -11,6 +11,7 @@ import 'package:store/core/extensions/string_extension.dart';
 import '../../../../../../core/common/widgets/text_app.dart';
 import '../../../../../../core/style/fonts/font_weight_helper.dart';
 import '../../../features/customer/favourites/presentation/cubit/favourite_cubit.dart';
+import '../../app/share/share_cubit.dart';
 import '../../routes/app_routes.dart';
 
 class CustomProductsItem extends StatelessWidget {
@@ -46,7 +47,53 @@ class CustomProductsItem extends StatelessWidget {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  const CustomShareButton(size: 25),
+                  BlocBuilder<ShareCubit, ShareState>(
+                    builder: (context, state) {
+                      return state.when(
+                        initial: () => CustomShareButton(
+                          size: 25,
+                          onTap: () {
+                            context.read<ShareCubit>().sendDynamicLinkProduct(
+                                  productId: productId.toString(),
+                                  title: title,
+                                  image: imageUrl[0],
+                                );
+                          },
+                        ),
+                        loading: (id) {
+                          if (id == productId.toString()) {
+                            return Padding(
+                              padding: EdgeInsets.symmetric(
+                                horizontal: 20.w,
+                                vertical: 15.h,
+                              ),
+                              child: SizedBox(
+                                height: 25.h,
+                                width: 25.w,
+                                child: CircularProgressIndicator.adaptive(
+                                  backgroundColor: context.color.bluePinkLight,
+                                ),
+                              ),
+                            );
+                          }
+                          return CustomShareButton(
+                            size: 25,
+                            onTap: () {},
+                          );
+                        },
+                        success: () => CustomShareButton(
+                          size: 25,
+                          onTap: () {
+                            context.read<ShareCubit>().sendDynamicLinkProduct(
+                                  productId: productId.toString(),
+                                  title: title,
+                                  image: imageUrl[0],
+                                );
+                          },
+                        ),
+                      );
+                    },
+                  ),
                   BlocBuilder<FavouriteCubit, FavouriteState>(
                     builder: (context, state) {
                       return CustomFavouriteButton(

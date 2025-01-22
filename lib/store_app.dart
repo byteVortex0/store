@@ -14,6 +14,8 @@ import 'package:store/core/services/shared_pref/shared_pref.dart';
 import 'package:store/core/theme/app_theme.dart';
 import 'package:store/features/customer/favourites/presentation/cubit/favourite_cubit.dart';
 
+import 'core/app/share/share_cubit.dart';
+
 class StoreApp extends StatelessWidget {
   const StoreApp({super.key});
 
@@ -31,6 +33,7 @@ class StoreApp extends StatelessWidget {
                               SharedPref().getBoolean(PrefKeys.themeMode))
                       ..savedLanguage()),
                 BlocProvider(create: (context) => sl<FavouriteCubit>()),
+                BlocProvider(create: (context) => sl<ShareCubit>()),
               ],
               child: ScreenUtilInit(
                 designSize: const Size(375, 812),
