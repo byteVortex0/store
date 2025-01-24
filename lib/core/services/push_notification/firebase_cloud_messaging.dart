@@ -10,6 +10,8 @@ import 'package:store/core/extensions/context_extension.dart';
 import 'package:store/core/language/lang_keys.dart';
 import 'package:store/core/toast/show_toast.dart';
 
+import 'firebase_messaging_navigate.dart';
+
 class FirebaseCloudMessaging {
   FirebaseCloudMessaging._();
 
@@ -27,6 +29,17 @@ class FirebaseCloudMessaging {
 
   Future<void> init() async {
     await notificationPermission();
+
+    //forground handler
+    FirebaseMessaging.onMessage
+        .listen(FirebaseMessagingNavigate.forGroundHandler);
+    //background handler
+    FirebaseMessaging.onMessageOpenedApp
+        .listen(FirebaseMessagingNavigate.backGroundHandler);
+    //terminate handler
+    FirebaseMessaging.instance
+        .getInitialMessage()
+        .then(FirebaseMessagingNavigate.terminateHandler);
   }
 
   Future<void> controlerForUserNotification(BuildContext context) async {
@@ -159,10 +172,10 @@ class FirebaseCloudMessaging {
               "title": title,
               "body": body,
             },
+            "data": {
+              "productId": productId.toString(),
+            }
           },
-          // "data": {
-          //   "productId": productId,
-          // }
         },
       );
 
