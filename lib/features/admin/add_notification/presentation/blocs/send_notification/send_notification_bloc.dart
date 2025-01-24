@@ -27,9 +27,18 @@ class SendNotificationBloc
         body: event.body,
         productId: event.productId,
       );
-      result.when(
-        success: (_) => emit(const SendNotificationState.success()),
-        failure: (error) => emit(SendNotificationState.error(error: error)),
+      await result.when(
+        success: (_) async {
+          await repo.addNotificationForAllUsers(
+            title: event.title,
+            body: event.body,
+            productId: event.productId.toString(),
+          );
+          emit(const SendNotificationState.success());
+        },
+        failure: (error) {
+          emit(SendNotificationState.error(error: error));
+        },
       );
     } catch (e, stackTrace) {
       log('Send Notification failed: $e\n$stackTrace');
