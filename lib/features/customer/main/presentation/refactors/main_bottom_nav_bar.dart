@@ -4,6 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:store/core/common/animations/animate_do.dart';
 import 'package:store/core/extensions/context_extension.dart';
 import 'package:store/features/customer/main/presentation/cubit/main_cubit.dart';
+import 'package:store/features/customer/main/presentation/widgets/notificatin_bar_icon.dart';
 import 'package:svg_flutter/svg.dart';
 
 import '../../../../../core/enums/nav_bar_enum.dart';
@@ -54,14 +55,14 @@ class MainBottomNavBar extends StatelessWidget {
                                       cubit.selectedNavBarIcon(NavBarEnum.home);
                                     },
                                   ),
-                                  IconTabNavBar(
-                                    icon: AppImages.categoriesTab,
-                                    isSelected: cubit.navBarEnum ==
-                                        NavBarEnum.categories,
+                                  GestureDetector(
                                     onTap: () {
                                       cubit.selectedNavBarIcon(
-                                          NavBarEnum.categories);
+                                          NavBarEnum.notifications);
                                     },
+                                    child: NotificatinBarIcon(
+                                        isSelected: cubit.navBarEnum ==
+                                            NavBarEnum.notifications),
                                   ),
                                   IconTabNavBar(
                                     icon: AppImages.favouritesTab,

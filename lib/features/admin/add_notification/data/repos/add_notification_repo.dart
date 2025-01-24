@@ -26,4 +26,16 @@ class AddNotificationRepo {
       return const ApiResult.failure(errorMassage);
     }
   }
+
+  Future<void> addNotificationForAllUsers({
+    required String title,
+    required String body,
+    required String productId,
+  }) async {
+    await dataSource.addNotificationForAllUsers(
+      title: title,
+      body: body,
+      productId: productId,
+    );
+  }
 }

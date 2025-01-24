@@ -32,4 +32,5 @@ class AppImages {
   static const buildDeveloper = 'assets/images/svg/build_developer.svg';
   static const logout = 'assets/images/svg/logout.svg';
   static const backButton = 'assets/images/svg/arrow_back.svg';
+  static const notificationIcon = 'assets/images/svg/notification_icon.svg';
 }

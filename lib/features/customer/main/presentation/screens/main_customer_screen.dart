@@ -3,7 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:store/core/di/injection_container.dart';
 import 'package:store/core/extensions/context_extension.dart';
-import 'package:store/features/customer/categories/presentation/screens/categories_screen.dart';
+import 'package:store/features/customer/notifications/presentation/screens/notifications_screen.dart';
 import 'package:store/features/customer/favourites/presentation/screens/favourites_screen.dart';
 import 'package:store/features/customer/home/presentation/screens/home_screen.dart';
 import 'package:store/features/customer/profile/presentation/screens/profile_screen.dart';
@@ -47,8 +47,8 @@ class MainCustomerScreen extends StatelessWidget {
                   child: BlocBuilder<MainCubit, MainState>(
                     builder: (context, state) {
                       final cubit = context.read<MainCubit>();
-                      if (cubit.navBarEnum == NavBarEnum.categories) {
-                        return const CategoriesScreen();
+                      if (cubit.navBarEnum == NavBarEnum.notifications) {
+                        return const NotificationsScreen();
                       } else if (cubit.navBarEnum == NavBarEnum.profile) {
                         return const ProfileScreen();
                       } else if (cubit.navBarEnum == NavBarEnum.favourites) {

@@ -14,8 +14,8 @@ class MainCubit extends Cubit<MainState> {
   void selectedNavBarIcon(NavBarEnum navBar) {
     if (navBar == NavBarEnum.home) {
       navBarEnum = NavBarEnum.home;
-    } else if (navBar == NavBarEnum.categories) {
-      navBarEnum = NavBarEnum.categories;
+    } else if (navBar == NavBarEnum.notifications) {
+      navBarEnum = NavBarEnum.notifications;
     } else if (navBar == NavBarEnum.favourites) {
       navBarEnum = NavBarEnum.favourites;
     } else if (navBar == NavBarEnum.profile) {

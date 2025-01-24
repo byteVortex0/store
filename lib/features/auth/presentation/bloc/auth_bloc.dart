@@ -55,6 +55,9 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
           await SharedPref()
               .setString(PrefKeys.userRole, user.userRole ?? 'customer');
 
+          //
+          await authRepo.addUserIdFirebase(userId: user.userId.toString());
+
           emit(AuthState.success(userRole: user.userRole ?? 'customer'));
         },
         failure: (errorHandler) {
@@ -84,7 +87,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       );
 
       result.when(
-        success: (loginData)  {
+        success: (loginData) {
           add(const AuthEvent.login());
         },
         failure: (errorHandler) {

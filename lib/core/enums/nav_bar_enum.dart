@@ -1,6 +1,6 @@
 enum NavBarEnum {
   home,
-  categories,
+  notifications,
   favourites,
   profile,
 }
