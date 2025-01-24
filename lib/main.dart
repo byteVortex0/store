@@ -7,6 +7,7 @@ import 'package:store/core/app/env_variables.dart';
 import 'package:store/core/services/dynamic_links/dynamic_links.dart';
 import 'package:store/core/services/hive/hive_database.dart';
 import 'package:store/core/services/push_notification/firebase_cloud_messaging.dart';
+import 'package:store/core/services/push_notification/local_notification.dart';
 import 'package:store/core/services/shared_pref/shared_pref.dart';
 
 import 'core/di/injection_container.dart';
@@ -20,9 +21,10 @@ void main() async {
 
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
-  );
-
-  await FirebaseCloudMessaging().init();
+  ).whenComplete(() async {
+    await FirebaseCloudMessaging().init();
+    await LocalNotification.init();
+  });
 
   await SharedPref().instantiatePreferences();
 
