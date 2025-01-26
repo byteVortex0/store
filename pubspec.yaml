@@ -6,7 +6,7 @@ publish_to: "none"
 version: 1.0.0+1
 
 environment:
-  sdk: ^3.6.1
+  sdk: ^3.5.0
 
 dependencies:
   flutter:
@@ -56,6 +56,9 @@ dependencies:
   firebase_dynamic_links: ^6.1.1
   share_plus: ^10.1.4
   app_links: ^6.3.3
+  flutter_local_notifications: ^18.0.1
+  badges: ^3.1.2
+  cloud_firestore: ^5.6.2
 
 dev_dependencies:
   flutter_test:
