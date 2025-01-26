@@ -52,7 +52,7 @@
             <data android:scheme="https" />
 
             <!-- Include one or more domains that should be verified. -->
-            <data android:host="myapp.example.com" />
+            <data android:host="com.dev_mahmoud.store" />
             </intent-filter>
             
             <!--* End-->
