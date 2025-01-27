@@ -1,5 +1,6 @@
 import 'dart:developer';
 
+import 'package:app_links/app_links.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -16,8 +17,55 @@ import 'package:store/features/customer/favourites/presentation/cubit/favourite_
 
 import 'core/app/share/share_cubit.dart';
 
-class StoreApp extends StatelessWidget {
+class StoreApp extends StatefulWidget {
   const StoreApp({super.key});
+
+  @override
+  State<StoreApp> createState() => _StoreAppState();
+}
+
+class _StoreAppState extends State<StoreApp> {
+  late final AppLinks _appLinks;
+
+  @override
+  void initState() {
+    super.initState();
+    _appLinks = AppLinks();
+    log('setupDeepLinkHandler');
+    _setupDeepLinkHandler();
+  }
+
+  void _setupDeepLinkHandler() async {
+    // Handle incoming deep links
+    _appLinks.uriLinkStream.listen((Uri? uri) {
+      if (uri != null) {
+        log('Deep link received: $uri');
+        _handleDeepLink(uri);
+      }
+    });
+
+    // Handle initial deep link
+    final Uri? initialLink = await _appLinks.getInitialLink();
+    if (initialLink != null) {
+      log('Initial deep link: $initialLink');
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        _handleDeepLink(initialLink);
+      });
+    }
+  }
+
+  void _handleDeepLink(Uri uri) {
+    if (uri.pathSegments.isNotEmpty && uri.pathSegments.first == 'product') {
+      final productId = uri.pathSegments.last;
+      if (productId.isNotEmpty) {
+        log('Product ID: $productId');
+        sl<GlobalKey<NavigatorState>>().currentState?.pushNamed(
+              AppRoutes.productDetails,
+              arguments: int.parse(productId),
+            );
+      }
+    }
+  }
 
   @override
   Widget build(BuildContext context) {

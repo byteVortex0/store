@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:share_plus/share_plus.dart';
 import 'package:store/core/common/widgets/custom_container_linear_customer.dart';
 import 'package:store/core/common/widgets/custom_favourite_button.dart';
 import 'package:store/core/common/widgets/custom_share_button.dart';
@@ -11,7 +12,6 @@ import 'package:store/core/extensions/string_extension.dart';
 import '../../../../../../core/common/widgets/text_app.dart';
 import '../../../../../../core/style/fonts/font_weight_helper.dart';
 import '../../../features/customer/favourites/presentation/cubit/favourite_cubit.dart';
-import '../../app/share/share_cubit.dart';
 import '../../routes/app_routes.dart';
 
 class CustomProductsItem extends StatelessWidget {
@@ -47,51 +47,58 @@ class CustomProductsItem extends StatelessWidget {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  BlocBuilder<ShareCubit, ShareState>(
-                    builder: (context, state) {
-                      return state.when(
-                        initial: () => CustomShareButton(
-                          size: 25,
-                          onTap: () {
-                            context.read<ShareCubit>().sendDynamicLinkProduct(
-                                  productId: productId.toString(),
-                                  title: title,
-                                  image: imageUrl[0],
-                                );
-                          },
-                        ),
-                        loading: (id) {
-                          if (id == productId.toString()) {
-                            return Padding(
-                              padding: EdgeInsets.symmetric(
-                                horizontal: 20.w,
-                                vertical: 15.h,
-                              ),
-                              child: SizedBox(
-                                height: 25.h,
-                                width: 25.w,
-                                child: CircularProgressIndicator.adaptive(
-                                  backgroundColor: context.color.bluePinkLight,
-                                ),
-                              ),
-                            );
-                          }
-                          return CustomShareButton(
-                            size: 25,
-                            onTap: () {},
-                          );
-                        },
-                        success: () => CustomShareButton(
-                          size: 25,
-                          onTap: () {
-                            context.read<ShareCubit>().sendDynamicLinkProduct(
-                                  productId: productId.toString(),
-                                  title: title,
-                                  image: imageUrl[0],
-                                );
-                          },
-                        ),
-                      );
+                  // BlocBuilder<ShareCubit, ShareState>(
+                  //   builder: (context, state) {
+                  //     return state.when(
+                  //       initial: () => CustomShareButton(
+                  //         size: 25,
+                  //         onTap: () {
+                  //           context.read<ShareCubit>().sendDynamicLinkProduct(
+                  //                 productId: productId.toString(),
+                  //                 title: title,
+                  //                 image: imageUrl[0],
+                  //               );
+                  //         },
+                  //       ),
+                  //       loading: (id) {
+                  //         if (id == productId.toString()) {
+                  //           return Padding(
+                  //             padding: EdgeInsets.symmetric(
+                  //               horizontal: 20.w,
+                  //               vertical: 15.h,
+                  //             ),
+                  //             child: SizedBox(
+                  //               height: 25.h,
+                  //               width: 25.w,
+                  //               child: CircularProgressIndicator.adaptive(
+                  //                 backgroundColor: context.color.bluePinkLight,
+                  //               ),
+                  //             ),
+                  //           );
+                  //         }
+                  //         return CustomShareButton(
+                  //           size: 25,
+                  //           onTap: () {},
+                  //         );
+                  //       },
+                  //       success: () => CustomShareButton(
+                  //         size: 25,
+                  //         onTap: () {
+                  //           context.read<ShareCubit>().sendDynamicLinkProduct(
+                  //                 productId: productId.toString(),
+                  //                 title: title,
+                  //                 image: imageUrl[0],
+                  //               );
+                  //         },
+                  //       ),
+                  //     );
+                  //   },
+                  // ),
+                  CustomShareButton(
+                    size: 25,
+                    onTap: () {
+                      Share.share(
+                          'https://70f1-154-182-49-229.ngrok-free.app/product/$productId');
                     },
                   ),
                   BlocBuilder<FavouriteCubit, FavouriteState>(

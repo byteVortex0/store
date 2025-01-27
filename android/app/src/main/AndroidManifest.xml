@@ -38,9 +38,7 @@
 
 
         <!-- *For Dynamic Links -->
-        <meta-data
-            android:name="flutter_deeplinking_enabled"
-            android:value="true" />
+        
 
             <!-- Write This code-->
             <intent-filter android:autoVerify="true">
@@ -52,7 +50,7 @@
             <data android:scheme="https" />
 
             <!-- Include one or more domains that should be verified. -->
-            <data android:host="com.dev_mahmoud.store" />
+            <data android:host="70f1-154-182-49-229.ngrok-free.app" />
             </intent-filter>
             
             <!--* End-->
@@ -64,6 +62,10 @@
         <meta-data
             android:name="flutterEmbedding"
             android:value="2" />
+
+        <meta-data
+            android:name="flutter_deeplinking_enabled"
+            android:value="true" />
     </application>
     <!-- Required to query activities that can process text, see:
          https://developer.android.com/training/package-visibility and
