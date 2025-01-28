@@ -20,7 +20,7 @@ class DynamicLinks {
     required String image,
   }) async {
     final dynamicLinkParms = DynamicLinkParameters(
-      uriPrefix: 'https://asroostore.page.link',
+      uriPrefix: 'https://store.page.link',
       link: Uri.parse('https://www.udemy.com/$productId'),
       socialMetaTagParameters: SocialMetaTagParameters(
         title: title,
