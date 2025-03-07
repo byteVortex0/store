@@ -6,7 +6,7 @@ import 'package:store/features/customer/product_details/presentation/refactors/p
 
 import '../../../../../core/common/widgets/customer_app_bar.dart';
 import '../../../../../core/di/injection_container.dart';
-import '../refactors/add_to_cart_button.dart';
+import '../refactors/pay_now_button.dart';
 import '../refactors/product_details_custom_painter.dart';
 
 class ProductDetialsScreen extends StatelessWidget {
@@ -53,7 +53,7 @@ class ProductDetialsScreen extends StatelessWidget {
                   ProductDetialsBody(data: data),
                 ],
               ),
-              bottomNavigationBar: AddToCartButton(
+              bottomNavigationBar: PayNowButton(
                 price: data.price!,
               ),
             ),

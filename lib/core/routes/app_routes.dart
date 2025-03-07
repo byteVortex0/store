@@ -15,6 +15,7 @@ import 'package:store/features/customer/search/presentation/screens/search_scree
 
 import '../../features/admin/home_admin/presentation/screens/home_admin_screen.dart';
 import '../../features/auth/presentation/screens/login_screen.dart';
+import '../../features/customer/product_details/presentation/screens/payment_web_view_screen.dart';
 
 class AppRoutes {
   static const String loginScreen = '/LoginScreen';
@@ -26,6 +27,7 @@ class AppRoutes {
   static const String categoryDetails = '/CategoryDetails';
   static const String productsViewAll = '/ProductsViewAll';
   static const String searchScreen = '/SearchScreen';
+  static const String paymentWebViewScreen = '/PaymentWebViewScreen';
 
   static Route onGenerateRoutes(RouteSettings settings) {
     final arg = settings.arguments;
@@ -39,14 +41,14 @@ class AppRoutes {
         );
       case signUpScreen:
         return BaseRoute(
-            page: MultiBlocProvider(providers: [
-          BlocProvider(
-            create: (context) => sl<UploadImageCubit>(),
+          page: MultiBlocProvider(
+            providers: [
+              BlocProvider(create: (context) => sl<UploadImageCubit>()),
+              BlocProvider(create: (context) => sl<AuthBloc>()),
+            ],
+            child: const SignUpScreen(),
           ),
-          BlocProvider(
-            create: (context) => sl<AuthBloc>(),
-          ),
-        ], child: const SignUpScreen()));
+        );
       case homeAdminScreen:
         return BaseRoute(page: const HomeAdminScreen());
       case mainCustomerScreen:
@@ -57,12 +59,16 @@ class AppRoutes {
         return BaseRoute(page: ProductDetialsScreen(productId: arg as int));
       case categoryDetails:
         return BaseRoute(
-            page: CategoryDetailsScreen(
-                categoryInfo: arg as ({String categoryName, int categoryId})));
+          page: CategoryDetailsScreen(
+            categoryInfo: arg as ({String categoryName, int categoryId}),
+          ),
+        );
       case productsViewAll:
         return BaseRoute(page: const ProductsViewAllScreen());
       case searchScreen:
         return BaseRoute(page: const SearchScreen());
+      case paymentWebViewScreen:
+        return BaseRoute(page: PaymentWebViewScreen(paymentUrl: arg as String));
 
       default:
         return BaseRoute(page: const PageUnderBuildScreen());
